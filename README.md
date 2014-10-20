@@ -44,6 +44,7 @@ Quick Start
 ```php
 use rock\validate\Validate;
 
+// Validation length from 10 to 20 characters inclusive + regexp pattern
 $v = Validate::length(10, 20, true)->regex('/^[a-z]+$/i');
 $v->validate('O’Reilly'); // output: false
 
