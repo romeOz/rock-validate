@@ -110,16 +110,16 @@ $input = [
     'username' => 'O’Reilly',
     'email' => 'o-reilly@site'
 ];
-$v = Validate::allOf(
-    [
-        'username' => Validate::required()
-            ->length(10, 20, true)
-            ->regex('/^[a-z]+$/i')
-            ->placeholders(['name' => 'username']),
-        
-        'email' => Validate::required()->email()
-    ]
-);
+$attributes =     [
+  'username' => Validate::required()
+      ->length(10, 20, true)
+      ->regex('/^[a-z]+$/i')
+      ->placeholders(['name' => 'username']),
+  
+  'email' => Validate::required()->email()
+];
+
+$v = Validate::allOf($attributes);
 $v->validate($input); // output false
 
 $v->getErrors();
