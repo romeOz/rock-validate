@@ -11,7 +11,7 @@ class Email extends Locale
     {
         return [
             self::MODE_DEFAULT => [
-                self::STANDARD => '{{name}} must be valid email',
+                self::STANDARD => '{{name}} must be valid',
             ],
             self::MODE_NEGATIVE => array(
                 self::STANDARD => '{{name}} must not be an email',
