@@ -26,15 +26,6 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider providerInvalid
-     */
-    public function testInvalidRu($min, $max, $inclusive, $input)
-    {
-        $o = Validate::locale(Validate::RU)->between($min, $max, $inclusive);
-        $this->assertFalse($o->validate($input));
-    }
-
-    /**
      * @expectedException \rock\validate\Exception
      */
     public function testInvalidConstructionParamsShouldRaiseException()
