@@ -23,15 +23,6 @@ class Captcha extends \PHPUnit_Framework_TestCase
         $this->assertFalse($v->validate($input));
     }
 
-    /**
-     * @dataProvider providerInvalid
-     */
-    public function testInvalidRu($start, $input, $identical=false)
-    {
-        $v = Validate::locale(Validate::RU)->captcha($start, $identical);
-        $this->assertFalse($v->validate($input));
-    }
-
     public function providerValid()
     {
         return [

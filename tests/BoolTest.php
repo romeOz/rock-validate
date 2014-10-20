@@ -23,11 +23,5 @@ class BoolTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validator->validate(0));
         $this->assertFalse($validator->validate(null));
     }
-
-    public function testInvalidRu()
-    {
-        $validator = Validate::locale(Validate::RU)->bool();
-        $this->assertFalse($validator->validate('foo'));;
-    }
 }
 

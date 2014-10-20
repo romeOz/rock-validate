@@ -41,4 +41,3 @@ class DateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($v->validate(new \stdClass));
     }
 }
-

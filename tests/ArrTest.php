@@ -29,15 +29,6 @@ class ArrTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($v->validate($input));
     }
 
-    /**
-     * @dataProvider providerInvalid
-     */
-    public function testInvalidRu($input)
-    {
-        $v = Validate::locale(Validate::RU)->arr();
-        $this->assertFalse($v->validate($input));
-    }
-
     public function providerValid()
     {
         return [

@@ -27,15 +27,6 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider providerInvalid
-     */
-    public function testInvalidRu($invalidAlnum, $additional)
-    {
-        $validator = Validate::locale(Validate::RU)->alnum($additional);
-        $this->assertFalse($validator->validate($invalidAlnum));
-    }
-
-    /**
      * @dataProvider providerInvalidParams
      * @expectedException \rock\validate\Exception
      */

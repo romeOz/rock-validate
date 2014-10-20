@@ -26,14 +26,6 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($callback->validate('invalid'));
     }
 
-    public function testInvalidRu()
-    {
-        $callback = Validate::locale(Validate::RU)->callback(function() {
-            return false;
-        });
-        $this->assertFalse($callback->validate('invalid'));
-    }
-
     public function testCallbackValidatorShouldAcceptArrayCallbackDefinitions()
     {
         $v = Validate::callback([$this, 'thisIsASampleCallbackUsedInsideThisTest']);

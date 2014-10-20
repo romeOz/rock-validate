@@ -46,4 +46,3 @@ class ContainsTest extends \PHPUnit_Framework_TestCase
         ];
     }
 }
-

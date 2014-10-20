@@ -27,15 +27,6 @@ class AlphaTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider providerInvalid
-     */
-    public function testInvalidRu($invalidAlpha, $additional)
-    {
-        $validator = Validate::locale(Validate::RU)->alpha($additional);
-        $this->assertFalse($validator->validate($invalidAlpha));
-    }
-
-    /**
      * @dataProvider providerForInvalidParams
      * @expectedException \rock\validate\Exception
      */

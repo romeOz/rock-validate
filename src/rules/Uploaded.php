@@ -2,6 +2,12 @@
 
 namespace rock\validate\rules;
 
+/**
+ * Class Uploaded
+ *
+ * @codeCoverageIgnore
+ * @package rock\validate\rules
+ */
 class Uploaded extends Rule
 {
     /**

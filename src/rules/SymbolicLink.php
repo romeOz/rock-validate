@@ -2,6 +2,12 @@
 
 namespace rock\validate\rules;
 
+/**
+ * Class SymbolicLink
+ *
+ * @codeCoverageIgnore
+ * @package rock\validate\rules
+ */
 class SymbolicLink extends Rule
 {
     public function validate($input)

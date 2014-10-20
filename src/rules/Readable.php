@@ -2,7 +2,12 @@
 
 namespace rock\validate\rules;
 
-
+/**
+ * Class Readable
+ *
+ * @codeCoverageIgnore
+ * @package rock\validate\rules
+ */
 class Readable extends Rule
 {
     public function validate($input)
