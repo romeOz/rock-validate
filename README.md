@@ -138,8 +138,8 @@ output:
 ]
 */
 
-$attribute = 'email;
-$v->getFirstError('$attribute);
+$attribute = 'email';
+$v->getFirstError($attribute);
 // output: email must be valid
 ```
 
