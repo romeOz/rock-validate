@@ -62,7 +62,7 @@ $v->getFirstError();
 // output: value must have a length between 10 and 20
 ```
 
-###Replacement of placeholder
+####Replacement of placeholder
 
 ```php
 use rock\validate\Validate;
@@ -83,7 +83,7 @@ output:
 */
 ```
 
-###i18n
+####i18n
 
 ```php
 use rock\validate\Validate;
@@ -102,7 +102,7 @@ output:
 */
 ```
 
-### AllOf (Array or Object)
+####AllOf (Array or Object)
 ```php
 use rock\validate\Validate;
 
@@ -110,7 +110,7 @@ $input = [
     'username' => 'O’Reilly',
     'email' => 'o-reilly@site'
 ];
-$attributes =     [
+$attributes = [
   'username' => Validate::required()
       ->length(10, 20, true)
       ->regex('/^[a-z]+$/i')
