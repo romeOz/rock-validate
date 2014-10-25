@@ -3,9 +3,9 @@
 namespace rockunit\mocks;
 
 
-use rock\validate\rules\FileExists;
+use rock\validate\rules\Exists;
 
-class FileExistsMock extends FileExists
+class ExistsMock extends Exists
 {
     public function validate($input)
     {

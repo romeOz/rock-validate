@@ -6,12 +6,12 @@ namespace rock\validate\locale\ru;
 use rock\validate\locale\Locale;
 
 /**
- * Class FileExists
+ * Class Exists
  *
  * @codeCoverageIgnore
  * @package rock\validate\locale\ru
  */
-class FileExists extends Locale
+class Exists extends Locale
 {
     public function defaultTemplates()
     {

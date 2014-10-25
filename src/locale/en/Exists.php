@@ -5,7 +5,7 @@ namespace rock\validate\locale\en;
 
 use rock\validate\locale\Locale;
 
-class FileExists extends Locale
+class Exists extends Locale
 {
     public function defaultTemplates()
     {

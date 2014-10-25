@@ -3,12 +3,12 @@
 namespace rock\validate\rules;
 
 /**
- * Class FileExists
+ * Class Exists
  *
  * @codeCoverageIgnore
  * @package rock\validate\rules
  */
-class FileExists extends Rule
+class Exists extends Rule
 {
     public function validate($input)
     {

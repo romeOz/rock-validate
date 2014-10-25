@@ -22,7 +22,7 @@ use rock\validate\rules\Domain;
 use rock\validate\rules\Email;
 use rock\validate\rules\EndsWith;
 use rock\validate\rules\Equals;
-use rock\validate\rules\FileExists;
+use rock\validate\rules\Exists;
 use rock\validate\rules\File;
 use rock\validate\rules\Float;
 use rock\validate\rules\Graph;
@@ -78,7 +78,7 @@ use rock\validate\rules\Writable;
  * @method static Validate endsWith(mixed $endValue, bool $identical = false)
  * @method static Validate equals(mixed $compareTo, bool $compareIdentical=false)
  * @method static Validate file()
- * @method static Validate fileExists()
+ * @method static Validate exists()
  * @method static Validate float()
  * @method static Validate graph(string $additionalChars = null)
  * @method static Validate in(array $haystack, bool $compareIdentical = false)
@@ -535,18 +535,18 @@ class Validate implements i18nInterface
                     self::RU => \rock\validate\locale\ru\Equals::className(),
                 ]
             ],
+            'exists' => [
+                'class' => Exists::className(),
+                'locales' => [
+                    self::EN => \rock\validate\locale\en\Exists::className(),
+                    self::RU => \rock\validate\locale\ru\Exists::className(),
+                ]
+            ],
             'file' => [
                 'class' => File::className(),
                 'locales' => [
                     self::EN => \rock\validate\locale\en\File::className(),
                     self::RU => \rock\validate\locale\ru\File::className(),
-                ]
-            ],
-            'fileExists' => [
-                'class' => FileExists::className(),
-                'locales' => [
-                    self::EN => \rock\validate\locale\en\FileExists::className(),
-                    self::RU => \rock\validate\locale\ru\FileExists::className(),
                 ]
             ],
             'float' => [

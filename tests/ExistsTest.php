@@ -4,9 +4,9 @@ namespace rockunit\validate;
 
 
 use rock\validate\Validate;
-use rockunit\mocks\FileExistsMock;
+use rockunit\mocks\ExistsMock;
 
-class FileExistsTest extends \PHPUnit_Framework_TestCase
+class ExistsTest extends \PHPUnit_Framework_TestCase
 {
     /** @var  Validate */
     protected $v;
@@ -14,11 +14,11 @@ class FileExistsTest extends \PHPUnit_Framework_TestCase
     {
         $config = [
             'rules' => [
-                'fileExists' => [
-                    'class' => FileExistsMock::className(),
+                'exists' => [
+                    'class' => ExistsMock::className(),
                     'locales' => [
-                        Validate::EN => \rock\validate\locale\en\FileExists::className(),
-                        Validate::RU => \rock\validate\locale\ru\FileExists::className(),
+                        Validate::EN => \rock\validate\locale\en\Exists::className(),
+                        Validate::RU => \rock\validate\locale\ru\Exists::className(),
                     ]
                 ],
             ]
@@ -35,7 +35,7 @@ class FileExistsTest extends \PHPUnit_Framework_TestCase
     public function testValid()
     {
         $GLOBALS['file_exists'] = true;
-        $v = $this->v->fileExists();
+        $v = $this->v->exists();
         $input = __DIR__ . '/../src/valid/readable/file.txt';
         $this->assertTrue($v->validate($input));
     }
@@ -43,7 +43,7 @@ class FileExistsTest extends \PHPUnit_Framework_TestCase
     public function testInvalid()
     {
         $GLOBALS['file_exists'] = false;
-        $v = $this->v->fileExists();
+        $v = $this->v->exists();
         $input = __DIR__ . '/../src/invalid/readable/file.txt';
         $this->assertFalse($v->validate($input));
     }
@@ -52,7 +52,7 @@ class FileExistsTest extends \PHPUnit_Framework_TestCase
     {
         $GLOBALS['file_exists'] = true;
 
-        $v = $this->v->fileExists();
+        $v = $this->v->exists();
         $input = __DIR__ . '/../src/valid/readable/file.txt';
         $object = new \SplFileInfo($input);
 
