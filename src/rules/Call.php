@@ -4,16 +4,16 @@ namespace rock\validate\rules;
 
 use rock\validate\Exception;
 
-class Callback extends Rule
+class Call extends Rule
 {
-    public function __construct($callback, $config = [])
+    public function __construct($call, $config = [])
     {
         $this->parentConstruct($config);
-        if (!is_callable($callback)) {
+        if (!is_callable($call)) {
             throw new Exception('Invalid callback.');
         }
 
-        $this->params['callback'] = $callback;
+        $this->params['callback'] = $call;
     }
 
     /**

@@ -11,7 +11,7 @@ use rock\validate\locale\Locale;
  * @codeCoverageIgnore
  * @package rock\validate\locale\ru
  */
-class Callback extends Locale
+class Call extends Locale
 {
     public function defaultTemplates()
     {

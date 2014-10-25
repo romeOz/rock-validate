@@ -534,6 +534,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
      */
     public function testOneOf($input)
     {
+        // valid
         $validate = Validate::oneOf(
             [
                 'email' => Validate::required()
@@ -544,6 +545,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertTrue($validate->validate($input));
         $this->assertEmpty($validate->getErrors());
+
+        // invalid
         $validate = Validate::oneOf(
             [
                 'username' => Validate::required(),

@@ -3,7 +3,7 @@ namespace rockunit\validate;
 
 use rock\validate\Validate;
 
-class CallbackTest extends \PHPUnit_Framework_TestCase
+class CallTest extends \PHPUnit_Framework_TestCase
 {
     public function thisIsASampleCallbackUsedInsideThisTest()
     {
@@ -12,7 +12,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testValid()
     {
-        $callback = Validate::callback(function() {
+        $callback = Validate::call(function() {
             return true;
         });
         $this->assertTrue($callback->validate(''));
@@ -20,7 +20,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalid()
     {
-        $callback = Validate::callback(function() {
+        $callback = Validate::call(function() {
             return false;
         });
         $this->assertFalse($callback->validate('invalid'));
@@ -28,13 +28,13 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
 
     public function testCallbackValidatorShouldAcceptArrayCallbackDefinitions()
     {
-        $v = Validate::callback([$this, 'thisIsASampleCallbackUsedInsideThisTest']);
+        $v = Validate::call([$this, 'thisIsASampleCallbackUsedInsideThisTest']);
         $this->assertTrue($v->validate('test'));
     }
 
     public function testCallbackValidatorShouldAcceptFunctionNamesAsString()
     {
-        $v = Validate::callback('is_string');
+        $v = Validate::call('is_string');
         $this->assertTrue($v->validate('test'));
     }
 
@@ -43,7 +43,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidCallbacksShouldRaiseComponentExceptionUponInstantiation()
     {
-        $v = Validate::callback(new \stdClass);
+        $v = Validate::call(new \stdClass);
         $this->assertTrue($v->validate('foo'));
     }
 }

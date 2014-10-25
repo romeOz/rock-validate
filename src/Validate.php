@@ -9,8 +9,9 @@ use rock\validate\rules\Alpha;
 use rock\validate\rules\Arr;
 use rock\validate\rules\Between;
 use rock\validate\rules\Bool;
-use rock\validate\rules\Callback;
+use rock\validate\rules\Call;
 use rock\validate\rules\Captcha;
+use rock\validate\rules\Closure;
 use rock\validate\rules\Cntrl;
 use rock\validate\rules\Confirm;
 use rock\validate\rules\Contains;
@@ -53,8 +54,8 @@ use rock\validate\rules\Writable;
 
 /**
  * Class Validate
- * @method static Validate notOf(Validate $validate)
  * @method static Validate allOf(array $attributes)
+ * @method static Validate notOf(Validate $validate)
  * @method static Validate oneOf(array $attributes)
  * @method static Validate locale(string $locale)
  *
@@ -64,7 +65,8 @@ use rock\validate\rules\Writable;
  * @method static Validate between(mixed $min = null, mixed $max = null, bool $inclusive = false)
  * @method static Validate bool()
  * @method static Validate captcha(mixed $compareTo)
- * @method static Validate callback(mixed $callback)
+ * @method static Validate closure()
+ * @method static Validate call(mixed $callback)
  * @method static Validate cntrl()
  * @method static Validate contains(mixed $containsValue, bool $identical = false)
  * @method static Validate confirm(mixed $compareTo)
@@ -85,8 +87,8 @@ use rock\validate\rules\Writable;
  * @method static Validate json()
  * @method static Validate length(int $min=null, int $max=null, bool $inclusive = true)
  * @method static Validate lowercase()
- * @method static Validate max(int $maxValue, bool $inclusive = false)
- * @method static Validate min(int $minValue, bool $inclusive = false)
+ * @method static Validate max(mixed $maxValue, bool $inclusive = false)
+ * @method static Validate min(mixed $minValue, bool $inclusive = false)
  * @method static Validate negative()
  * @method static Validate required()
  * @method static Validate noWhitespace()
@@ -442,11 +444,11 @@ class Validate implements i18nInterface
                     self::RU => \rock\validate\locale\ru\Bool::className(),
                 ]
             ],
-            'callback' => [
-                'class' => Callback::className(),
+            'call' => [
+                'class' => Call::className(),
                 'locales' => [
-                    self::EN => \rock\validate\locale\en\Callback::className(),
-                    self::RU => \rock\validate\locale\ru\Callback::className(),
+                    self::EN => \rock\validate\locale\en\Call::className(),
+                    self::RU => \rock\validate\locale\ru\Call::className(),
                 ]
             ],
             'captcha' => [
@@ -454,6 +456,13 @@ class Validate implements i18nInterface
                 'locales' => [
                     self::EN => \rock\validate\locale\en\Captcha::className(),
                     self::RU => \rock\validate\locale\ru\Captcha::className(),
+                ]
+            ],
+            'closure' => [
+                'class' => Closure::className(),
+                'locales' => [
+                    self::EN => \rock\validate\locale\en\Closure::className(),
+                    self::RU => \rock\validate\locale\ru\Closure::className(),
                 ]
             ],
             'cntrl' => [
