@@ -5,10 +5,10 @@ Rules
 
 ### [Generics](#generics-1)
 
- * [v::allOf()](#vallof)
- * [v::notOf()](#vnotof)
- * [v::oneOf()](#voneof)
- * [v::when()](#vwhenv-if-v-then-v-else)
+ * [v::allOf()](#vallofattribute_1--v1-attribute_2--v2-attribute_3--v3-)
+ * [v::notOf()](#vnotofv)
+ * [v::oneOf()](#voneofattribute_1--v1-attribute_2--v2-attribute_3--v3-)
+ * [v::when()](#vwhenv-if-v-then-v-else--null)
   
 ### [Comparing Values](#comparing-values-1)
 
@@ -75,7 +75,7 @@ Rules
  * [v::startsWith()](#vstartswithvalue)
  * [v::uppercase()](#vuppercase)
 
-### [Array](#array)
+### Array
 
  * [v::arr()](#varr)
  * [v::contains()](#vcontainsvalue)
