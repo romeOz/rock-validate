@@ -26,14 +26,14 @@ Installation
 
 From the Command Line:
 
-```composer require romeoz/rock-validate:*@dev```
+```composer require romeoz/rock-validate:*```
 
 In your composer.json:
 
 ```json
 {
     "require": {
-        "romeoz/rock-validate": "*@dev"
+        "romeoz/rock-validate": "*"
     }
 }
 ```
