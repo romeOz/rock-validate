@@ -31,3 +31,8 @@ Desktop.ini
 ## PHPStorm
 ############
 .idea/*
+
+############
+## npm
+############
+node_modules/*
