@@ -94,7 +94,7 @@ Rules
  * [v::between()](#vbetweenmin-max)
  * [v::date()](#vdate)
 
-### [File](#files-1)
+### [File](#file-1)
 
  * [v::directory()](#vdirectory)
  * [v::exists)](#vexists)
