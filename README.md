@@ -151,6 +151,36 @@ Documentation
  * [Custom messages, placeholders and templates](https://github.com/romeOz/rock-validate/blob/master/docs/custom-messages.md)
  * [Custom rules](https://github.com/romeOz/rock-validate/blob/master/docs/custom-rules.md)
 
+Demo & Tests
+-------------------
+
+Use a specially prepared environment (Vagrant + Ansible) with preinstalled and configured storages.
+
+###Out of the box:
+
+ * Ubuntu 14.04 64 bit
+
+> If you need to use 32 bit of Ubuntu, then uncomment `config.vm.box_url` the appropriate version in the file `/path/to/Vagrantfile`.
+
+ * Nginx 1.6
+ * PHP-FPM 5.6
+ * Composer
+ * Local IP loop on Host machine /etc/hosts and Virtual hosts in Nginx already set up!
+
+###Installation:
+
+1. [Install Composer](https://getcomposer.org/doc/00-intro.md#globally)
+2. ```composer create-project --prefer-dist --stability=dev romeoz/rock-template```
+3. [Install Vagrant](https://www.vagrantup.com/downloads), and additional Vagrant plugins ```vagrant plugin install vagrant-hostsupdater vagrant-vbguest vagrant-cachier```
+4. ```vagrant up```
+5. Open demo [http://rock.validate/](http://rock.validate/) or [http://192.168.33.35/](http://192.168.33.35/)
+
+> Work/editing the project can be done via ssh:
+```bash
+vagrant ssh
+cd /var/www/
+```
+
 Requirements
 -------------------
 
