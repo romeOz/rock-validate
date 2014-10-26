@@ -3,22 +3,22 @@ Rules
 
 > Documentation with some modifications taken from [Respect/Validation](https://github.com/Respect/Validation).
 
-### [Generics](#generics)
+### [Generics](#generics-1)
 
  * [v::allOf()](#vallof)
  * [v::notOf()](#vnotof)
  * [v::oneOf()](#voneof)
  * [v::when()](#vwhenv-if-v-then-v-else)
   
-### [Comparing Values](#comparing-values)
+### [Comparing Values](#comparing-values-1)
 
  * [v::between()](#vbetweenmin-max)
- * [v::confirm()](#vconfirm)
+ * [v::confirm()](#vconfirmvalue)
  * [v::equals()](#vequalsvalue)
- * [v::max()](#vmax)
- * [v::min()](#vmin)
+ * [v::max()](#vmaxmax)
+ * [v::min()](#vminmin)
 
-### [Types](#types)
+### [Types](#types-1)
 
  * [v::arr()](#varr)
  * [v::bool()](#vbool)
@@ -32,7 +32,7 @@ Rules
  * [v::object()](#vobject)
  * [v::string()](#vstring)
   
-### [CTypes](#ctypes)  
+### [CTypes](#ctypes-1)  
 
  * [v::alnum()](#valnum)
  * [v::alpha()](#valpha)
@@ -41,7 +41,7 @@ Rules
  * [v::graph()](#vgraph)
  * [v::space()](#vspace)
 
-### [Numeric](#numeric)
+### [Numeric](#numeric-1)
 
  * [v::between()](#vbetweenmin-max)
  * [v::bool()](#vbool)
@@ -53,7 +53,7 @@ Rules
  * [v::positive()](#vpositive)
  * [v::digit()](#vdigit)
 
-### [String](#string)
+### [String](#string-1)
 
  * [v::alnum()](#valnum)
  * [v::alpha()](#valpha)
@@ -75,7 +75,7 @@ Rules
  * [v::startsWith()](#vstartswithvalue)
  * [v::uppercase()](#vuppercase)
 
-### Arrays
+### [Array](#array)
 
  * [v::arr()](#varr)
  * [v::contains()](#vcontainsvalue)
@@ -85,7 +85,7 @@ Rules
  * [v::required()](#vrequired)
  * [v::startsWith()](#vstartswithvalue)
 
-### Objects
+### Object
 
  * [v::object()](#vobject)
 
@@ -94,7 +94,7 @@ Rules
  * [v::between()](#vbetweenmin-max)
  * [v::date()](#vdate)
 
-### [Files](#files)
+### [File](#files-1)
 
  * [v::directory()](#vdirectory)
  * [v::exists)](#vexists)
@@ -104,14 +104,14 @@ Rules
  * [v::uploaded()](#vuploaded)
  * [v::writable()](#vwritable)
 
-### [Network](#network)
+### [Network](#network-1)
 
  * [v::domain()](#vdomain)
  * [v::ip()](#vip)
   
-### [Other](#other)
+### [Other](#other-1)
 
- * [v::call()](#vcall)
+ * [v::call()](#vcallmixed-callback)
 
 ### [Custom rules](custom-rules.md)
 
@@ -301,8 +301,8 @@ Placeholders for this validator includes `{{minValue}}` and `{{maxValue}}`.
 
 See also:
 
-  * [v::min()](#vmin)
-  * [v::max()](#vmax)
+  * [v::min()](#vminmin)
+  * [v::max()](#vmaxmax)
 
 #### v::equals($value)
 #### v::equals($value, boolean $identical=false)
@@ -325,8 +325,8 @@ Placeholder for this validator includes `{{compareTo}}`.
 
 > `confirm` differs default message.
 
-#### v::max()
-#### v::max(boolean $inclusive=false)
+#### v::max($max)
+#### v::max($max, boolean $inclusive=false)
 
 Validates if the input doesn't exceed the maximum value.
 
@@ -347,11 +347,11 @@ Placeholders for this validator includes `{{maxValue}}`.
 
 See also:
 
-  * [v::min()](#vmin)
+  * [v::min()](#vminmin)
   * [v::between()](#vbetweenmin-max)
 
-#### v::min()
-#### v::min(boolean $inclusive=false)
+#### v::min($min)
+#### v::min($min, boolean $inclusive=false)
 
 Validates if the input doesn't exceed the minimum value.
 
@@ -433,8 +433,8 @@ Placeholders for this validator includes `{{format}}`.
 See also:
 
   * [v::between()](#vbetweenmin-max)
-  * [v::min()](#vmin)
-  * [v::max()](#vmax)
+  * [v::min()](#vminmin)
+  * [v::max()](#vmaxmax)
   
 #### v::float()
 
@@ -764,6 +764,28 @@ Validates if the given input is a valid JSON.
 v::json->validate('{"foo":"bar"}'); // output: true
 ```  
   
+#### v::in($haystack)
+#### v::in($haystack, boolean $identical=false)
+
+Validates if the input is contained in a specific haystack.
+
+For strings:
+
+```php
+v::in('lorem ipsum')->validate('ipsum'); //true
+```
+
+For arrays:
+
+```php
+v::in(array('lorem', 'ipsum'))->validate('lorem'); //true
+```
+
+A second parameter may be passed for identical comparison instead
+of equal comparison.
+
+Placeholders for this validator includes `{{haystack}}`.  
+  
 #### v::length($min, $max)
 #### v::length($min, null)
 #### v::length(null, $max)
@@ -893,7 +915,7 @@ See also:
   * [v::lowercase()](#vlowercase)
   
   
-### Files
+### File
   
 #### v::directory()
 
