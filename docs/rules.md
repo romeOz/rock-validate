@@ -753,7 +753,7 @@ See also:
 
   * [v::startsWith()](#vstartswithvalue)
   * [v::contains()](#vcontainsvalue)
-  * [v::in()](#vin)  
+  * [v::in()](#vinhaystack)  
   
   
 #### v::json()
@@ -899,7 +899,7 @@ See also:
 
   * [v::endsWith()](#vendswithvalue)
   * [v::contains()](#vcontainsvalue)
-  * [v::in()](#vin)
+  * [v::in()](#vinhaystack)
     
     
 #### v::uppercase()
