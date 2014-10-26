@@ -567,13 +567,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $validate->getErrors());
     }
 
-    public function testTt()
-    {
-
-        var_export(Validate::date()->min(new \DateTime('2012-01-01'))->validate('2010-01-01'));
-
-    }
-
     public function providerInputOneOf()
     {
         return [

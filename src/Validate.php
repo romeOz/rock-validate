@@ -57,6 +57,7 @@ use rock\validate\rules\Writable;
  * @method static Validate allOf(array $attributes)
  * @method static Validate notOf(Validate $validate)
  * @method static Validate oneOf(array $attributes)
+ * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
  * @method static Validate locale(string $locale)
  *
  * @method static Validate alnum(string $additionalChars = null)
@@ -237,6 +238,13 @@ class Validate implements i18nInterface
                 continue;
             }
 
+            if ($rule instanceof When) {
+                $rule->valid = $this->valid;
+                $rule->validate($input);
+                $this->errors = array_merge($this->errors, $rule->getErrors());
+                continue;
+            }
+
             if ($rule instanceof AllOf) {
                 $rule->valid = $this->valid;
                 $rule->validate($input);
@@ -320,7 +328,7 @@ class Validate implements i18nInterface
 
     public function __call($name, $arguments)
     {
-        if ($name === 'notOf' || $name === 'allOf' || $name === 'oneOf' || $name === 'locale') {
+        if ($name === 'notOf' || $name === 'allOf' || $name === 'oneOf' || $name === 'when' || $name === 'locale') {
             call_user_func_array([$this, "{$name}Internal"], $arguments);
             return $this;
         }
@@ -364,6 +372,12 @@ class Validate implements i18nInterface
     {
         $validate->valid = false;
         $this->_rules[] = $validate;
+        return $this;
+    }
+
+    protected function whenInternal(Validate $if, Validate $then, Validate $else = null)
+    {
+        $this->_rules['when'] = new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid]);
         return $this;
     }
 
