@@ -146,7 +146,10 @@ $v->getFirstError($attribute);
 
 Documentation
 -------------------
-**TODO**
+
+ * [Rules](https://github.com/romeOz/rock-validate/blob/master/docs/rules.md)
+ * [Custom messages, placeholders and templates](https://github.com/romeOz/rock-validate/blob/master/docs/custom-messages.md)
+ * [Custom rules](https://github.com/romeOz/rock-validate/blob/master/docs/custom-rules.md)
 
 Requirements
 -------------------
