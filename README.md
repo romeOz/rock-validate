@@ -170,7 +170,7 @@ Use a specially prepared environment (Vagrant + Ansible) with preinstalled and c
 ###Installation:
 
 1. [Install Composer](https://getcomposer.org/doc/00-intro.md#globally)
-2. ```composer create-project --prefer-dist --stability=dev romeoz/rock-template```
+2. ```composer create-project --prefer-dist romeoz/rock-validate```
 3. [Install Vagrant](https://www.vagrantup.com/downloads), and additional Vagrant plugins ```vagrant plugin install vagrant-hostsupdater vagrant-vbguest vagrant-cachier```
 4. ```vagrant up```
 5. Open demo [http://rock.validate/](http://rock.validate/) or [http://192.168.33.35/](http://192.168.33.35/)
