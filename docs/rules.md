@@ -257,7 +257,7 @@ For `attributes`:
 
 ```php
 $input = ['email' => 7, 'name' => 'Tom'];
-$v = Validate::attributes([
+$v = v::attributes([
     'name' => v::contains('foo')->email(),
     'email' => v::oneOf(v::string()->email())
 ]);
