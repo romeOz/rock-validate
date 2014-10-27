@@ -604,6 +604,23 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $validate->validate($array);
     }
 
+    public function testOneOf()
+    {
+        $v = Validate::oneOf(Validate::string()->email());
+        $this->assertFalse($v->validate(7));
+        $this->assertCount(1, $v->getErrors());
+
+        // attributes
+
+        $v = Validate::attributes([
+            'name' => Validate::contains('foo')->email(),
+            'email' => Validate::oneOf(Validate::string()->email())
+        ]);
+        $this->assertFalse($v->validate(['email' => 7, 'name' => 'Tom']));
+        $this->assertCount(2, $v->getErrors()['name']);
+        $this->assertCount(1, $v->getErrors()['email']);
+    }
+
     public function testGetFirstError()
     {
         $validate = Validate::required()

@@ -8,6 +8,7 @@ Rules
  * [v::attributes](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::attributesOne()](#vattributesoneattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::notOf()](#vnotofv)
+ * [v::oneOf()](#voneofv)
  * [v::when()](#vwhenv-if-v-then-v-else--null)
   
 ### [Comparing Values](#comparing-values-1)
@@ -232,6 +233,49 @@ $v = v::notOf(
     )
 );
 $v->validate($input); // output: true
+```
+
+#### v::oneOf($v)
+
+This is a group validator that acts as an OR operator (if only one condition is valid).
+
+```php
+$input = 7;
+$v = v::oneOf(v::string()->email());
+
+$v->validate($input); // output: false
+$v->getErrors();
+/*
+output:
+[
+  'string' => 'value must be string'
+]
+*/
+```
+
+For `attributes`:
+
+```php
+$input = ['email' => 7, 'name' => 'Tom'];
+$v = Validate::attributes([
+    'name' => v::contains('foo')->email(),
+    'email' => v::oneOf(v::string()->email())
+]);
+
+$v->validate($input); // output: false
+$v->getErrors();
+/*
+output:
+[
+  'name' => [
+    'contains' => 'value must contain the value "foo"',
+    'email' => 'value must be valid',
+  ],
+  'email' => [
+    'string' => 'value must be string',
+  ],
+]
+*/
 ```
 
 #### v::when(v $if, v $then, v $else = null)

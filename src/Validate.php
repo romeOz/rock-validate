@@ -55,8 +55,9 @@ use rock\validate\rules\Writable;
 /**
  * Class Validate
  * @method static Validate attributes(array $attributes)
- * @method static Validate notOf(Validate $validate)
  * @method static Validate attributesOne(array $attributes)
+ * @method static Validate notOf(Validate $validate)
+ * @method static Validate oneOf(Validate $validate)
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
  * @method static Validate locale(string $locale)
  *
@@ -147,6 +148,11 @@ class Validate implements i18nInterface
      * @var string
      */
     public $locale = self::EN;
+    /**
+     * This is a group validator that acts as an OR operator (if only one condition is valid).
+     * @var bool
+     */
+    public $one = false;
     /** @var Rule[]  */
     protected $_rules = [];
     /**
@@ -231,7 +237,7 @@ class Validate implements i18nInterface
         $this->errors = [];
         foreach($this->_rules as $ruleName => $rule){
 
-            // notOf
+            // notOf or oneOf
             if ($rule instanceof Validate) {
                 $rule->validate($input);
                 $this->errors = array_merge($this->errors, $rule->getErrors());
@@ -267,6 +273,9 @@ class Validate implements i18nInterface
                 continue;
             }
             $this->errors[$ruleName] = $this->error($ruleName, $rule);
+            if ($this->one === true) {
+                break;
+            }
         }
         return empty($this->errors);
     }
@@ -328,7 +337,7 @@ class Validate implements i18nInterface
 
     public function __call($name, $arguments)
     {
-        if ($name === 'notOf' || $name === 'attributes' || $name === 'attributesOne' || $name === 'when' || $name === 'locale') {
+        if ($name === 'notOf' || $name === 'oneOf' || $name === 'attributes' || $name === 'attributesOne' || $name === 'when' || $name === 'locale') {
             call_user_func_array([$this, "{$name}Internal"], $arguments);
             return $this;
         }
@@ -357,7 +366,6 @@ class Validate implements i18nInterface
     {
         $this->_rules = [];
         $this->_rules['attributes'] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
-
         return $this;
     }
 
@@ -368,10 +376,17 @@ class Validate implements i18nInterface
         return $this;
     }
 
+    protected function oneOfInternal(Validate $validate)
+    {
+        $validate->one = true;
+        $this->_rules['oneOf'] = $validate;
+        return $this;
+    }
+
     protected function notOfInternal(Validate $validate)
     {
         $validate->valid = false;
-        $this->_rules[] = $validate;
+        $this->_rules['notOf'] = $validate;
         return $this;
     }
 
