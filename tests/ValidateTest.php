@@ -413,13 +413,13 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(['numeric' => 'email must not be numeric'], $validate->getErrors());
     }
 
-    public function testAllOf()
+    public function testAttributes()
     {
         $input = [
             'email' => 'tom@site.com',
             'name' => 'Tom'
         ];
-        $validate = Validate::allOf(
+        $validate = Validate::attributes(
             [
                 'email' => Validate::required()
                     ->string()
@@ -435,7 +435,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             'name' => 'Tom'
         ];
         $validate = Validate::notOf(
-            Validate::allOf(
+            Validate::attributes(
                 [
                     'username' => Validate::required(),
                     'email' => Validate::required()
@@ -453,7 +453,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 ],
         ];
         $this->assertSame($expected, $validate->getErrors());
-        $validate = Validate::allOf(
+        $validate = Validate::attributes(
             [
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
@@ -481,15 +481,14 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $validate->getErrors());
     }
 
-
-    public function testAllOfAsObject()
+    public function testAttributesAsObject()
     {
         $input = (object)[
             'email' => '',
             'name' => 'Tom'
         ];
         $validate = Validate::notOf(
-            Validate::allOf(
+            Validate::attributes(
                 [
                     'username' => Validate::required(),
                     'email' => Validate::required()
@@ -512,13 +511,13 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Exception
      */
-    public function testAllOfException()
+    public function testAttributesThrowException()
     {
         $array = [
             'email' => 'tom@site.com',
             'name' => 'Tom'
         ];
-        $validate = Validate::allOf(
+        $validate = Validate::attributes(
             [
                 'email' => Validate::required()
                     ->string()
@@ -530,12 +529,12 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @dataProvider providerInputOneOf
+     * @dataProvider providerInputAttributesOne
      */
-    public function testOneOf($input)
+    public function testAttributesOne($input)
     {
         // valid
-        $validate = Validate::oneOf(
+        $validate = Validate::attributesOne(
             [
                 'email' => Validate::required()
                     ->string()
@@ -547,7 +546,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($validate->getErrors());
 
         // invalid
-        $validate = Validate::oneOf(
+        $validate = Validate::attributesOne(
             [
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
@@ -567,7 +566,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $validate->getErrors());
     }
 
-    public function providerInputOneOf()
+    public function providerInputAttributesOne()
     {
         return [
             [
@@ -588,13 +587,13 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException Exception
      */
-    public function testOneOfException()
+    public function testAttributesOneThrowException()
     {
         $array = [
             'email' => 'tom@site.com',
             'name' => 'Tom'
         ];
-        $validate = Validate::oneOf(
+        $validate = Validate::attributesOne(
             [
                 'email' => Validate::required()
                     ->string()
@@ -616,12 +615,13 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $validate = Validate::string();
         $this->assertTrue($validate->validate(''));
         $this->assertEmpty($validate->getFirstError());
-        // all off
+
+        // attributes
         $array = [
             'email' => null,
             'name' => 'Tom'
         ];
-        $validate = Validate::allOf(
+        $validate = Validate::attributes(
             [
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
@@ -651,12 +651,13 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $validate = Validate::string();
         $this->assertTrue($validate->validate(''));
         $this->assertEmpty($validate->getLastError());
-        // all off
+
+        // attributes
         $array = [
             'email' => null,
             'name' => 'Tom'
         ];
-        $validate = Validate::allOf(
+        $validate = Validate::attributes(
             [
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())

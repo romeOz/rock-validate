@@ -3,7 +3,7 @@
 namespace rock\validate;
 
 
-class OneOf
+class AttributesOne
 {
     use ObjectTrait {
         ObjectTrait::__construct as parentConstruct;

@@ -13,7 +13,7 @@ Features
 -------------------
 
  * Supports large many validation rules (string, number, ctype, file, network)
- * Validation of scalar variable and array (`allOf`, `oneOf`)
+ * Validation of scalar variable and array (`attributes`, `attributesOne`)
  * **Output the list of errors in an associative array**
  * **i18n support**
  * **Hot replacement of placeholders for messages (`{{name}} must be valid`), as well messages**
@@ -102,7 +102,7 @@ output:
 */
 ```
 
-####AllOf (Array or Object)
+####attributes (Array or Object)
 ```php
 use rock\validate\Validate;
 
@@ -119,7 +119,7 @@ $attributes = [
   'email' => Validate::required()->email()
 ];
 
-$v = Validate::allOf($attributes);
+$v = Validate::attributes($attributes);
 $v->validate($input); // output false
 
 $v->getErrors();

@@ -54,9 +54,9 @@ use rock\validate\rules\Writable;
 
 /**
  * Class Validate
- * @method static Validate allOf(array $attributes)
+ * @method static Validate attributes(array $attributes)
  * @method static Validate notOf(Validate $validate)
- * @method static Validate oneOf(array $attributes)
+ * @method static Validate attributesOne(array $attributes)
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
  * @method static Validate locale(string $locale)
  *
@@ -245,14 +245,14 @@ class Validate implements i18nInterface
                 continue;
             }
 
-            if ($rule instanceof AllOf) {
+            if ($rule instanceof Attributes) {
                 $rule->valid = $this->valid;
                 $rule->validate($input);
                 $this->errors = $rule->getErrors();
                 break;
             }
 
-            if ($rule instanceof OneOf) {
+            if ($rule instanceof AttributesOne) {
                 $rule->valid = $this->valid;
                 $rule->validate($input);
                 $this->errors = $rule->getErrors();
@@ -328,7 +328,7 @@ class Validate implements i18nInterface
 
     public function __call($name, $arguments)
     {
-        if ($name === 'notOf' || $name === 'allOf' || $name === 'oneOf' || $name === 'when' || $name === 'locale') {
+        if ($name === 'notOf' || $name === 'attributes' || $name === 'attributesOne' || $name === 'when' || $name === 'locale') {
             call_user_func_array([$this, "{$name}Internal"], $arguments);
             return $this;
         }
@@ -353,18 +353,18 @@ class Validate implements i18nInterface
         return call_user_func_array([$self, $name], $arguments);
     }
 
-    protected function allOfInternal(array $attributes)
+    protected function attributesInternal(array $attributes)
     {
         $this->_rules = [];
-        $this->_rules['allOf'] = new AllOf(['attributes' => $attributes, 'valid' => $this->valid]);
+        $this->_rules['attributes'] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
 
         return $this;
     }
 
-    protected function oneOfInternal(array $attributes)
+    protected function attributesOneInternal(array $attributes)
     {
         $this->_rules = [];
-        $this->_rules['oneOf'] = new OneOf(['attributes' => $attributes, 'valid' => $this->valid]);
+        $this->_rules['attributesOne'] = new AttributesOne(['attributes' => $attributes, 'valid' => $this->valid]);
         return $this;
     }
 

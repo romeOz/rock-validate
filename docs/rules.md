@@ -5,9 +5,9 @@ Rules
 
 ### [Generics](#generics-1)
 
- * [v::allOf()](#vallofattribute_1--v1-attribute_2--v2-attribute_3--v3-)
+ * [v::attributes](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
+ * [v::attributesOne()](#vattributesoneattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::notOf()](#vnotofv)
- * [v::oneOf()](#voneofattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::when()](#vwhenv-if-v-then-v-else--null)
   
 ### [Comparing Values](#comparing-values-1)
@@ -118,7 +118,7 @@ Rules
 
 ### Generics
 
-#### v::allOf(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
+#### v::attributes(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
 	
 For arrays and objects. Will validate if all inner validators of attributes valid.
 
@@ -135,7 +135,7 @@ $attributes = [
   'email' => v::required()->email()
 ];
 
-$v = v::allOf($attributes);
+$v = v::attributes($attributes);
 $v->validate($input); // output false
 ```
 Syntax allows you to set custom placeholders for every node:
@@ -156,7 +156,7 @@ $attributes = [
                 ->placeholders(['name' => 'email']),
 ];
 
-$v = v::allOf($attributes);
+$v = v::attributes($attributes);
 $v->validate($input); // output false
 
 $v->getErrors();
@@ -177,7 +177,7 @@ output:
 */
 ```
 
-#### v::oneOf(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
+#### v::attributesOne(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
 
 This is a group validator that acts as an OR operator (if only one condition is valid).
 
@@ -186,7 +186,7 @@ $input =  [
     'email' => 'tom@site',
     'username' => ''
 ];
-$v = v::oneOf(
+$v = v::attributesOne(
     [
         'email' => v::email(),
         'username' => v::required()
@@ -216,7 +216,7 @@ $v = v::notOf(v::required());
 $v->validate(''); // output: true
 ```
 
-For `allOf`:
+For `attributes`:
 
 ```php
 $input =  [
@@ -224,7 +224,7 @@ $input =  [
     'username' => ''
 ];
 $v = v::notOf(
-    v::allOf(
+    v::attributes(
         [
             'email' => v::email(),
             'username' => v::required()

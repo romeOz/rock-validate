@@ -2,7 +2,7 @@
 
 namespace rock\validate;
 
-class AllOf
+class Attributes
 {
     use ObjectTrait {
         ObjectTrait::__construct as parentConstruct;

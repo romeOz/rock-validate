@@ -26,8 +26,8 @@ class WhenTest extends \PHPUnit_Framework_TestCase
             'firstname' => 'Tom',
         ];
         $v = Validate::when(
-            Validate::allOf(['email' => Validate::required()->email()]),
-            Validate::allOf(['firstname' => Validate::required()->string()])
+            Validate::attributes(['email' => Validate::required()->email()]),
+            Validate::attributes(['firstname' => Validate::required()->string()])
         );
         $this->assertTrue($v->validate($input));
         $this->assertEmpty($v->getErrors());
@@ -38,9 +38,9 @@ class WhenTest extends \PHPUnit_Framework_TestCase
             'firstname' => 'Tom',
         ];
         $v = Validate::when(
-            Validate::allOf(['email' => Validate::required()->email()]),
-            Validate::allOf(['firstname' => Validate::required()->string()]),
-            Validate::allOf(['firstname' => Validate::required()->string()])
+            Validate::attributes(['email' => Validate::required()->email()]),
+            Validate::attributes(['firstname' => Validate::required()->string()]),
+            Validate::attributes(['firstname' => Validate::required()->string()])
         );
         $this->assertTrue($v->validate($input));
         $this->assertEmpty($v->getErrors());
@@ -65,9 +65,9 @@ class WhenTest extends \PHPUnit_Framework_TestCase
             'firstname' => 'Tom',
         ];
         $v = Validate::when(
-            Validate::allOf(['email' => Validate::required()->email()]),
-            Validate::allOf(['firstname' => Validate::required()->string()]),
-            Validate::allOf(['firstname' => Validate::required()->int()])
+            Validate::attributes(['email' => Validate::required()->email()]),
+            Validate::attributes(['firstname' => Validate::required()->string()]),
+            Validate::attributes(['firstname' => Validate::required()->int()])
         );
         $this->assertFalse($v->validate($input));
         $this->assertSame(
