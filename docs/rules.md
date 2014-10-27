@@ -120,7 +120,7 @@ Rules
 
 #### v::attributes(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
 	
-For arrays and objects. Will validate if all inner validators of attributes valid.
+For arrays or objects. Will validate if all inner validators of attributes valid.
 
 ```php
 $input = [
@@ -179,7 +179,7 @@ output:
 
 #### v::attributesOne(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
 
-This is a group validator that acts as an OR operator (if only one condition is valid).
+For arrays or objects. This is a group validator that acts as an OR operator (if only one condition is valid).
 
 ```php
 $input =  [

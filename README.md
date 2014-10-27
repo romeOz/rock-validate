@@ -13,7 +13,7 @@ Features
 -------------------
 
  * Supports large many validation rules (string, number, ctype, file, network)
- * Validation of scalar variable and array (`attributes`, `attributesOne`)
+ * Validation of scalar variable and array (`attributes()`, `attributesOne()`)
  * **Output the list of errors in an associative array**
  * **i18n support**
  * **Hot replacement of placeholders for messages (`{{name}} must be valid`), as well messages**
@@ -154,7 +154,7 @@ Documentation
 Demo & Tests
 -------------------
 
-Use a specially prepared environment (Vagrant + Ansible) with preinstalled and configured storages.
+Use a specially prepared environment (Vagrant + Ansible).
 
 ###Out of the box:
 
