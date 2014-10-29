@@ -27,7 +27,7 @@ class StartsWith extends Rule
         if (is_array($input)) {
             return reset($input) == $this->params['startValue'];
         }
-        return 0 === mb_stripos($input, $this->params['startValue'], 0, mb_detect_encoding($input));
+        return \rock\helpers\String::startsWith($input, $this->params['startValue'], false);
     }
 
     protected function validateIdentical($input)
@@ -35,6 +35,6 @@ class StartsWith extends Rule
         if (is_array($input)) {
             return reset($input) === $this->params['startValue'];
         }
-        return 0 === mb_strpos($input, $this->params['startValue'], 0, mb_detect_encoding($input));
+        return \rock\helpers\String::startsWith($input, $this->params['startValue'], true);
     }
 }

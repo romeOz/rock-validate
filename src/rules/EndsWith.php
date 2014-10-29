@@ -26,19 +26,15 @@ class EndsWith extends Rule
     {
         if (is_array($input)) {
             return end($input) == $this->params['endValue'];
-        } else {
-            return mb_strripos($input, $this->params['endValue'], -1, $enc = mb_detect_encoding($input))
-                   === mb_strlen($input, $enc) - mb_strlen($this->params['endValue'], $enc) ;
         }
+        return \rock\helpers\String::endsWith($input, $this->params['endValue'], false);
     }
 
     protected function validateIdentical($input)
     {
         if (is_array($input)) {
             return end($input) === $this->params['endValue'];
-        } else {
-            return mb_strrpos($input, $this->params['endValue'], 0, $enc = mb_detect_encoding($input))
-                   === mb_strlen($input, $enc) - mb_strlen($this->params['endValue'], $enc);
         }
+        return \rock\helpers\String::endsWith($input, $this->params['endValue'], true);
     }
 }
