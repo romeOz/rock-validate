@@ -102,7 +102,8 @@ output:
 */
 ```
 
-####attributes (Array or Object)
+####For Array or Object
+
 ```php
 use rock\validate\Validate;
 

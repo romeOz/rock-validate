@@ -83,4 +83,3 @@ output:
 $v->getFirstErrors();
 // output:  CSRF-token must be valid
 ```
-
