@@ -746,5 +746,10 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($validate->validate(''));
         $this->assertSame(['required' => 'значение не должно быть пустым'], $validate->getErrors());
     }
+
+    public function testExistsRule()
+    {
+        $this->assertTrue((new Validate())->existsRule('string'));
+        $this->assertFalse((new Validate())->existsRule('unknown'));
+    }
 }
- 

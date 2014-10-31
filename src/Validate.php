@@ -335,6 +335,11 @@ class Validate implements i18nInterface
         return $error;
     }
 
+    public function existsRule($name)
+    {
+        return isset($this->rules[$name]);
+    }
+
     public function __call($name, $arguments)
     {
         if ($name === 'notOf' || $name === 'oneOf' || $name === 'attributes' || $name === 'attributesOne' || $name === 'when' || $name === 'locale') {
