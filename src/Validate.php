@@ -68,7 +68,7 @@ use rock\validate\rules\Writable;
  * @method static Validate bool()
  * @method static Validate captcha(mixed $compareTo)
  * @method static Validate closure()
- * @method static Validate call(mixed $callback)
+ * @method static Validate call(mixed $call, array $args = null)
  * @method static Validate cntrl()
  * @method static Validate contains(mixed $containsValue, bool $identical = false)
  * @method static Validate confirm(mixed $compareTo)

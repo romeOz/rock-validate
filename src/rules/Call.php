@@ -6,14 +6,18 @@ use rock\validate\Exception;
 
 class Call extends Rule
 {
-    public function __construct($call, $config = [])
+    protected $call;
+    protected $args = [];
+    public function __construct($call, array $args = null, $config = [])
     {
         $this->parentConstruct($config);
         if (!is_callable($call)) {
             throw new Exception('Invalid callback.');
         }
-
-        $this->params['callback'] = $call;
+        $this->call = $call;
+        if (!empty($args)) {
+            $this->args = $args;
+        }
     }
 
     /**
@@ -21,6 +25,8 @@ class Call extends Rule
      */
     public function validate($input)
     {
-        return (bool)call_user_func($this->params['callback'], $input);
+        $args = $this->args;
+        array_unshift($args, $input);
+        return (bool)call_user_func_array($this->call, $args);
     }
 } 

@@ -112,7 +112,7 @@ Rules
   
 ### [Other](#other-1)
 
- * [v::call()](#vcallmixed-callback)
+ * [v::call()](#vcallmixed-call)
 
 ### [Custom rules](custom-rules.md)
 
@@ -1099,13 +1099,14 @@ v::ip(FILTER_FLAG_NO_PRIV_RANGE)->validate('127.0.0.1'); // output: false
   
 ### Other  
   
-#### v::call(mixed $callback)
+#### v::call(mixed $call)
+#### v::call(mixed $call, array $args = null)
 
 This is a wildcard validator, it uses a function name, method or closure
 to validate something:
 
 ```php
-v::callback('is_int')->validate(10); // output: true
+v::call('is_int')->validate(10); // output: true
 
 $callback = function($input) {
                 return is_int($input);
@@ -1114,3 +1115,8 @@ v::call($callback)->validate('invalid'); // output: false
 ```
 
 > Please note that this is a sample, the `v::int()` validator is much better.
+
+
+```php
+v::call('strpos', ['a'])->validate('test'); // output: false
+```
