@@ -28,7 +28,7 @@ class Contains extends Rule
         if (is_array($input)) {
             return in_array($this->params['containsValue'], $input);
         }
-        return \rock\helpers\String::contains($input, $this->params['containsValue'], false);
+        return \rock\helpers\StringHelper::contains($input, $this->params['containsValue'], false);
     }
 
     protected function validateIdentical($input)
@@ -36,6 +36,6 @@ class Contains extends Rule
         if (is_array($input)) {
             return in_array($this->params['containsValue'], $input, true);
         }
-        return \rock\helpers\String::contains($input, $this->params['containsValue'], true);
+        return \rock\helpers\StringHelper::contains($input, $this->params['containsValue'], true);
     }
 }

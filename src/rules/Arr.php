@@ -9,6 +9,7 @@ use Traversable;
 
 class Arr extends Rule
 {
+    public $skipOnEmpty = false;
     public function validate($input)
     {
         return is_array($input) || ($input instanceof ArrayAccess

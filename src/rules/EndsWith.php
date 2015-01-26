@@ -27,7 +27,7 @@ class EndsWith extends Rule
         if (is_array($input)) {
             return end($input) == $this->params['endValue'];
         }
-        return \rock\helpers\String::endsWith($input, $this->params['endValue'], false);
+        return \rock\helpers\StringHelper::endsWith($input, $this->params['endValue'], false);
     }
 
     protected function validateIdentical($input)
@@ -35,6 +35,6 @@ class EndsWith extends Rule
         if (is_array($input)) {
             return end($input) === $this->params['endValue'];
         }
-        return \rock\helpers\String::endsWith($input, $this->params['endValue'], true);
+        return \rock\helpers\StringHelper::endsWith($input, $this->params['endValue'], true);
     }
 }

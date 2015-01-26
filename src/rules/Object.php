@@ -5,6 +5,7 @@ namespace rock\validate\rules;
 
 class Object extends Rule
 {
+    public $skipOnEmpty = false;
     /**
      * @inheritdoc
      */

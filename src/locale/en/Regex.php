@@ -13,9 +13,9 @@ class Regex extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} contains invalid characters',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} does not contain invalid characters',
-            )
+            ]
         ];
     }
 }

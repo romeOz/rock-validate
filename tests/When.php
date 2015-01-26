@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 
 

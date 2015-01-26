@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 
 
@@ -41,6 +41,7 @@ class ArrTest extends \PHPUnit_Framework_TestCase
     public function providerInvalid()
     {
         return [
+            [''],
             [null],
             [121],
             [new \stdClass],

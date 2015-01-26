@@ -1,8 +1,7 @@
 <?php
 
-namespace rockunit\validation;
+namespace rockunit;
 
-use rock\validate\Exception;
 use rock\validate\locale\en\Date;
 use rock\validate\locale\en\Numeric;
 use rock\validate\Validate;
@@ -79,7 +78,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function providerNumericValid()
     {
         return [
-            [''],
             [0],
             [5],
             [5.5]
@@ -123,7 +121,6 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function providerArrValid()
     {
         return [
-            [''],
             [[]],
             [['foo']],
         ];
@@ -396,7 +393,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validate->validate(''));
         $validate = Validate::notOf(
             Validate::required()->string()->placeholders(['name' => 'email']));
-        $this->assertTrue($validate->validate(''));
+        $this->assertFalse($validate->validate(''));
         $validate = Validate::notOf(
             Validate::required()->string()->placeholders(['name' => 'email']));
         $this->assertFalse($validate->validate('foo'));
@@ -508,8 +505,66 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $validate->getErrors());
     }
 
+    public function testEach()
+    {
+        // success
+        $input = [
+            'email' => 'tom@site.com',
+            'name' => 'Tom'
+        ];
+        $validate = Validate::attributes(Validate::required()->string());
+        $this->assertTrue($validate->validate($input));
+        $this->assertEmpty($validate->getErrors());
+
+        // fail
+        $input = [
+            'email' => '',
+            'name' => 5
+        ];
+        $validate = Validate::attributes(Validate::required()->string());
+        $this->assertFalse($validate->validate($input));
+        $expected = [
+            'email' => [
+                'required' => 'value must not be empty',
+            ],
+            'name' =>
+                [
+                    'string' => 'value must be string',
+                ],
+        ];
+        $this->assertSame($expected, $validate->getErrors());
+    }
+
+    public function testEachOne()
+    {
+        // success
+        $input = [
+            'email' => 'tom@site.com',
+            'name' => 'Tom'
+        ];
+        $validate = Validate::attributesOne(Validate::required()->string());
+        $this->assertTrue($validate->validate($input));
+        $this->assertEmpty($validate->getErrors());
+
+        // fail
+        $input = [
+            'email' => '',
+            'name' => 5
+        ];
+        $validate = Validate::attributesOne(Validate::required()->string());
+        $this->assertFalse($validate->validate($input));
+        $expected = [
+            'email' => [
+                'required' => 'value must not be empty',
+            ],
+        ];
+        $this->assertSame($expected, $validate->getErrors());
+    }
+
+
+
     /**
-     * @expectedException Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testAttributesThrowException()
     {
@@ -585,7 +640,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testAttributesOneThrowException()
     {
@@ -690,7 +745,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testUnknownRule()
     {
@@ -699,7 +754,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testClassNotExists()
     {
@@ -708,8 +763,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'bar' => [
                     'class' => 'bar',
                     'locales' => [
-                        Validate::EN => \rock\validate\locale\en\Writable::className(),
-                        Validate::RU => \rock\validate\locale\ru\Writable::className(),
+                        'en' => \rock\validate\locale\en\Writable::className(),
+                        'ru' => \rock\validate\locale\ru\Writable::className(),
                     ]
                 ],
             ]
@@ -720,7 +775,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testClassI18NNotExists()
     {
@@ -729,8 +784,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'required' => [
                     'class' => 'bar',
                     'locales' => [
-                        Validate::EN => 'foo',
-                        Validate::RU => 'bar',
+                        'en' => 'foo',
+                        'ru' => 'bar',
                     ]
                 ],
             ]
@@ -742,7 +797,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
     public function testI18N()
     {
-        $validate = Validate::locale(Validate::RU)->required();
+        $validate = Validate::locale('ru')->required();
         $this->assertFalse($validate->validate(''));
         $this->assertSame(['required' => 'значение не должно быть пустым'], $validate->getErrors());
     }
@@ -753,3 +808,4 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse((new Validate())->existsRule('unknown'));
     }
 }
+ 

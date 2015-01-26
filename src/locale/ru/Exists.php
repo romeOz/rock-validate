@@ -6,7 +6,7 @@ namespace rock\validate\locale\ru;
 use rock\validate\locale\Locale;
 
 /**
- * Class Exists
+ * Class FileExists
  *
  * @codeCoverageIgnore
  * @package rock\validate\locale\ru

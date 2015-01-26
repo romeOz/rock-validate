@@ -3,7 +3,7 @@
 namespace rock\validate\rules;
 
 
-use rock\validate\Exception;
+use rock\validate\ValidateException;
 
 class Ip extends Rule
 {
@@ -41,15 +41,15 @@ class Ip extends Rule
         } elseif (strpos($input, '/') !== false) {
             $this->parseRangeUsingCidr($input, $range);
         } else {
-            throw new Exception('Invalid network range');
+            throw new ValidateException('Invalid network range');
         }
 
         if (!$this->verifyAddress($range['min'])) {
-            throw new Exception('Invalid network range');
+            throw new ValidateException('Invalid network range');
         }
 
         if (isset($range['max']) && !$this->verifyAddress($range['max'])) {
-            throw new Exception('Invalid network range');
+            throw new ValidateException('Invalid network range');
         }
         return $range;
     }
@@ -84,7 +84,7 @@ class Ip extends Rule
         }
 
         if ($isAddressMask || $input[1] < 8 || $input[1] > 30) {
-            throw new Exception('Invalid network mask');
+            throw new ValidateException('Invalid network mask');
         }
 
         $range['mask'] = sprintf('%032b', ip2long(long2ip(~(pow(2, (32 - $input[1])) - 1))));

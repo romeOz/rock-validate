@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use \DateTime;
 use rock\validate\rules\Between;
@@ -26,7 +26,7 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testInvalidConstructionParamsShouldRaiseException()
     {

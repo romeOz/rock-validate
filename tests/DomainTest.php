@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\Validate;
 
@@ -25,27 +25,30 @@ class DomainTest extends \PHPUnit_Framework_TestCase
 
     public function providerValid()
     {
-        return array(
+        return [
+            // skip empty
             [''],
-            array('111111111111domain.local'),
-            array('111111111111.domain.local'),
-            array('example.com'),
-            array('xn--bcher-kva.ch'),
-            array('example-hyphen.com'),
-            array('ёлка.рф'),
-            array('пример.онлайн'),
-        );
+            [null],
+            [[]],
+
+            ['111111111111domain.local'],
+            ['111111111111.domain.local'],
+            ['example.com'],
+            ['xn--bcher-kva.ch'],
+            ['example-hyphen.com'],
+            ['ёлка.рф'],
+            ['пример.онлайн'],
+        ];
     }
 
     public function providerInvalid()
     {
-        return array(
-            array(null),
-            array('-example-invalid.com'),
-            array('example.invalid.-com'),
-            array('1.2.3.256'),
-            array('1.2.3.4'),
-        );
+        return [
+            ['-example-invalid.com'],
+            ['example.invalid.-com'],
+            ['1.2.3.256'],
+            ['1.2.3.4'],
+        ];
     }
 }
 

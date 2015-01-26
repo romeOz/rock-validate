@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\Validate;
 
@@ -27,7 +27,6 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function providerValid()
     {
         return [
-            [''],
             [new \stdClass],
             [new \ArrayObject],
         ];
@@ -36,9 +35,11 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     public function providerInvalid()
     {
         return [
+            // skip empty
+            [''],
             [null],
-            [121],
             [[]],
+            [121],
             ['Foo'],
             [false],
         ];

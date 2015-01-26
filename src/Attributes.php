@@ -2,7 +2,12 @@
 
 namespace rock\validate;
 
-class Attributes
+
+use rock\base\ObjectInterface;
+use rock\base\ObjectTrait;
+
+
+class Attributes implements ObjectInterface
 {
     use ObjectTrait {
         ObjectTrait::__construct as parentConstruct;
@@ -17,21 +22,24 @@ class Attributes
         $this->parentConstruct($config);
     }
 
-    public function validate($value)
+    public function validate($input)
     {
-        if (is_object($value)) {
-            $value = (array)$value;
+        if (is_object($input)) {
+            $input = (array)$input;
+        }
+        if ($this->attributes instanceof Validate) {
+            $this->each($input);
         }
         foreach ($this->attributes as $attribute => $validate) {
             if (!$validate instanceof Validate) {
-                throw new Exception("`{$attribute}` is not `".Validate::className()."`");
+                throw new ValidateException("`{$attribute}` is not `".Validate::className()."`");
             }
-            if (!isset($value[$attribute])) {
-                $value[$attribute] = null;
+            if (!isset($input[$attribute])) {
+                $input[$attribute] = null;
             }
 
             $validate->valid = $this->valid;
-            if ($validate->validate($value[$attribute])) {
+            if ($validate->validate($input[$attribute])) {
                 continue;
             }
 
@@ -44,5 +52,14 @@ class Attributes
     public function getErrors()
     {
         return $this->errors;
+    }
+
+    protected function each($input)
+    {
+        $validate = $this->attributes;
+        $this->attributes = [];
+        foreach($input as $key => $value) {
+            $this->attributes[$key] = $validate;
+        }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\Validate;
 
@@ -26,7 +26,6 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function providerValid()
     {
         return [
-            [''],
             [16],
             ['165'],
             [123456],
@@ -37,7 +36,9 @@ class IntTest extends \PHPUnit_Framework_TestCase
     public function providerInvalid()
     {
         return [
+            [''],
             [null],
+            [[]],
             ['a'],
             [' '],
             ['Foo'],

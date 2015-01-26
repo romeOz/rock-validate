@@ -2,7 +2,7 @@
 
 namespace rock\validate\rules;
 
-use rock\validate\Exception;
+use rock\validate\ValidateException;
 
 class Call extends Rule
 {
@@ -12,7 +12,7 @@ class Call extends Rule
     {
         $this->parentConstruct($config);
         if (!is_callable($call)) {
-            throw new Exception('Invalid callback.');
+            throw new ValidateException('Invalid callback.');
         }
         $this->call = $call;
         if (!empty($args)) {

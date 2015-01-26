@@ -1,6 +1,6 @@
 <?php
 
-namespace rockunit\validate;
+namespace rockunit;
 
 
 use rock\validate\Validate;
@@ -17,8 +17,8 @@ class ExistsTest extends \PHPUnit_Framework_TestCase
                 'exists' => [
                     'class' => ExistsMock::className(),
                     'locales' => [
-                        Validate::EN => \rock\validate\locale\en\Exists::className(),
-                        Validate::RU => \rock\validate\locale\ru\Exists::className(),
+                        'en' => \rock\validate\locale\en\Exists::className(),
+                        'ru' => \rock\validate\locale\ru\Exists::className(),
                     ]
                 ],
             ]

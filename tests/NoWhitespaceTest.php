@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\rules\NoWhitespace;
 use rock\validate\Validate;

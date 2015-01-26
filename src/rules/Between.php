@@ -3,14 +3,14 @@
 namespace rock\validate\rules;
 
 
-use rock\validate\Exception;
+use rock\validate\ValidateException;
 
 class Between extends Rule
 {
     public function __construct($min = null, $max = null, $inclusive = false, $config = [])
     {
         if (!is_null($min) && !is_null($max) && $min > $max) {
-            throw new Exception(sprintf('%s cannot be less than  %s for validation', $min, $max));
+            throw new ValidateException(sprintf('%s cannot be less than  %s for validation', $min, $max));
         }
         $this->parentConstruct($config);
         $this->params['minValue'] = $min;

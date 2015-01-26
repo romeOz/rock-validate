@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\rules\Positive;
 use rock\validate\Validate;
@@ -26,27 +26,30 @@ class PositiveTest extends \PHPUnit_Framework_TestCase
 
     public function providerValid()
     {
-        return array(
-            array(''),
-            array(16),
-            array('165'),
-            array(123456),
-            array(1e10),
-        );
+        return [
+            // skip empty
+            [''],
+            [null],
+            [[]],
+            
+            [16],
+            ['165'],
+            [123456],
+            [1e10],
+        ];
     }
 
     public function providerInvalid()
     {
-        return array(
-            array(null),
-            array('a'),
-            array(' '),
-            array('Foo'),
-            array('-1.44'),
-            array(-1e-5),
-            array(0),
-            array(-0),
-            array(-10),
-        );
+        return [
+            ['a'],
+            [' '],
+            ['Foo'],
+            ['-1.44'],
+            [-1e-5],
+            [0],
+            [-0],
+            [-10],
+        ];
     }
 }

@@ -1,9 +1,9 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\Validate;
 
-class Captcha extends \PHPUnit_Framework_TestCase
+class CaptchaTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider providerValid

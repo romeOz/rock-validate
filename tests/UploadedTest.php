@@ -1,6 +1,6 @@
 <?php
 
-namespace rockunit\validate;
+namespace rockunit;
 
 
 use rock\validate\Validate;
@@ -17,8 +17,8 @@ class UploadedTest extends \PHPUnit_Framework_TestCase
                 'uploaded' => [
                     'class' => UploadedMock::className(),
                     'locales' => [
-                        Validate::EN => \rock\validate\locale\en\Uploaded::className(),
-                        Validate::RU => \rock\validate\locale\ru\Uploaded::className(),
+                        'en' => \rock\validate\locale\en\Uploaded::className(),
+                        'ru' => \rock\validate\locale\ru\Uploaded::className(),
                     ]
                 ],
             ]

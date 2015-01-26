@@ -19,9 +19,9 @@ class Regex extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} содержит неверные символы',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не содержит верные символы',
-            )
+            ]
         ];
     }
 

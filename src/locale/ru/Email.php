@@ -19,9 +19,9 @@ class Email extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должен быть верным',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должен быть верным',
-            )
+            ]
         ];
     }
 

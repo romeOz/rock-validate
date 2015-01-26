@@ -9,7 +9,7 @@ class Digit extends CType
      */
     public function validate($input)
     {
-        if (!is_scalar($input)) {
+        if (!is_scalar($input) || $input === '') {
             return false;
         }
         $input = $this->filterWhiteSpace((string)$input);

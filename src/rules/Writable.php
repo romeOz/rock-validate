@@ -2,6 +2,11 @@
 
 namespace rock\validate\rules;
 
+
+use ArrayAccess;
+use Countable;
+use Traversable;
+
 /**
  * Class Writable
  *

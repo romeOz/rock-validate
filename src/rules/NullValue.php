@@ -5,6 +5,7 @@ namespace rock\validate\rules;
 
 class NullValue extends Rule
 {
+    public $skipOnEmpty = false;
     /**
      * @inheritdoc
      */

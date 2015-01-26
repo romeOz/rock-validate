@@ -1,6 +1,6 @@
 <?php
 
-namespace rockunit\validate;
+namespace rockunit;
 
 
 
@@ -19,8 +19,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
                 'file' => [
                     'class' => FileMock::className(),
                     'locales' => [
-                        Validate::EN => \rock\validate\locale\en\File::className(),
-                        Validate::RU => \rock\validate\locale\ru\File::className(),
+                        'en' => \rock\validate\locale\en\File::className(),
+                        'ru' => \rock\validate\locale\ru\File::className(),
                     ]
                 ],
             ]

@@ -1,6 +1,5 @@
 <?php
-namespace rockunit\validate;
-
+namespace rockunit;
 
 
 use rock\validate\rules\Alnum;
@@ -28,7 +27,7 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerInvalidParams
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testThrowException($additional)
     {
@@ -64,7 +63,6 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     public function providerValid()
     {
         return [
-            ['', ''],
             ['alganet', ''],
             ['alganet', 'alganet'],
             ['0alg-anet0', '0-9'],
@@ -86,13 +84,14 @@ class AlnumTest extends \PHPUnit_Framework_TestCase
     public function providerInvalid()
     {
         return [
+            [null, ''],
+            [[], ''],
+            ['', ''],
             ['@#$', ''],
             ['_', ''],
             ['dgç', ''],
             [1e21, ''], //evaluates to "1.0E+21"
-            [null, ''],
             [new \stdClass, ''],
-            [[], ''],
         ];
     }
 }

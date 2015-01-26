@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\rules\Digit;
 use rock\validate\Validate;
@@ -26,7 +26,7 @@ class DigitTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerForInvalidParams
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testThrowComponentException($additional)
     {
@@ -62,7 +62,6 @@ class DigitTest extends \PHPUnit_Framework_TestCase
     public function providerValid()
     {
         return [
-            [''],
             ["\n\t"],
             [' '],
             [165],
@@ -78,14 +77,16 @@ class DigitTest extends \PHPUnit_Framework_TestCase
 
     public function providerInvalid()
     {
-        return array(
-            array(null),
-            array('16-50'),
-            array('a'),
-            array('Foo'),
-            array('12.1'),
-            array('-12'),
-            array(-12),
-        );
+        return [
+            [''],
+            [null],
+            [[]],
+            ['16-50'],
+            ['a'],
+            ['Foo'],
+            ['12.1'],
+            ['-12'],
+            [-12],
+        ];
     }
 }

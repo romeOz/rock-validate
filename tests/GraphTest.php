@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\rules\Graph;
 use rock\validate\Validate;
@@ -26,7 +26,7 @@ class GraphTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerForInvalidParams
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testInvalidConstructorParamsShouldThrowComponentExceptionUponInstantiation($additional)
     {
@@ -62,7 +62,6 @@ class GraphTest extends \PHPUnit_Framework_TestCase
     public function providerValid()
     {
         return [
-            [''],
             ['LKA#@%.54'],
             ['foobar'],
             ['16-50'],
@@ -74,7 +73,9 @@ class GraphTest extends \PHPUnit_Framework_TestCase
     public function providerInvalid()
     {
         return [
+            [''],
             [null],
+            [[]],
             ["foo\nbar"],
             ["foo\tbar"],
             ['foo bar'],

@@ -16,7 +16,7 @@ class StartsWith extends Rule
      */
     public function validate($input)
     {
-        if ($this->params['identical'] ) {
+        if ($this->params['identical']) {
             return $this->validateIdentical($input);
         }
         return $this->validateEquals($input);
@@ -27,7 +27,7 @@ class StartsWith extends Rule
         if (is_array($input)) {
             return reset($input) == $this->params['startValue'];
         }
-        return \rock\helpers\String::startsWith($input, $this->params['startValue'], false);
+        return \rock\helpers\StringHelper::startsWith($input, $this->params['startValue'], false);
     }
 
     protected function validateIdentical($input)
@@ -35,6 +35,6 @@ class StartsWith extends Rule
         if (is_array($input)) {
             return reset($input) === $this->params['startValue'];
         }
-        return \rock\helpers\String::startsWith($input, $this->params['startValue'], true);
+        return \rock\helpers\StringHelper::startsWith($input, $this->params['startValue'], true);
     }
 }

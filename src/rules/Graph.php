@@ -9,7 +9,7 @@ class Graph extends CType
      */
     public function validate($input)
     {
-        if (!is_scalar($input)) {
+        if (!is_scalar($input) || $input === '') {
             return false;
         }
         $input = str_replace(str_split($this->params['additionalChars']), '', (string)$input);

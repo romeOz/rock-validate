@@ -3,7 +3,7 @@
 namespace rock\validate\locale;
 
 
-use rock\validate\ClassName;
+use rock\base\ClassName;
 
 abstract class Locale
 {
@@ -14,10 +14,22 @@ abstract class Locale
     const MODE_DEFAULT = 1;
     const MODE_NEGATIVE = 0;
 
+    /**
+     * Default template.
+     * @var int
+     */
     public $defaultTemplate = self::STANDARD;
 
+    /**
+     * List templates by default.
+     * @return mixed
+     */
     abstract public function defaultTemplates();
 
+    /**
+     * List placeholders by default.
+     * @return array
+     */
     public function defaultPlaceholders()
     {
         return ['name' => 'value'];

@@ -4,7 +4,7 @@ namespace rock\validate\rules;
 
 
 use Countable;
-use rock\validate\Exception;
+use rock\validate\ValidateException;
 
 class Length extends Rule
 {
@@ -12,15 +12,15 @@ class Length extends Rule
     {
         $this->parentConstruct($config);
         if (!is_numeric($min) && !is_null($min)) {
-            throw new Exception(sprintf('%s is not a valid numeric length', $min));
+            throw new ValidateException(sprintf('%s is not a valid numeric length', $min));
         }
 
         if (!is_numeric($max) && !is_null($max)) {
-            throw new Exception(sprintf('%s is not a valid numeric length', $max));
+            throw new ValidateException(sprintf('%s is not a valid numeric length', $max));
         }
 
         if (!is_null($min) && !is_null($max) && $min > $max) {
-            throw new Exception(sprintf('%s cannot be less than %s for validation', $min, $max));
+            throw new ValidateException(sprintf('%s cannot be less than %s for validation', $min, $max));
         }
         $this->params['minValue'] = $min;
         $this->params['maxValue'] = $max;
@@ -32,6 +32,9 @@ class Length extends Rule
      */
     public function validate($input)
     {
+        if (is_int($input)) {
+            $input = (string)$input;
+        }
         $length = $this->extractLength($input);
         return $this->validateMin($length) && $this->validateMax($length);
     }

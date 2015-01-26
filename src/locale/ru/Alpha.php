@@ -22,10 +22,10 @@ class Alpha extends Locale
                 self::STANDARD => '{{name}} должно содержать только буквы',
                 self::EXTRA => '{{name}} должно содержать только буквы и "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно содержать буквы',
                 self::EXTRA => '{{name}} не должно содержать буквы или "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

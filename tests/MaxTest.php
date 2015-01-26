@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\Validate;
 
@@ -27,6 +27,8 @@ class MaxTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [200, false, ''],
+            [200, false, null],
+            [200, false, []],
             [200, false, 165.0],
             [200, false, -200],
             [200, true, 200],

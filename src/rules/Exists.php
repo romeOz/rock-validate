@@ -2,6 +2,11 @@
 
 namespace rock\validate\rules;
 
+
+use ArrayAccess;
+use Countable;
+use Traversable;
+
 /**
  * Class Exists
  *
@@ -15,6 +20,6 @@ class Exists extends Rule
         if ($input instanceof \SplFileInfo) {
             $input = $input->getPathname();
         }
-        return (is_string($input) && file_exists($input));
+        return is_string($input) && file_exists($input);
     }
 } 

@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\rules\Space;
 use rock\validate\Validate;
@@ -26,7 +26,7 @@ class SpaceTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider providerForInvalidParams
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testInvalidConstructorParamsShouldThrowComponentExceptionUponInstantiation($additional)
     {
@@ -62,7 +62,6 @@ class SpaceTest extends \PHPUnit_Framework_TestCase
     public function providerValid()
     {
         return [
-            [''],
             ["\n"],
             [" "],
             ["    "],
@@ -74,6 +73,9 @@ class SpaceTest extends \PHPUnit_Framework_TestCase
     public function providerInvalid()
     {
         return [
+            [''],
+            [null],
+            [[]],
             ['16-50'],
             ['a'],
             ['Foo'],
@@ -81,7 +83,6 @@ class SpaceTest extends \PHPUnit_Framework_TestCase
             ['-12'],
             [-12],
             ['_'],
-            [[]],
         ];
     }
 }

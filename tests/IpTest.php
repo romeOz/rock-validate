@@ -1,5 +1,5 @@
 <?php
-namespace rockunit\validate;
+namespace rockunit;
 
 use rock\validate\Validate;
 
@@ -42,7 +42,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testThrowExceptionMinNetworkRange()
     {
@@ -51,7 +51,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \rock\validate\Exception
+     * @expectedException \rock\validate\ValidateException
      */
     public function testThrowExceptionMaxNetworkRange()
     {
@@ -62,6 +62,11 @@ class IpTest extends \PHPUnit_Framework_TestCase
     public function providerForIp()
     {
         return [
+            // skip empty
+            [''],
+            [null],
+            [[]],
+
             ['127.0.0.1'],
         ];
     }
@@ -92,7 +97,6 @@ class IpTest extends \PHPUnit_Framework_TestCase
     public function providerForNotIp()
     {
         return [
-            [null],
             ['j'],
             [' '],
             ['Foo'],
