@@ -5,6 +5,12 @@ namespace rock\validate\locale\en;
 
 use rock\validate\locale\Locale;
 
+/**
+ * Class Unique
+ *
+ * @codeCoverageIgnore
+ * @package rock\validate\locale\en
+ */
 class Unique extends Locale
 {
     public function defaultTemplates()

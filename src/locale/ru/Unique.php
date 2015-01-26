@@ -2,7 +2,12 @@
 
 namespace rock\validate\locale\ru;
 
-
+/**
+ * Class Unique
+ *
+ * @codeCoverageIgnore
+ * @package rock\validate\locale\ru
+ */
 class Unique extends \rock\validate\locale\en\Unique
 {
     public function defaultTemplates()

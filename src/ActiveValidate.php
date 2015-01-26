@@ -11,6 +11,7 @@ use rock\validate\rules\Unique;
  *
  * @method static Validate unique(Model $m, $targetAttribute = null, $targetClass = null, $filter = null)
  *
+ * @codeCoverageIgnore
  * @package rock\validate
  */
 class ActiveValidate extends Validate
