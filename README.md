@@ -18,6 +18,7 @@ Features
  * **i18n support**
  * **Hot replacement of placeholders for messages (`{{name}} must be valid`), as well messages**
  * **Customization of validation rules**
+ * **Module for [Rock Framework](https://github.com/romeOz/rock)**
 
 > Bolded features are different from [Respect/Validation](https://github.com/Respect/Validation).
 
