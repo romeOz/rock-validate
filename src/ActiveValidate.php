@@ -16,11 +16,6 @@ use rock\validate\rules\Unique;
  */
 class ActiveValidate extends Validate
 {
-    public static function __callStatic($name, $arguments)
-    {
-        return call_user_func_array([static::getInstance('activeValidate'), $name], $arguments);
-    }
-
     public function existsModelRule($name)
     {
         $rules = $this->modelRules();
