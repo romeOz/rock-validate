@@ -89,7 +89,7 @@ output:
 ```php
 use rock\validate\Validate;
 
-$v = Validate::locale(Validate::RU)->length(10, 20, true)->regex('/^[a-z]+$/i');
+$v = Validate::locale('ru')->length(10, 20, true)->regex('/^[a-z]+$/i');
 $v->validate('O’Reilly'); // output: false
 
 $v->getErrors();
