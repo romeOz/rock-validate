@@ -13,7 +13,7 @@ Features
 -------------------
 
  * Supports large many validation rules (string, number, ctype, file, network)
- * Validation of scalar variable and array (`attributes()`, `attributesOne()`)
+ * Validation of scalar variable and array (`attributes()`)
  * **Output the list of errors in an associative array**
  * **i18n support**
  * **Hot replacement of placeholders for messages (`{{name}} must be valid`), as well messages**

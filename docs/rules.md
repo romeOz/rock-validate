@@ -6,7 +6,6 @@ Rules
 ### [Generics](#generics-1)
 
  * [v::attributes](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
- * [v::attributesOne()](#vattributesoneattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::notOf()](#vnotofv)
  * [v::oneOf()](#voneofv)
  * [v::when()](#vwhenv-if-v-then-v-else--null)
@@ -178,36 +177,6 @@ output:
 */
 ```
 
-#### v::attributesOne(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
-
-For arrays or objects. This is a group validator that acts as an OR operator (if only one condition is valid).
-
-```php
-$input =  [
-    'email' => 'tom@site',
-    'username' => ''
-];
-$v = v::attributesOne(
-    [
-        'email' => v::email(),
-        'username' => v::required()
-    ]
-);
-$v->validate($input); // output: false
-
-$v->getErrors();
-/*
-output:
-
-[
-  'email' => 
-  [
-    'email' => 'email must be valid',
-  ]
-]
-*/
-```
-
 #### v::notOf($v)
 
 Negates any rule (invert validation).
@@ -253,7 +222,7 @@ output:
 */
 ```
 
-For `attributes`:
+Inside `attributes`:
 
 ```php
 $input = ['email' => 7, 'name' => 'Tom'];
@@ -274,6 +243,34 @@ output:
   'email' => [
     'string' => 'value must be string',
   ],
+]
+*/
+```
+
+For arrays or objects. This is a group validator that acts as an OR operator (if only one condition is valid).
+
+```php
+$input =  [
+    'email' => 'tom@site',
+    'username' => ''
+];
+
+$attributes = v::attributes( [
+    'email' => v::email(),
+    'username' => v::required()
+]);
+$v = v::oneOf($attributes);
+$v->validate($input); // output: false
+
+$v->getErrors();
+/*
+output:
+
+[
+  'email' => 
+  [
+    'email' => 'email must be valid',
+  ]
 ]
 */
 ```

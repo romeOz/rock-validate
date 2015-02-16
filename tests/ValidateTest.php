@@ -542,7 +542,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             'email' => 'tom@site.com',
             'name' => 'Tom'
         ];
-        $validate = Validate::attributesOne(Validate::required()->string());
+        $validate = Validate::oneOf(Validate::attributes(Validate::required()->string()));
         $this->assertTrue($validate->validate($input));
         $this->assertEmpty($validate->getErrors());
 
@@ -551,7 +551,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             'email' => '',
             'name' => 5
         ];
-        $validate = Validate::attributesOne(Validate::required()->string());
+        $validate = Validate::oneOf(Validate::attributes(Validate::required()->string()));
         $this->assertFalse($validate->validate($input));
         $expected = [
             'email' => [
@@ -586,22 +586,22 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerInputAttributesOne
      */
-    public function testAttributesOne($input)
+    public function testEachOneViaProvider($input)
     {
         // valid
-        $validate = Validate::attributesOne(
+        $validate = Validate::oneOf(Validate::attributes(
             [
                 'email' => Validate::required()
                     ->string()
                     ->placeholders(['name' => 'email']),
                 'name' => Validate::required()->string()
             ]
-        );
+        ));
         $this->assertTrue($validate->validate($input));
         $this->assertEmpty($validate->getErrors());
 
         // invalid
-        $validate = Validate::attributesOne(
+        $validate = Validate::oneOf(Validate::attributes(
             [
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
@@ -610,7 +610,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'name' => Validate::required()->notOf(
                     Validate::string()->placeholders(['name' => 'email']))
             ]
-        );
+        ));
         $this->assertFalse($validate->validate($input));
         $expected = [
             'username' =>
@@ -648,14 +648,14 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             'email' => 'tom@site.com',
             'name' => 'Tom'
         ];
-        $validate = Validate::attributesOne(
+        $validate = Validate::oneOf(Validate::attributes(
             [
                 'email' => Validate::required()
                     ->string()
                     ->placeholders(['name' => 'email']),
                 'name' => Validate::required()->string()->validate('foo')
             ]
-        );
+        ));
         $validate->validate($array);
     }
 

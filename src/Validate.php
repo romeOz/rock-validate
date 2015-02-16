@@ -4,7 +4,7 @@ namespace rock\validate;
 
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
-use rock\di\Container;
+use rock\helpers\Instance;
 use rock\helpers\StringHelper;
 use rock\validate\locale\Locale;
 use rock\validate\rules\Alnum;
@@ -65,7 +65,6 @@ use rock\validate\rules\Writable;
  * Class Validate
  *
  * @method static Validate attributes($attributes)
- * @method static Validate attributesOne($attributes)
  * @method static Validate notOf(Validate $validate)
  * @method static Validate oneOf(Validate $validate)
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
@@ -273,13 +272,7 @@ class Validate implements ObjectInterface
             }
 
             if ($rule instanceof Attributes) {
-                $rule->valid = $this->valid;
-                $rule->validate($input);
-                $this->errors = $rule->getErrors();
-                break;
-            }
-
-            if ($rule instanceof AttributesOne) {
+                $rule->one = $this->one;
                 $rule->valid = $this->valid;
                 $rule->validate($input);
                 $this->errors = $rule->getErrors();
@@ -416,13 +409,6 @@ class Validate implements ObjectInterface
         return $this;
     }
 
-    protected function attributesOneInternal($attributes)
-    {
-        $this->_rules = [];
-        $this->_rules['attributesOne'] = new AttributesOne(['attributes' => $attributes, 'valid' => $this->valid]);
-        return $this;
-    }
-
     protected function oneOfInternal(Validate $validate)
     {
         $validate->one = true;
@@ -492,14 +478,10 @@ class Validate implements ObjectInterface
      * @param string|array $config the configuration. It can be either a string representing the class name
      *                                     or an array representing the object configuration.
      * @return static
-     * @throws \rock\di\ContainerException
      */
     protected static function getInstance($config)
     {
-        if (class_exists('\rock\di\Container')) {
-            return Container::load($config);
-        }
-        return new static();
+        return Instance::ensure($config, static::className());
     }
 
     protected function defaultRules()

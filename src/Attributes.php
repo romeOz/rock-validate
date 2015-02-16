@@ -15,6 +15,7 @@ class Attributes implements ObjectInterface
 
     public $attributes = [];
     public $valid = true;
+    public $one = false;
     protected $errors = [];
 
     public function __construct($config = [])
@@ -45,6 +46,9 @@ class Attributes implements ObjectInterface
 
             if ($errors = $validate->getErrors()) {
                 $this->errors[$attribute] = $errors;
+                if ($this->one) {
+                    break;
+                }
             }
         }
     }
