@@ -5,7 +5,7 @@ Rules
 
 ### [Generics](#generics-1)
 
- * [v::attributes](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
+ * [v::attributes()](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::notOf()](#vnotofv)
  * [v::oneOf()](#voneofv)
  * [v::when()](#vwhenv-if-v-then-v-else--null)
