@@ -24,7 +24,6 @@
     <filter>
         <blacklist>
             <directory suffix=".php">./src/locale/ru</directory>
-            <file>./src/ActiveValidate.php</file>
             <file>./src/polyfills.php</file>
             <directory>./tests/</directory>
         </blacklist>
