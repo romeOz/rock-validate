@@ -165,16 +165,16 @@ Demo & Tests (one of two ways)
 ####2. Vagrant + Ansible
 
  * `git clone https://github.com/romeOz/vagrant-rock-validate.git`
+ * [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
  * [Install Vagrant](https://www.vagrantup.com/downloads), and additional Vagrant plugins `vagrant plugin install vagrant-hostsupdater vagrant-vbguest vagrant-cachier`
  * `vagrant up`
- * Open demo [http://rock.validate/](http://rock.validate/) or [http://192.168.33.35/](http://192.168.33.35/)
+ * Open demo [http://www.rock-validate/](http://www.rock-validate/) or [http://192.168.33.35/](http://192.168.33.35/)
 
 > Work/editing the project can be done via ssh:
 
 ```bash
 vagrant ssh
 cd /var/www/rock-validate
-```ar/www/rock-validate
 ```
 
 Requirements
