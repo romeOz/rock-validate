@@ -162,7 +162,7 @@ Demo & Tests (one of two ways)
  * `docker run -d -p 8080:80 romeoz/vagrant-rock-validate`
  * Open demo [http://localhost:8080/](http://localhost:8080/)
  
-####2. Vagrant + Ansible
+####2. VirtualBox + Vagrant + Ansible
 
  * `git clone https://github.com/romeOz/vagrant-rock-validate.git`
  * [Install VirtualBox](https://www.virtualbox.org/wiki/Downloads)
