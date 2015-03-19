@@ -3,7 +3,7 @@ Rules
 
 > Documentation with some modifications taken from [Respect/Validation](https://github.com/Respect/Validation).
 
-### [Generics](#generics-1)
+### [General](#general-1)
 
  * [v::attributes()](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
  * [v::notOf()](#vnotofv)
@@ -116,7 +116,7 @@ Rules
 ### [Custom rules](custom-rules.md)
 
 
-### Generics
+### General
 
 #### v::attributes(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
 	
