@@ -27,6 +27,7 @@
             <file>./src/polyfills.php</file>
             <file>./src/rules/Rule.php</file>
             <file>./src/locale/Locale.php</file>
+            <file>./src/ValidateException.php</file>
             <directory>./tests/</directory>
         </blacklist>
     </filter>
