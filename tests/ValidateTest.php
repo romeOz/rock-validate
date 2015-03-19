@@ -478,12 +478,11 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($expected, $validate->getErrors());
     }
 
-    public function testAttributesAsObject()
+    /**
+     * @dataProvider providerAttributesAsObject
+     */
+    public function testAttributesAsObject($input)
     {
-        $input = (object)[
-            'email' => '',
-            'name' => 'Tom'
-        ];
         $validate = Validate::notOf(
             Validate::attributes(
                 [
@@ -503,6 +502,21 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 ],
         ];
         $this->assertSame($expected, $validate->getErrors());
+    }
+
+    public function providerAttributesAsObject()
+    {
+        return [
+            [
+                (object)[
+                    'email' => '',
+                    'name' => 'Tom'
+                ]
+            ],
+            [
+               new TestObject()
+            ],
+        ];
     }
 
     public function testEach()
@@ -807,5 +821,19 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue((new Validate())->existsRule('string'));
         $this->assertFalse((new Validate())->existsRule('unknown'));
     }
+
+    public function testSkipEmpty()
+    {
+        $v = Validate::email();
+        $this->assertTrue($v->validate(''));
+
+        $this->assertFalse($v->skipEmpty(false)->validate(''));
+    }
 }
- 
+
+
+class TestObject
+{
+    public $email = '';
+    public $name = 'Tom';
+}
