@@ -5,7 +5,7 @@ namespace rock\validate\rules;
 
 class Int extends Rule
 {
-    public $skipOnEmpty = false;
+    public $skipEmpty = false;
     /**
      * @inheritdoc
      */

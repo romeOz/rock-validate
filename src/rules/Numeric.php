@@ -5,7 +5,7 @@ namespace rock\validate\rules;
 
 class Numeric extends Rule
 {
-    public $skipOnEmpty = false;
+    public $skipEmpty = false;
     /**
      * @inheritdoc
      */

@@ -69,6 +69,7 @@ use rock\validate\rules\Writable;
  * @method static Validate oneOf(Validate $validate)
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
  * @method static Validate locale(string $locale)
+ * @method static Validate skipEmpty(bool $skip = true)
  *
  * @method static Validate alnum(string $additionalChars = null)
  * @method static Validate alpha(string $additionalChars = null)
@@ -173,7 +174,7 @@ class Validate implements ObjectInterface
      * @var boolean whether this validation rule should be skipped if the attribute value
      * is null or an empty string.
      */
-    public $skipOnEmpty = true;
+    public $skipEmpty = true;
     /** @var Rule[]  */
     protected $_rules = [];
     /**
@@ -279,7 +280,7 @@ class Validate implements ObjectInterface
                 break;
             }
 
-            if ($this->skipOnEmpty && $rule->skipOnEmpty && $this->isEmpty($input, $rule)) {
+            if ($this->skipEmpty && $rule->skipEmpty && $this->isEmpty($input, $rule)) {
                 continue;
             }
 
@@ -295,7 +296,7 @@ class Validate implements ObjectInterface
     }
 
     /**
-     * Get all errors.
+     * Returns all errors.
      * @return array
      */
     public function getErrors()
@@ -304,7 +305,7 @@ class Validate implements ObjectInterface
     }
 
     /**
-     * Get first error.
+     * Returns first error.
      * @param string|null $attribute
      * @return string|null
      */
@@ -327,7 +328,7 @@ class Validate implements ObjectInterface
     }
 
     /**
-     * Get last error.
+     * Returns last error.
      * @param string|null $attribute
      * @return string|null
      */
@@ -395,11 +396,11 @@ class Validate implements ObjectInterface
      */
     protected function isEmpty($value, Rule $rule)
     {
-        if ($rule->isEmpty !== null) {
+        if (is_callable($rule->isEmpty)) {
             return call_user_func($rule->isEmpty, $value);
-        } else {
-            return $value === null || $value === [] || $value === '';
         }
+
+        return $value === null || $value === [] || $value === '';
     }
 
     protected function attributesInternal($attributes)
@@ -470,8 +471,14 @@ class Validate implements ObjectInterface
         return $this;
     }
 
+    protected function SkipEmptyInternal($skip = true)
+    {
+        $this->skipEmpty = $skip;
+        return $this;
+    }
+
     /**
-     * Get instance.
+     * Returns instance.
      *
      * If exists {@see \rock\di\Container} that uses it.
      *

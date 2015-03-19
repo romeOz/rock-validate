@@ -24,7 +24,7 @@ abstract class Rule implements ObjectInterface
      * @var boolean whether this validation rule should be skipped if the attribute value
      * is null or an empty string.
      */
-    public $skipOnEmpty = true;
+    public $skipEmpty = true;
 
     /**
      * @param mixed $input
