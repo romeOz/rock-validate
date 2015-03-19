@@ -25,6 +25,8 @@
         <blacklist>
             <directory suffix=".php">./src/locale/ru</directory>
             <file>./src/polyfills.php</file>
+            <file>./src/rules/Rule.php</file>
+            <file>./src/locale/Locale.php</file>
             <directory>./tests/</directory>
         </blacklist>
     </filter>
