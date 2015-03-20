@@ -9,19 +9,12 @@ use rock\base\ObjectTrait;
 
 class Attributes implements ObjectInterface
 {
-    use ObjectTrait {
-        ObjectTrait::__construct as parentConstruct;
-    }
+    use ObjectTrait;
 
     public $attributes = [];
     public $valid = true;
     public $one = false;
     protected $errors = [];
-
-    public function __construct($config = [])
-    {
-        $this->parentConstruct($config);
-    }
 
     public function validate($input)
     {
