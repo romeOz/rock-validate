@@ -25,8 +25,10 @@ class Call extends Rule
      */
     public function validate($input)
     {
+
         $args = $this->args;
         array_unshift($args, $input);
+
         return (bool)call_user_func_array($this->call, $args);
     }
 } 

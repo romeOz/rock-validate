@@ -38,10 +38,17 @@ class CallTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($v->validate('test'));
         $v = Validate::call('strpos', ['e']);
         $this->assertTrue($v->validate('test'));
+        $v = Validate::call('strpos', ['e'])->call('strpos', ['s']);
+        $this->assertTrue($v->validate('test'));
 
         // fail
         $v = Validate::call('strpos', ['a']);
         $this->assertFalse($v->validate('test'));
+        $v = Validate::call('strpos', ['e'])->call('strpos', ['a']);
+        $this->assertFalse($v->validate('test'));
+        $v = Validate::call('strpos', ['a'])->call('strpos', ['e']);
+        $this->assertFalse($v->validate('test'));
+
     }
 
     /**

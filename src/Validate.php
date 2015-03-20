@@ -175,7 +175,7 @@ class Validate implements ObjectInterface
      * is null or an empty string.
      */
     public $skipEmpty = true;
-    /** @var Rule[]  */
+    /** @var array  */
     protected $_rules = [];
     /**
      * Received errors.
@@ -256,40 +256,47 @@ class Validate implements ObjectInterface
     public function validate($input)
     {
         $this->errors = [];
-        foreach($this->_rules as $ruleName => $rule){
 
-            // notOf or oneOf
-            if ($rule instanceof Validate) {
-                $rule->validate($input);
-                $this->errors = array_merge($this->errors, $rule->getErrors());
-                continue;
-            }
+        /**
+         * @var Rule[]  $rules
+         */
+        foreach($this->_rules as $ruleName => $rules){
 
-            if ($rule instanceof When) {
-                $rule->valid = $this->valid;
-                $rule->validate($input);
-                $this->errors = array_merge($this->errors, $rule->getErrors());
-                continue;
-            }
+            foreach($rules as $rule) {
 
-            if ($rule instanceof Attributes) {
-                $rule->one = $this->one;
-                $rule->valid = $this->valid;
-                $rule->validate($input);
-                $this->errors = $rule->getErrors();
-                break;
-            }
+                // notOf or oneOf
+                if ($rule instanceof Validate) {
+                    $rule->validate($input);
+                    $this->errors = array_merge($this->errors, $rule->getErrors());
+                    continue;
+                }
 
-            if ($this->skipEmpty && $rule->skipEmpty && $this->isEmpty($input, $rule)) {
-                continue;
-            }
+                if ($rule instanceof When) {
+                    $rule->valid = $this->valid;
+                    $rule->validate($input);
+                    $this->errors = array_merge($this->errors, $rule->getErrors());
+                    continue;
+                }
 
-            if ($rule->validate($input) === $this->valid) {
-                continue;
-            }
-            $this->errors[$ruleName] = $this->error($ruleName, $rule);
-            if ($this->one === true) {
-                break;
+                if ($rule instanceof Attributes) {
+                    $rule->one = $this->one;
+                    $rule->valid = $this->valid;
+                    $rule->validate($input);
+                    $this->errors = $rule->getErrors();
+                    break 2;
+                }
+
+                if ($this->skipEmpty && $rule->skipEmpty && $this->isEmpty($input, $rule)) {
+                    continue;
+                }
+
+                if ($rule->validate($input) === $this->valid) {
+                    continue;
+                }
+                $this->errors[$ruleName] = $this->error($ruleName, $rule);
+                if ($this->one === true) {
+                    break 2;
+                }
             }
         }
         return empty($this->errors);
@@ -375,7 +382,10 @@ class Validate implements ObjectInterface
         /** @var Rule $rule */
         $reflect = new \ReflectionClass($this->rules[$name]['class']);
         $rule = $reflect->newInstanceArgs($arguments);
-        $this->_rules[$name] = $rule;
+        if (!isset($this->_rules[$name])) {
+            $this->_rules[$name] = [];
+        }
+        $this->_rules[$name][] = $rule;
         return $this;
     }
 
@@ -406,27 +416,27 @@ class Validate implements ObjectInterface
     protected function attributesInternal($attributes)
     {
         $this->_rules = [];
-        $this->_rules['attributes'] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
+        $this->_rules['attributes'][0] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
         return $this;
     }
 
     protected function oneOfInternal(Validate $validate)
     {
         $validate->one = true;
-        $this->_rules['oneOf'] = $validate;
+        $this->_rules['oneOf'][0] = $validate;
         return $this;
     }
 
     protected function notOfInternal(Validate $validate)
     {
         $validate->valid = false;
-        $this->_rules['notOf'] = $validate;
+        $this->_rules['notOf'][0] = $validate;
         return $this;
     }
 
     protected function whenInternal(Validate $if, Validate $then, Validate $else = null)
     {
-        $this->_rules['when'] = new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid]);
+        $this->_rules['when'][0] = new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid]);
         return $this;
     }
 

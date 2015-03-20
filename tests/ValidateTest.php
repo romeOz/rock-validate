@@ -828,6 +828,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($v->validate(''));
 
         $this->assertFalse($v->skipEmpty(false)->validate(''));
+        $this->assertEquals(array (
+            'email' => 'email must be valid',
+        ), $v->getErrors());
     }
 }
 
