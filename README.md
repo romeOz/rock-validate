@@ -4,6 +4,7 @@ Validator for PHP
 [![Latest Stable Version](https://poser.pugx.org/romeOz/rock-validate/v/stable.svg)](https://packagist.org/packages/romeOz/rock-validate)
 [![Total Downloads](https://poser.pugx.org/romeOz/rock-validate/downloads.svg)](https://packagist.org/packages/romeOz/rock-validate)
 [![Build Status](https://travis-ci.org/romeOz/rock-validate.svg?branch=master)](https://travis-ci.org/romeOz/rock-validate)
+[![HHVM Status](http://hhvm.h4cc.de/badge/romeoz/rock-validate.svg)](http://hhvm.h4cc.de/package/romeoz/rock-validate)
 [![Coverage Status](https://coveralls.io/repos/romeOz/rock-validate/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-validate?branch=master)
 [![License](https://poser.pugx.org/romeOz/rock-validate/license.svg)](https://packagist.org/packages/romeOz/rock-validate)
 
