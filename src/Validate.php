@@ -77,7 +77,7 @@ use rock\validate\rules\Writable;
  * @method static Validate between(mixed $min = null, mixed $max = null, bool $inclusive = false)
  * @method static Validate bool()
  * @method static Validate captcha(mixed $compareTo)
- * @method static Validate call(mixed $call, array $args = null)
+ * @method static Validate call(callable $call, array $args = null)
  * @method static Validate closure()
  * @method static Validate cntrl()
  * @method static Validate contains(mixed $containsValue, bool $identical = false)
@@ -257,15 +257,13 @@ class Validate implements ObjectInterface
     {
         $this->errors = [];
 
-        /**
-         * @var Rule[]  $rules
-         */
-        foreach($this->_rules as $ruleName => $rules){
+        foreach($this->_rules as $rules){
 
-            if (!is_array($rules)) {
-                $rules = [$rules];
-            }
-            foreach($rules as $rule) {
+            list($ruleName, $rule) = $rules;
+//            if (!is_array($rules)) {
+//                $rules = [$rules];
+//            }
+//            foreach($rules as $rule) {
 
                 // notOf or oneOf
                 if ($rule instanceof Validate) {
@@ -286,7 +284,7 @@ class Validate implements ObjectInterface
                     $rule->valid = $this->valid;
                     $rule->validate($input);
                     $this->errors = $rule->getErrors();
-                    break 2;
+                    break;
                 }
 
                 if ($this->skipEmpty && $rule->skipEmpty && $this->isEmpty($input, $rule)) {
@@ -298,9 +296,9 @@ class Validate implements ObjectInterface
                 }
                 $this->errors[$ruleName] = $this->error($ruleName, $rule);
                 if ($this->one === true) {
-                    break 2;
+                    break;
                 }
-            }
+            //}
         }
         return empty($this->errors);
     }
@@ -385,10 +383,7 @@ class Validate implements ObjectInterface
         /** @var Rule $rule */
         $reflect = new \ReflectionClass($this->rules[$name]['class']);
         $rule = $reflect->newInstanceArgs($arguments);
-        if (!isset($this->_rules[$name])) {
-            $this->_rules[$name] = [];
-        }
-        $this->_rules[$name][] = $rule;
+        $this->_rules[] = [$name, $rule];
         return $this;
     }
 
@@ -419,27 +414,27 @@ class Validate implements ObjectInterface
     protected function attributesInternal($attributes)
     {
         $this->_rules = [];
-        $this->_rules['attributes'] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
+        $this->_rules[] = ['attributes', new Attributes(['attributes' => $attributes, 'valid' => $this->valid])];
         return $this;
     }
 
     protected function oneOfInternal(Validate $validate)
     {
         $validate->one = true;
-        $this->_rules['oneOf'] = $validate;
+        $this->_rules[] = ['oneOf', $validate];
         return $this;
     }
 
     protected function notOfInternal(Validate $validate)
     {
         $validate->valid = false;
-        $this->_rules['notOf'] = $validate;
+        $this->_rules[] = ['notOf', $validate];
         return $this;
     }
 
     protected function whenInternal(Validate $if, Validate $then, Validate $else = null)
     {
-        $this->_rules['when'] = new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid]);
+        $this->_rules[] = ['when', new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid])];
         return $this;
     }
 

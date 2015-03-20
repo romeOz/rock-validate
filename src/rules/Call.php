@@ -2,18 +2,13 @@
 
 namespace rock\validate\rules;
 
-use rock\validate\ValidateException;
-
 class Call extends Rule
 {
     protected $call;
     protected $args = [];
-    public function __construct($call, array $args = null, $config = [])
+    public function __construct(callable $call, array $args = null, $config = [])
     {
         $this->parentConstruct($config);
-        if (!is_callable($call)) {
-            throw new ValidateException('Invalid callback.');
-        }
         $this->call = $call;
         if (!empty($args)) {
             $this->args = $args;

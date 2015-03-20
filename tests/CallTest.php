@@ -1,6 +1,7 @@
 <?php
 namespace rockunit;
 
+use rock\base\ClassName;
 use rock\validate\Validate;
 
 class CallTest extends \PHPUnit_Framework_TestCase
@@ -12,18 +13,24 @@ class CallTest extends \PHPUnit_Framework_TestCase
 
     public function testValid()
     {
-        $callback = Validate::call(function() {
-            return true;
+        $call = Validate::call(function($value) {
+            return $value === 'valid';
         });
-        $this->assertTrue($callback->validate(''));
+        $this->assertTrue($call->validate('valid'));
+
+        $call = Validate::call([CallClass::className(), 'valid']);
+        $this->assertTrue($call->validate('valid'));
     }
 
     public function testInvalid()
     {
-        $callback = Validate::call(function() {
-            return false;
+        $call = Validate::call(function($value) {
+            return $value === 'valid';
         });
-        $this->assertFalse($callback->validate('invalid'));
+        $this->assertFalse($call->validate('invalid'));
+
+        $call = Validate::call([CallClass::className(), 'invalid']);
+        $this->assertFalse($call->validate('valid'));
     }
 
     public function testCallbackValidatorShouldAcceptArrayCallbackDefinitions()
@@ -50,14 +57,20 @@ class CallTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($v->validate('test'));
 
     }
+}
 
-    /**
-     * @expectedException \rock\validate\ValidateException
-     */
-    public function testInvalidCallbacksShouldRaiseComponentExceptionUponInstantiation()
+class CallClass
+{
+    use ClassName;
+
+    public static function valid($value)
     {
-        $v = Validate::call(new \stdClass);
-        $this->assertTrue($v->validate('foo'));
+        return $value === 'valid';
+    }
+
+    public static function invalid($value)
+    {
+        return $value === 'invalid';
     }
 }
 
