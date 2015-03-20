@@ -111,7 +111,7 @@ Rules
   
 ### [Other](#other-1)
 
- * [v::call()](#vcallmixed-call)
+ * [v::call()](#vcallcallable-call)
 
 ### [Custom rules](custom-rules.md)
 
@@ -1096,8 +1096,8 @@ v::ip(FILTER_FLAG_NO_PRIV_RANGE)->validate('127.0.0.1'); // output: false
   
 ### Other  
   
-#### v::call(mixed $call)
-#### v::call(mixed $call, array $args = null)
+#### v::call(callable $call)
+#### v::call(callable $call, array $args = null)
 
 This is a wildcard validator, it uses a function name, method or closure
 to validate something:
