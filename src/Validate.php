@@ -262,6 +262,9 @@ class Validate implements ObjectInterface
          */
         foreach($this->_rules as $ruleName => $rules){
 
+            if (!is_array($rules)) {
+                $rules = [$rules];
+            }
             foreach($rules as $rule) {
 
                 // notOf or oneOf
@@ -416,27 +419,27 @@ class Validate implements ObjectInterface
     protected function attributesInternal($attributes)
     {
         $this->_rules = [];
-        $this->_rules['attributes'][0] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
+        $this->_rules['attributes'] = new Attributes(['attributes' => $attributes, 'valid' => $this->valid]);
         return $this;
     }
 
     protected function oneOfInternal(Validate $validate)
     {
         $validate->one = true;
-        $this->_rules['oneOf'][0] = $validate;
+        $this->_rules['oneOf'] = $validate;
         return $this;
     }
 
     protected function notOfInternal(Validate $validate)
     {
         $validate->valid = false;
-        $this->_rules['notOf'][0] = $validate;
+        $this->_rules['notOf'] = $validate;
         return $this;
     }
 
     protected function whenInternal(Validate $if, Validate $then, Validate $else = null)
     {
-        $this->_rules['when'][0] = new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid]);
+        $this->_rules['when'] = new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid]);
         return $this;
     }
 
