@@ -6,8 +6,8 @@ Rules
 ### [General](#general-1)
 
  * [v::attributes()](#vattributesattribute_1--v1-attribute_2--v2-attribute_3--v3-)
- * [v::notOf()](#vnotofv)
- * [v::oneOf()](#voneofv)
+ * [v::notOf()](#vnotofv-v)
+ * [v::oneOf()](#voneofv-v)
  * [v::when()](#vwhenv-if-v-then-v-else--null)
   
 ### [Comparing Values](#comparing-values-1)
@@ -119,6 +119,7 @@ Rules
 ### General
 
 #### v::attributes(['attribute_1' => $v1, 'attribute_2' => $v2, 'attribute_3' => $v3,... ])
+#### v::attributes(v $v)
 	
 For arrays or objects. Will validate if all inner validators of attributes valid.
 
@@ -138,6 +139,13 @@ $attributes = [
 $v = v::attributes($attributes);
 $v->validate($input); // output false
 ```
+
+Validate all attributes:
+
+```php
+v::attributes(v::required()->string())->validate($input);
+```
+
 Syntax allows you to set custom placeholders for every node:
 
 ```php
@@ -177,7 +185,7 @@ output:
 */
 ```
 
-#### v::notOf($v)
+#### v::notOf(v $v)
 
 Negates any rule (invert validation).
 
@@ -204,7 +212,7 @@ $v = v::notOf(
 $v->validate($input); // output: true
 ```
 
-#### v::oneOf($v)
+#### v::oneOf(v $v)
 
 This is a group validator that acts as an OR operator (if only one condition is valid).
 
