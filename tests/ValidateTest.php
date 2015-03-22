@@ -8,6 +8,17 @@ use rock\validate\Validate;
 
 class ValidateTest extends \PHPUnit_Framework_TestCase
 {
+    public function testNewInit()
+    {
+        $v = (new Validate)->string()->email();
+        $this->assertFalse($v->validate(7));
+        $expected = [
+            'string' => 'value must be string',
+            'email' => 'value must be valid',
+        ];
+        $this->assertEquals($expected, $v->getErrors());
+    }
+
     public function testRequired()
     {
         $validate = Validate::required();
