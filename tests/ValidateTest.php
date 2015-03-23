@@ -843,6 +843,75 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             'email' => 'email must be valid',
         ), $v->getErrors());
     }
+
+    public function testRemainder()
+    {
+        $input = [
+            '#' => 5,
+            'email' => 'tom@site',
+            'name' => 'Tom',
+            'age' => 15
+        ];
+        $validate = Validate::attributes(
+            [
+                '*' => Validate::required()->string(),
+                '#' => Validate::int(),
+                'email' => Validate::required()->email(),
+
+            ]
+        );
+
+        $this->assertFalse($validate->validate($input));
+        $expected = [
+            'age' =>
+                [
+                    'string' => 'value must be string',
+                ],
+            'email' =>
+                [
+                    'email' => 'email must be valid',
+                ],
+        ];
+        $this->assertEquals($expected, $validate->getErrors());
+
+        $validate = Validate::attributes(
+            [
+                '#' => Validate::int(),
+                'email' => Validate::required()->email(),
+                '_rem' => Validate::required()->string(),
+
+            ]
+        );
+        $this->assertFalse($validate->labelRemainder('_rem')->validate($input));
+        $expected = [
+            'email' =>
+                [
+                    'email' => 'email must be valid',
+                ],
+            'age' =>
+                [
+                    'string' => 'value must be string',
+                ],
+        ];
+        $this->assertEquals($expected, $validate->getErrors());
+
+        $input = [
+            '#' => 5,
+            'email' => 'tom@site.com',
+            'name' => 'Tom',
+            'age' => '15'
+        ];
+
+        $validate = Validate::attributes(
+            [
+                '#' => Validate::int(),
+                'email' => Validate::required()->email(),
+                '_rem' => Validate::required()->string(),
+
+            ]
+        );
+        $this->assertTrue($validate->labelRemainder('_rem')->validate($input));
+    }
 }
 
 

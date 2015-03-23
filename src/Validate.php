@@ -70,6 +70,7 @@ use rock\validate\rules\Writable;
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
  * @method static Validate locale(string $locale)
  * @method static Validate skipEmpty(bool $skip = true)
+ * @method static Validate labelRemainder(string $label = '*')
  *
  * @method static Validate alnum(string $additionalChars = null)
  * @method static Validate alpha(string $additionalChars = null)
@@ -175,6 +176,7 @@ class Validate implements ObjectInterface
      * is null or an empty string.
      */
     public $skipEmpty = true;
+    public $remainder = '*';
     /** @var array  */
     protected $_rules = [];
     /**
@@ -260,45 +262,44 @@ class Validate implements ObjectInterface
         foreach($this->_rules as $rules){
 
             list($ruleName, $rule) = $rules;
-//            if (!is_array($rules)) {
-//                $rules = [$rules];
-//            }
-//            foreach($rules as $rule) {
 
-                // notOf or oneOf
-                if ($rule instanceof Validate) {
-                    $rule->validate($input);
-                    $this->errors = array_merge($this->errors, $rule->getErrors());
-                    continue;
-                }
+            // notOf or oneOf
+            if ($rule instanceof Validate) {
+                $rule->validate($input);
+                $this->errors = array_merge($this->errors, $rule->getErrors());
+                continue;
+            }
 
-                if ($rule instanceof When) {
-                    $rule->valid = $this->valid;
-                    $rule->validate($input);
-                    $this->errors = array_merge($this->errors, $rule->getErrors());
-                    continue;
-                }
+            if ($rule instanceof When) {
+                $rule->valid = $this->valid;
+                $rule->validate($input);
+                $this->errors = array_merge($this->errors, $rule->getErrors());
+                continue;
+            }
 
-                if ($rule instanceof Attributes) {
-                    $rule->one = $this->one;
-                    $rule->valid = $this->valid;
-                    $rule->validate($input);
-                    $this->errors = $rule->getErrors();
-                    break;
-                }
+            if ($rule instanceof Attributes) {
+                $config = [
+                    'one' => $this->one,
+                    'valid' => $this->valid,
+                    'remainder' =>  $this->remainder
+                ];
+                $rule->setProperties($config);
+                $rule->validate($input);
+                $this->errors = $rule->getErrors();
+                break;
+            }
 
-                if ($this->skipEmpty && $rule->skipEmpty && $this->isEmpty($input, $rule)) {
-                    continue;
-                }
+            if ($this->skipEmpty && $rule->skipEmpty && $this->isEmpty($input, $rule)) {
+                continue;
+            }
 
-                if ($rule->validate($input) === $this->valid) {
-                    continue;
-                }
-                $this->errors[$ruleName] = $this->error($ruleName, $rule);
-                if ($this->one === true) {
-                    break;
-                }
-            //}
+            if ($rule->validate($input) === $this->valid) {
+                continue;
+            }
+            $this->errors[$ruleName] = $this->error($ruleName, $rule);
+            if ($this->one === true) {
+                break;
+            }
         }
         return empty($this->errors);
     }
@@ -414,7 +415,7 @@ class Validate implements ObjectInterface
     protected function attributesInternal($attributes)
     {
         $this->_rules = [];
-        $this->_rules[] = ['attributes', new Attributes(['attributes' => $attributes, 'valid' => $this->valid])];
+        $this->_rules[] = ['attributes', new Attributes(['attributes' => $attributes, 'one' => $this->one, 'valid' => $this->valid, 'remainder' => $this->remainder])];
         return $this;
     }
 
@@ -482,6 +483,12 @@ class Validate implements ObjectInterface
     protected function SkipEmptyInternal($skip = true)
     {
         $this->skipEmpty = $skip;
+        return $this;
+    }
+
+    protected function labelRemainderInternal($label = '*')
+    {
+        $this->remainder = $label;
         return $this;
     }
 

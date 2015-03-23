@@ -9,6 +9,7 @@ Rules
  * [v::notOf()](#vnotofv-v)
  * [v::oneOf()](#voneofv-v)
  * [v::when()](#vwhenv-if-v-then-v-else--null)
+ * [remainder](#remainder)
   
 ### [Comparing Values](#comparing-values-1)
 
@@ -309,6 +310,54 @@ output:
 In the sample above, if `$input` is an integer, then it must be positive.
 If `$input` is not an integer, then it must not me empty.
 
+####remainder
+
+Default label `*`.
+
+```php
+use rock\validate\Validate as v;
+
+$input = [
+    '#' => 5,
+    'email' => 'tom@site',
+    'name' => 'Tom',
+    'age' => 15
+];
+
+$validate = v::attributes(
+    [
+        '#' => Validate::int(),
+        'email' => Validate::required()->email(),
+        '*' => Validate::required()->string(),
+    ]
+);
+$validate->validate($input); // output: false
+
+/*
+output:
+[
+    'age' => [
+            'string' => 'value must be string',
+     ],
+    'email' => [
+            'email' => 'email must be valid',
+    ],
+]
+*/
+```
+
+Change default label:
+
+```php
+$validate = v::labelRemainder('_remainder')
+    ->attributes(
+        [
+            '#' => Validate::int(),
+            'email' => Validate::required()->email(),
+            '_remainder' => Validate::required()->string(),
+        ]
+    );
+```
 
 ### Comparing Values
 

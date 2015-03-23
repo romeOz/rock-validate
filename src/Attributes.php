@@ -5,6 +5,7 @@ namespace rock\validate;
 
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
+use rock\helpers\ArrayHelper;
 
 
 class Attributes implements ObjectInterface
@@ -14,6 +15,7 @@ class Attributes implements ObjectInterface
     public $attributes = [];
     public $valid = true;
     public $one = false;
+    public $remainder = '*';
     protected $errors = [];
 
     public function validate($input)
@@ -27,6 +29,10 @@ class Attributes implements ObjectInterface
         foreach ($this->attributes as $attribute => $validate) {
             if (!$validate instanceof Validate) {
                 throw new ValidateException("`{$attribute}` is not `".Validate::className()."`");
+            }
+            if ($attribute === $this->remainder) {
+                $this->remainder($validate, $input);
+                continue;
             }
             if (!isset($input[$attribute])) {
                 $input[$attribute] = null;
@@ -58,5 +64,16 @@ class Attributes implements ObjectInterface
         foreach($input as $key => $value) {
             $this->attributes[$key] = $validate;
         }
+    }
+
+    protected function remainder(Validate $validate, $input)
+    {
+        $input = ArrayHelper::diffByKeys($input, array_keys($this->attributes));
+        $config = [
+            'remainder' => $this->remainder,
+            'attributes' => $validate
+        ];
+        $this->setProperties($config);
+        $this->validate($input);
     }
 }
