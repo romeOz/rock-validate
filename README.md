@@ -8,7 +8,7 @@ Validator for PHP
 [![Coverage Status](https://coveralls.io/repos/romeOz/rock-validate/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-validate?branch=master)
 [![License](https://poser.pugx.org/romeOz/rock-validate/license.svg)](https://packagist.org/packages/romeOz/rock-validate)
 
-[Rock validator on Packagist](https://packagist.org/packages/romeOz/rock-validate)
+[Rock Validate on Packagist](https://packagist.org/packages/romeOz/rock-validate)
 
 Features
 -------------------
@@ -186,4 +186,4 @@ Requirements
 License
 -------------------
 
-The Rock Validator is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+The Rock Validate is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
