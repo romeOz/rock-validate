@@ -6,6 +6,13 @@ namespace rock\validate\rules;
 class Required extends Rule
 {
     public $skipEmpty = false;
+
+    public function __construct($strict = true, $config = [])
+    {
+        $this->parentConstruct($config);
+        $this->params['strict'] = $strict;
+    }
+
     /**
      * @inheritdoc
      */
@@ -15,6 +22,10 @@ class Required extends Rule
             $input = trim($input);
         }
 
-        return !empty($input);
+        if ($this->params['strict']) {
+            return !empty($input);
+        }
+
+        return $input !== '' && $input !== null;
     }
 } 

@@ -8,18 +8,18 @@ class RequiredTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerValid
      */
-    public function testValid($input)
+    public function testValid($input, $strict = true)
     {
-        $v = Validate::required();
+        $v = Validate::required($strict);
         $this->assertTrue($v->validate($input));
     }
 
     /**
      * @dataProvider providerInvalid
      */
-    public function testInvalid($input)
+    public function testInvalid($input, $strict = true)
     {
-        $v = Validate::required();
+        $v = Validate::required($strict);
         $this->assertFalse($v->validate($input));
     }
 
@@ -29,8 +29,15 @@ class RequiredTest extends \PHPUnit_Framework_TestCase
             [1],
             [' oi'],
             [[5]],
-            [array(0)],
-            [new \stdClass]
+            [[0]],
+            [new \stdClass],
+
+            [0, false],
+            [1, false],
+            [[], false],
+            ['0', false],
+            ['1', false],
+            [false, false],
         ];
     }
 
@@ -38,11 +45,15 @@ class RequiredTest extends \PHPUnit_Framework_TestCase
     {
         return [
             [''],
+            [0],
             ['    '],
             ["\n"],
             [false],
             [null],
-            [[]]
+            [[]],
+
+            ['', false],
+            [null, false]
         ];
     }
 }

@@ -559,6 +559,7 @@ See also:
 
     
 #### v::required()
+#### v::required(bool $strict = true)
 
 Validates if the given input is not empty or in other words is input mandatory and
 required. This function also takes whitespace into account, use `noWhitespace()`
@@ -583,7 +584,7 @@ v::int()->required()->validate(0); // output: false
 Empty arrays:
 
 ```php
-v::arr()->required()->validate(array()); // output: false
+v::arr()->required()->validate([]); // output: false
 ```
 
 Whitespace:
@@ -591,6 +592,16 @@ Whitespace:
 ```php
 v::string()->required()->validate('        ');  // output: false
 v::string()->required()->validate("\t \n \r");  // output: false
+```
+
+The non-strict mode (`$strict = false`) validation, implies: `null` or ''
+
+```php
+v::arr()->required()->validate(false); // output: true
+v::arr()->required()->validate([]); // output: true
+v::arr()->required()->validate(0); // output: true
+
+v::arr()->required()->validate(''); // output: false
 ```
 
 See also:

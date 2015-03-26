@@ -109,7 +109,7 @@ use rock\validate\rules\Writable;
  * @method static Validate max(int $maxValue, bool $inclusive = false)
  * @method static Validate min(int $minValue, bool $inclusive = false)
  * @method static Validate negative()
- * @method static Validate required()
+ * @method static Validate required(bool $strict = true)
  * @method static Validate noWhitespace()
  * @method static Validate nullValue()
  * @method static Validate numeric()
