@@ -6,21 +6,21 @@ namespace rock\validate\locale\ru;
 use rock\validate\locale\Locale;
 
 /**
- * Class Float
+ * Class Int
  *
  * @codeCoverageIgnore
  * @package rock\validate\locale\ru
  */
-class Float extends Locale
+class IntLocale extends Locale
 {
     public function defaultTemplates()
     {
         return [
             self::MODE_DEFAULT => [
-                self::STANDARD => '{{name}} должно быть вещественным числом',
+                self::STANDARD => '{{name}} должно быть целым числом',
             ],
             self::MODE_NEGATIVE => array(
-                self::STANDARD => '{{name}} не должно быть вещественным числом',
+                self::STANDARD => '{{name}} не должно быть целым числом',
             )
         ];
     }

@@ -6,22 +6,22 @@ namespace rock\validate\locale\ru;
 use rock\validate\locale\Locale;
 
 /**
- * Class String
+ * Class Float
  *
  * @codeCoverageIgnore
  * @package rock\validate\locale\ru
  */
-class String extends Locale
+class FloatLocale extends Locale
 {
     public function defaultTemplates()
     {
         return [
             self::MODE_DEFAULT => [
-                self::STANDARD => '{{name}} должно быть строкой',
+                self::STANDARD => '{{name}} должно быть вещественным числом',
             ],
-            self::MODE_NEGATIVE => [
-                self::STANDARD => '{{name}} не должно быть строкой',
-            ]
+            self::MODE_NEGATIVE => array(
+                self::STANDARD => '{{name}} не должно быть вещественным числом',
+            )
         ];
     }
 

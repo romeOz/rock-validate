@@ -5,7 +5,7 @@ namespace rock\validate\locale\en;
 
 use rock\validate\locale\Locale;
 
-class Int extends Locale
+class IntLocale extends Locale
 {
     public function defaultTemplates()
     {

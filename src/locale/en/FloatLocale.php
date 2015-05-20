@@ -5,7 +5,7 @@ namespace rock\validate\locale\en;
 
 use rock\validate\locale\Locale;
 
-class Float extends Locale
+class FloatLocale extends Locale
 {
     public function defaultTemplates()
     {

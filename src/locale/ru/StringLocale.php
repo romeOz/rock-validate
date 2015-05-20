@@ -6,21 +6,21 @@ namespace rock\validate\locale\ru;
 use rock\validate\locale\Locale;
 
 /**
- * Class Bool
+ * Class String
  *
  * @codeCoverageIgnore
  * @package rock\validate\locale\ru
  */
-class Bool extends Locale
+class StringLocale extends Locale
 {
     public function defaultTemplates()
     {
         return [
             self::MODE_DEFAULT => [
-                self::STANDARD => '{{name}} должно быть булевым',
+                self::STANDARD => '{{name}} должно быть строкой',
             ],
             self::MODE_NEGATIVE => [
-                self::STANDARD => '{{name}} не должно быть булевым',
+                self::STANDARD => '{{name}} не должно быть строкой',
             ]
         ];
     }

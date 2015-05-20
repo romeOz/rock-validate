@@ -540,8 +540,8 @@ class Validate implements ObjectInterface
             'bool' => [
                 'class' => BoolRule::className(),
                 'locales' => [
-                    'en' => \rock\validate\locale\en\Bool::className(),
-                    'ru' => \rock\validate\locale\ru\Bool::className(),
+                    'en' => \rock\validate\locale\en\BoolLocale::className(),
+                    'ru' => \rock\validate\locale\ru\BoolLocale::className(),
                 ]
             ],
             'call' => [
@@ -694,8 +694,8 @@ class Validate implements ObjectInterface
             'float' => [
                 'class' => FloatRule::className(),
                 'locales' => [
-                    'en' => \rock\validate\locale\en\Float::className(),
-                    'ru' => \rock\validate\locale\ru\Float::className(),
+                    'en' => \rock\validate\locale\en\FloatLocale::className(),
+                    'ru' => \rock\validate\locale\ru\FloatLocale::className(),
                 ]
             ],
             'graph' => [
@@ -715,8 +715,8 @@ class Validate implements ObjectInterface
             'int' => [
                 'class' => IntRule::className(),
                 'locales' => [
-                    'en' => \rock\validate\locale\en\Int::className(),
-                    'ru' => \rock\validate\locale\ru\Int::className(),
+                    'en' => \rock\validate\locale\en\IntLocale::className(),
+                    'ru' => \rock\validate\locale\ru\IntLocale::className(),
                 ]
             ],
             'ip' => [
@@ -848,8 +848,8 @@ class Validate implements ObjectInterface
             'string' => [
                 'class' => \rock\validate\rules\StringRule::className(),
                 'locales' => [
-                    'en' => \rock\validate\locale\en\String::className(),
-                    'ru' => \rock\validate\locale\ru\String::className(),
+                    'en' => \rock\validate\locale\en\StringLocale::className(),
+                    'ru' => \rock\validate\locale\ru\StringLocale::className(),
                 ]
             ],
             'symbolicLink' => [
