@@ -1,10 +1,10 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\String;
+use rock\validate\rules\StringRule;
 use rock\validate\Validate;
 
-class StringTest extends \PHPUnit_Framework_TestCase
+class StringRuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider providerValid

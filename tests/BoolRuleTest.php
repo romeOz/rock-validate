@@ -3,7 +3,7 @@ namespace rockunit;
 
 use rock\validate\Validate;
 
-class BoolTest extends \PHPUnit_Framework_TestCase
+class BoolRuleTest extends \PHPUnit_Framework_TestCase
 {
     public function testValid()
     {

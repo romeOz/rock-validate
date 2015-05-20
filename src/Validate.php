@@ -846,7 +846,7 @@ class Validate implements ObjectInterface
                 ]
             ],
             'string' => [
-                'class' => \rock\validate\rules\String::className(),
+                'class' => \rock\validate\rules\StringRule::className(),
                 'locales' => [
                     'en' => \rock\validate\locale\en\String::className(),
                     'ru' => \rock\validate\locale\ru\String::className(),

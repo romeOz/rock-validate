@@ -3,7 +3,7 @@ namespace rockunit;
 
 use rock\validate\Validate;
 
-class FloatTest extends \PHPUnit_Framework_TestCase
+class FloatRuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider providerValid

@@ -3,7 +3,7 @@ namespace rockunit;
 
 use rock\validate\Validate;
 
-class IntTest extends \PHPUnit_Framework_TestCase
+class IntRuleTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @dataProvider providerValid
