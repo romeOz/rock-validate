@@ -22,7 +22,7 @@
         "romeoz/rock-helpers" : "0.10.*"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.4.*",
+        "phpunit/phpunit": "4.6.*",
         "romeoz/rock-db" : "0.10.*"
     },
     "suggest": {
