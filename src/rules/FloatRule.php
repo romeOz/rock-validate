@@ -3,7 +3,7 @@
 namespace rock\validate\rules;
 
 
-class Int extends Rule
+class FloatRule extends Rule
 {
     public $skipEmpty = false;
     /**
@@ -11,6 +11,6 @@ class Int extends Rule
      */
     public function validate($input)
     {
-        return is_numeric($input) && (int)$input == $input;
+        return is_float(filter_var($input, FILTER_VALIDATE_FLOAT));
     }
 } 

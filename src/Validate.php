@@ -11,7 +11,7 @@ use rock\validate\rules\Alnum;
 use rock\validate\rules\Alpha;
 use rock\validate\rules\Arr;
 use rock\validate\rules\Between;
-use rock\validate\rules\Bool;
+use rock\validate\rules\BoolRule;
 use rock\validate\rules\Call;
 use rock\validate\rules\Captcha;
 use rock\validate\rules\Closure;
@@ -33,10 +33,10 @@ use rock\validate\rules\FileMimeTypes;
 use rock\validate\rules\FileSizeBetween;
 use rock\validate\rules\FileSizeMax;
 use rock\validate\rules\FileSizeMin;
-use rock\validate\rules\Float;
+use rock\validate\rules\FloatRule;
 use rock\validate\rules\Graph;
 use rock\validate\rules\In;
-use rock\validate\rules\Int;
+use rock\validate\rules\IntRule;
 use rock\validate\rules\Ip;
 use rock\validate\rules\JSON;
 use rock\validate\rules\Length;
@@ -69,19 +69,19 @@ use rock\validate\rules\Writable;
  * @method static Validate oneOf(Validate $validate)
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
  * @method static Validate locale(string $locale)
- * @method static Validate skipEmpty(bool $skip = true)
+ * @method static Validate skipEmpty(BoolRule $skip = true)
  * @method static Validate labelRemainder(string $label = '*')
  *
  * @method static Validate alnum(string $additionalChars = null)
  * @method static Validate alpha(string $additionalChars = null)
  * @method static Validate arr()
- * @method static Validate between(mixed $min = null, mixed $max = null, bool $inclusive = false)
+ * @method static Validate between(mixed $min = null, mixed $max = null, BoolRule $inclusive = false)
  * @method static Validate bool()
  * @method static Validate captcha(mixed $compareTo)
  * @method static Validate call(callable $call, array $args = null)
  * @method static Validate closure()
  * @method static Validate cntrl()
- * @method static Validate contains(mixed $containsValue, bool $identical = false)
+ * @method static Validate contains(mixed $containsValue, BoolRule $identical = false)
  * @method static Validate confirm(mixed $compareTo)
  * @method static Validate csrf()
  * @method static Validate date(string $format = null)
@@ -89,27 +89,27 @@ use rock\validate\rules\Writable;
  * @method static Validate directory()
  * @method static Validate domain()
  * @method static Validate email()
- * @method static Validate endsWith(mixed $endValue, bool $identical = false)
- * @method static Validate equals(mixed $compareTo, bool $compareIdentical=false)
+ * @method static Validate endsWith(mixed $endValue, BoolRule $identical = false)
+ * @method static Validate equals(mixed $compareTo, BoolRule $compareIdentical=false)
  * @method static Validate exists()
  * @method static Validate file()
- * @method static Validate fileExtensions($extensions, bool $checkExtensionByMimeType = true)
+ * @method static Validate fileExtensions($extensions, BoolRule $checkExtensionByMimeType = true)
  * @method static Validate fileMimeTypes($mimeTypes)
- * @method static Validate fileSizeMax(int $maxValue, bool $inclusive = false) *
- * @method static Validate fileSizeMin(int $minValue, bool $inclusive = false)
- * @method static Validate fileSizeBetween(int $min = null, int $max = null, bool $inclusive = false)
+ * @method static Validate fileSizeMax(IntRule $maxValue, BoolRule $inclusive = false) *
+ * @method static Validate fileSizeMin(IntRule $minValue, BoolRule $inclusive = false)
+ * @method static Validate fileSizeBetween(IntRule $min = null, IntRule $max = null, BoolRule $inclusive = false)
  * @method static Validate float()
  * @method static Validate graph(string $additionalChars = null)
- * @method static Validate in(array $haystack, bool $compareIdentical = false)
+ * @method static Validate in(array $haystack, BoolRule $compareIdentical = false)
  * @method static Validate int()
  * @method static Validate ip(array $ipOptions = null)
  * @method static Validate json()
- * @method static Validate length(int $min=null, int $max=null, bool $inclusive = true)
+ * @method static Validate length(IntRule $min=null, IntRule $max=null, BoolRule $inclusive = true)
  * @method static Validate lowercase()
- * @method static Validate max(int $maxValue, bool $inclusive = false)
- * @method static Validate min(int $minValue, bool $inclusive = false)
+ * @method static Validate max(IntRule $maxValue, BoolRule $inclusive = false)
+ * @method static Validate min(IntRule $minValue, BoolRule $inclusive = false)
  * @method static Validate negative()
- * @method static Validate required(bool $strict = true)
+ * @method static Validate required(BoolRule $strict = true)
  * @method static Validate noWhitespace()
  * @method static Validate nullValue()
  * @method static Validate numeric()
@@ -119,7 +119,7 @@ use rock\validate\rules\Writable;
  * @method static Validate readable()
  * @method static Validate regex($regex)
  * @method static Validate space(string $additionalChars = null)
- * @method static Validate startsWith(mixed $startValue, bool $identical = false)
+ * @method static Validate startsWith(mixed $startValue, BoolRule $identical = false)
  * @method static Validate string()
  * @method static Validate symbolicLink()
  * @method static Validate uploaded()
@@ -538,7 +538,7 @@ class Validate implements ObjectInterface
                 ]
             ],
             'bool' => [
-                'class' => Bool::className(),
+                'class' => BoolRule::className(),
                 'locales' => [
                     'en' => \rock\validate\locale\en\Bool::className(),
                     'ru' => \rock\validate\locale\ru\Bool::className(),
@@ -692,7 +692,7 @@ class Validate implements ObjectInterface
                 ]
             ],
             'float' => [
-                'class' => Float::className(),
+                'class' => FloatRule::className(),
                 'locales' => [
                     'en' => \rock\validate\locale\en\Float::className(),
                     'ru' => \rock\validate\locale\ru\Float::className(),
@@ -713,7 +713,7 @@ class Validate implements ObjectInterface
                 ]
             ],
             'int' => [
-                'class' => Int::className(),
+                'class' => IntRule::className(),
                 'locales' => [
                     'en' => \rock\validate\locale\en\Int::className(),
                     'ru' => \rock\validate\locale\ru\Int::className(),

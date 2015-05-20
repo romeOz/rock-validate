@@ -3,7 +3,7 @@
 namespace rock\validate\rules;
 
 
-class Bool extends Rule
+class BoolRule extends Rule
 {
     public $skipEmpty = false;
     /**
