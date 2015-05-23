@@ -178,7 +178,7 @@ class Validate implements ObjectInterface
     public $skipEmpty = true;
     public $remainder = '*';
     /** @var array  */
-    protected $_rules = [];
+    protected $rawRules = [];
     /**
      * Received errors.
      * @var array
@@ -259,7 +259,7 @@ class Validate implements ObjectInterface
     {
         $this->errors = [];
 
-        foreach($this->_rules as $rules){
+        foreach($this->rawRules as $rules){
 
             list($ruleName, $rule) = $rules;
 
@@ -369,6 +369,14 @@ class Validate implements ObjectInterface
         return isset($this->rules[$name]);
     }
 
+    /**
+     * @return rules\Rule[]
+     */
+    public function getRawRules()
+    {
+        return $this->rawRules;
+    }
+
     public function __call($name, $arguments)
     {
         if (method_exists($this, "{$name}Internal")) {
@@ -384,7 +392,7 @@ class Validate implements ObjectInterface
         /** @var Rule $rule */
         $reflect = new \ReflectionClass($this->rules[$name]['class']);
         $rule = $reflect->newInstanceArgs($arguments);
-        $this->_rules[] = [$name, $rule];
+        $this->rawRules[] = [$name, $rule];
         return $this;
     }
 
@@ -414,28 +422,28 @@ class Validate implements ObjectInterface
 
     protected function attributesInternal($attributes)
     {
-        $this->_rules = [];
-        $this->_rules[] = ['attributes', new Attributes(['attributes' => $attributes, 'one' => $this->one, 'valid' => $this->valid, 'remainder' => $this->remainder])];
+        $this->rawRules = [];
+        $this->rawRules[] = ['attributes', new Attributes(['attributes' => $attributes, 'one' => $this->one, 'valid' => $this->valid, 'remainder' => $this->remainder])];
         return $this;
     }
 
     protected function oneOfInternal(Validate $validate)
     {
         $validate->one = true;
-        $this->_rules[] = ['oneOf', $validate];
+        $this->rawRules[] = ['oneOf', $validate];
         return $this;
     }
 
     protected function notOfInternal(Validate $validate)
     {
         $validate->valid = false;
-        $this->_rules[] = ['notOf', $validate];
+        $this->rawRules[] = ['notOf', $validate];
         return $this;
     }
 
     protected function whenInternal(Validate $if, Validate $then, Validate $else = null)
     {
-        $this->_rules[] = ['when', new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid])];
+        $this->rawRules[] = ['when', new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid])];
         return $this;
     }
 

@@ -2,6 +2,7 @@
 
 namespace rockunit;
 
+use rock\validate\Attributes;
 use rock\validate\locale\en\Date;
 use rock\validate\locale\en\Numeric;
 use rock\validate\Validate;
@@ -911,6 +912,14 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             ]
         );
         $this->assertTrue($validate->labelRemainder('_rem')->validate($input));
+    }
+
+    public function testGetRawRules()
+    {
+        $rawRules = Validate::attributes(Validate::required()->string())->getRawRules();
+        $rawRule = current($rawRules);
+        list(,$rule) = $rawRule;
+        $this->assertTrue($rule instanceof Attributes);
     }
 }
 
