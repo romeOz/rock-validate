@@ -4,7 +4,7 @@ namespace rock\validate\rules;
 
 use rock\base\BaseException;
 use rock\components\Model;
-use rock\db\ActiveRecordInterface;
+use rock\db\common\ActiveRecordInterface;
 use rock\log\Log;
 use rock\validate\ValidateException;
 
