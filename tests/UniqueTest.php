@@ -14,7 +14,7 @@ use rockunit\models\ValidatorTestMainModel;
 use rockunit\models\ValidatorTestRefModel;
 use rockunit\models\ValidatorTestRefRulesModel;
 
-class UniqueValidatorTest extends DatabaseTestCase
+class UniqueTest extends DatabaseTestCase
 {
     protected $driverName = 'mysql';
 
