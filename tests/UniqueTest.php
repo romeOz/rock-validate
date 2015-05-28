@@ -153,7 +153,7 @@ class UniqueTest extends DatabaseTestCase
 
     public function testValidateAttributeAttributeNotInTableException()
     {
-        $this->setExpectedException(\rock\db\DbException::className());
+        $this->setExpectedException(\rock\db\common\DbException::className());
         $m = new ValidatorTestMainModel();
         $val = ActiveValidate::unique($m);
         $val->validate('testMainVal');
