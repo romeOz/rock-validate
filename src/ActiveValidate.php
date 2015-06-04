@@ -36,6 +36,13 @@ class ActiveValidate extends Validate
                     'ru' => \rock\db\validate\locale\ru\Unique::className(),
                 ]
             ],
+            'mongoId' => [
+                'class' => \rock\mongodb\validate\MongoIdRule::className(),
+                'locales' => [
+                    'en' => \rock\mongodb\validate\locale\en\MongoIdLocale::className(),
+                    'ru' => \rock\mongodb\validate\locale\ru\MongoIdLocale::className(),
+                ]
+            ],
         ];
     }
 }
