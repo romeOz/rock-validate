@@ -27,9 +27,6 @@ install:
   - composer install --prefer-dist
   - composer require satooshi/php-coveralls:*@dev
 
-before_script:
-  - mysql -e 'CREATE DATABASE rocktest;';
-
 script:
   - mkdir -p build/logs
   - vendor/bin/phpunit --verbose --coverage-clover build/logs/clover.xml

@@ -28,6 +28,7 @@
             <file>./src/rules/Rule.php</file>
             <file>./src/locale/Locale.php</file>
             <file>./src/ValidateException.php</file>
+            <file>./src/ActiveValidate.php</file>
             <directory>./tests/</directory>
         </blacklist>
     </filter>

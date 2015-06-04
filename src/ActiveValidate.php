@@ -4,10 +4,10 @@ namespace rock\validate;
 
 
 use rock\components\Model;
-use rock\validate\rules\Unique;
+use rock\db\validate\rules\Unique;
 
 /**
- * Class ValidateModel
+ * AR validate rules.
  *
  * @method static Validate unique(Model $m, $targetAttribute = null, $targetClass = null, $filter = null)
  *
@@ -32,8 +32,8 @@ class ActiveValidate extends Validate
             'unique' => [
                 'class' => Unique::className(),
                 'locales' => [
-                    'en' => \rock\validate\locale\en\Unique::className(),
-                    'ru' => \rock\validate\locale\ru\Unique::className(),
+                    'en' => \rock\db\validate\locale\en\Unique::className(),
+                    'ru' => \rock\db\validate\locale\ru\Unique::className(),
                 ]
             ],
         ];
