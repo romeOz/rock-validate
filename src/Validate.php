@@ -125,7 +125,7 @@ use rock\validate\rules\Writable;
  * @method static Validate uploaded()
  * @method static Validate uppercase()
  * @method static Validate writable()
- * 
+ *
  * @package rock\validate
  */
 class Validate implements ObjectInterface
@@ -389,9 +389,8 @@ class Validate implements ObjectInterface
         if (!class_exists($this->rules[$name]['class'])) {
             throw new ValidateException(ValidateException::UNKNOWN_CLASS, ['class' => $this->rules[$name]['class']]);
         }
-        /** @var Rule $rule */
-        $reflect = new \ReflectionClass($this->rules[$name]['class']);
-        $rule = $reflect->newInstanceArgs($arguments);
+
+        $rule = $this->getInstanceRule($name, $arguments);
         $this->rawRules[] = [$name, $rule];
         return $this;
     }
@@ -498,6 +497,18 @@ class Validate implements ObjectInterface
     {
         $this->remainder = $label;
         return $this;
+    }
+
+    /**
+     * Returns instance rule.
+     * @param string $name name of rule
+     * @param array $arguments
+     * @return Rule
+     */
+    protected function getInstanceRule($name, array $arguments)
+    {
+        $reflect = new \ReflectionClass($this->rules[$name]['class']);
+        return $reflect->newInstanceArgs($arguments);
     }
 
     /**
