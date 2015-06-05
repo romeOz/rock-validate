@@ -8,9 +8,7 @@ use rock\base\ObjectTrait;
 
 abstract class Rule implements ObjectInterface
 {
-    use ObjectTrait{
-        ObjectTrait::__construct as parentConstruct;
-    }
+    use ObjectTrait;
 
     public $params = [];
     /**

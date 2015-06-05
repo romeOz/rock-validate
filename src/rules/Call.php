@@ -8,7 +8,7 @@ class Call extends Rule
     protected $args = [];
     public function __construct(callable $call, array $args = null, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->call = $call;
         if (!empty($args)) {
             $this->args = $args;

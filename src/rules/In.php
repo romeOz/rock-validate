@@ -6,7 +6,7 @@ class In extends Rule
 {
     public function __construct($haystack, $compareIdentical = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['haystack'] = $haystack;
         $this->params['compareIdentical'] = $compareIdentical;
     }

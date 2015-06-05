@@ -11,7 +11,7 @@ class Min extends Rule
 {
     public function __construct($min, $inclusive = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['minValue'] = $min;
         $this->params['inclusive'] = $inclusive;
     }

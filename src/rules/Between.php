@@ -12,7 +12,7 @@ class Between extends Rule
         if (!is_null($min) && !is_null($max) && $min > $max) {
             throw new ValidateException(sprintf('%s cannot be less than  %s for validation', $min, $max));
         }
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['minValue'] = $min;
         $this->params['maxValue'] = $max;
         $this->params['inclusive'] = $inclusive;

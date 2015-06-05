@@ -6,7 +6,7 @@ class EndsWith extends Rule
 {
     public function __construct($endValue, $identical = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['endValue'] = $endValue;
         $this->params['identical'] = $identical;
     }

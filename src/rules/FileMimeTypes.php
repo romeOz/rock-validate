@@ -8,7 +8,7 @@ class FileMimeTypes extends Rule
 {
     public function __construct($mimeTypes, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['mimeTypes'] = $this->toArray($mimeTypes);
     }
 

@@ -9,7 +9,7 @@ class FileSizeBetween extends Rule
 {
     public function __construct($min = null, $max = null, $inclusive = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         if (!is_null($min) && !is_null($max) && $min > $max) {
             throw new ValidateException(sprintf('%s cannot be less than  %s for validation', $min, $max));
         }

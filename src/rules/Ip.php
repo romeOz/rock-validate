@@ -9,7 +9,7 @@ class Ip extends Rule
 {
     public function __construct($ipOptions = null, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['ipOptions'] = null;
         if (is_int($ipOptions)) {
             $this->params['ipOptions'] = $ipOptions;

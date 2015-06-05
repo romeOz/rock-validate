@@ -11,7 +11,7 @@ abstract class CType extends Rule
 
     public function __construct($additionalChars = '', $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         if (!is_string($additionalChars)) {
             throw new ValidateException('Invalid list of additional characters to be loaded');
         }

@@ -7,7 +7,7 @@ class Contains extends Rule
 {
     public function __construct($containsValue, $identical = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['containsValue'] = $containsValue;
         $this->params['identical'] = $identical;
     }

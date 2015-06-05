@@ -7,7 +7,7 @@ class Regex extends Rule
 {
     public function __construct($regex = null, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['regex'] = $regex;
     }
 

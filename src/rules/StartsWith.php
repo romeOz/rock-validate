@@ -6,7 +6,7 @@ class StartsWith extends Rule
 {
     public function __construct($startValue, $identical = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['startValue'] = $startValue;
         $this->params['identical'] = $identical;
     }

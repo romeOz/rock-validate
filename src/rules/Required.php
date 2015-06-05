@@ -9,7 +9,7 @@ class Required extends Rule
 
     public function __construct($strict = true, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['strict'] = $strict;
     }
 

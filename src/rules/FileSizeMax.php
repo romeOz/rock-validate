@@ -9,7 +9,7 @@ class FileSizeMax extends Rule
 {
     public function __construct($maxValue = null, $inclusive = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['maxValue'] = class_exists('rock\file\UploadedFile')
             ? UploadedFile::getSizeLimit($maxValue)
             : FileHelper::sizeToBytes(ini_get('upload_max_filesize'));

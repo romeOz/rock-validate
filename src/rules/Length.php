@@ -10,7 +10,7 @@ class Length extends Rule
 {
     public function __construct($min = null, $max = null, $inclusive = true, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         if (!is_numeric($min) && !is_null($min)) {
             throw new ValidateException(sprintf('%s is not a valid numeric length', $min));
         }

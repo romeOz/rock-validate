@@ -6,7 +6,7 @@ class Equals extends Rule
 {
     public function __construct($compareTo, $compareIdentical = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['compareTo'] = $compareTo;
         $this->params['compareIdentical'] = $compareIdentical;
     }

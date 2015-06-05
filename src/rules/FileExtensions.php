@@ -10,7 +10,7 @@ class FileExtensions extends Rule
 {
     public function __construct($extensions, $checkExtensionByMimeType = true, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['extensions'] = $this->toArray($extensions);
         $this->params['checkExtensionByMimeType'] = $checkExtensionByMimeType;
     }

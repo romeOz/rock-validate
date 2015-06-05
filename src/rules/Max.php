@@ -7,7 +7,7 @@ class Max extends Rule
 {
     public function __construct($max, $inclusive = false, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['maxValue'] = $max;
         $this->params['inclusive'] = $inclusive;
     }

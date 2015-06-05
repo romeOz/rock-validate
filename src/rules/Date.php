@@ -8,7 +8,7 @@ class Date extends Rule
 {
     public function __construct($format = null, $config = [])
     {
-        $this->parentConstruct($config);
+        parent::__construct($config);
         $this->params['format'] = $format;
     }
 
