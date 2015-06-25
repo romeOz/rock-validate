@@ -11,7 +11,7 @@ class CSRF extends Locale
     {
         return [
             self::MODE_DEFAULT => [
-                self::STANDARD => 'CSRF-token must be valid ',
+                self::STANDARD => 'CSRF-token must be valid',
             ],
             self::MODE_NEGATIVE => array(
                 self::STANDARD => 'CSRF-token must not be valid',
