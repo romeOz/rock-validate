@@ -13,11 +13,11 @@ class Date extends Locale
     {
         return [
             self::MODE_DEFAULT => [
-                self::STANDARD => 'value must be date',
+                self::STANDARD => '{{name}} must be date',
                 self::FORMAT => '{{name}} must be a valid date. Sample format: {{format}}'
             ],
             self::MODE_NEGATIVE => [
-                self::STANDARD => 'value must not be date',
+                self::STANDARD => '{{name}} must not be date',
                 self::FORMAT => '{{name}} must not be a valid date in the format {{format}}'
             ]
         ];

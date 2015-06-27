@@ -20,11 +20,11 @@ class Date extends Locale
         return [
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должно быть датой',
-                self::FORMAT => '{{name}} должно соответствовать фомату: {{format}}'
+                self::FORMAT => '{{name}} должно соответствовать формату: {{format}}'
             ],
             self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно быть датой',
-                self::FORMAT => '{{name}} не должно соответствовать фомату: {{format}}'
+                self::FORMAT => '{{name}} не должно соответствовать формату: {{format}}'
             ]
         ];
     }
