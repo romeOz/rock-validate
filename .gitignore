@@ -2,11 +2,11 @@
 ## Project
 ############
 
-vendor
+vendor/
 composer.lock
-./index.php
-assets/*
-views/*
+node_modules/
+Gruntfile.js
+package.json
 *~
 
 
@@ -24,15 +24,10 @@ Desktop.ini
 ############
 ## Vagrant
 ############
-.vagrant/*
+.vagrant/
 
 
 ############
 ## PHPStorm
 ############
-.idea/*
-
-############
-## npm
-############
-node_modules/*
+.idea/
