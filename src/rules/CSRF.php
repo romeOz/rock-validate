@@ -3,7 +3,7 @@
 namespace rock\validate\rules;
 
 
-use rock\validate\ValidateException;
+use rock\helpers\Instance;
 
 class CSRF extends Rule
 {
@@ -12,13 +12,7 @@ class CSRF extends Rule
 
     public function init()
     {
-        if (!is_object($this->csrf)) {
-            if (class_exists('\rock\di\Container')) {
-                $this->csrf = \rock\di\Container::load($this->csrf);
-                return;
-            }
-            throw new ValidateException(ValidateException::NOT_INSTALL_CSRF);
-        }
+        $this->csrf = Instance::ensure($this->csrf, '\rock\csrf\CSRF');
     }
 
     /**
@@ -26,6 +20,6 @@ class CSRF extends Rule
      */
     public function validate($input)
     {
-        return $this->csrf->valid($input);
+        return $this->csrf->check($input);
     }
 }
