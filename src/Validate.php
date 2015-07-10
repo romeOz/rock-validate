@@ -4,7 +4,6 @@ namespace rock\validate;
 
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
-use rock\helpers\Instance;
 use rock\helpers\StringHelper;
 use rock\validate\locale\Locale;
 use rock\validate\rules\Alnum;
@@ -397,7 +396,7 @@ class Validate implements ObjectInterface
 
     public static function __callStatic($name, $arguments)
     {
-        return call_user_func_array([static::getInstance(static::className()), $name], $arguments);
+        return call_user_func_array([static::getInstance(), $name], $arguments);
     }
 
     /**
@@ -515,14 +514,14 @@ class Validate implements ObjectInterface
      * Returns instance.
      *
      * If exists {@see \rock\di\Container} that uses it.
-     *
-     * @param string|array $config the configuration. It can be either a string representing the class name
-     *                                     or an array representing the object configuration.
      * @return static
      */
-    protected static function getInstance($config)
+    protected static function getInstance()
     {
-        return Instance::ensure($config, static::className());
+        if (class_exists('\rock\di\Container')) {
+            return \rock\di\Container::load(static::className());
+        }
+        return new static();
     }
 
     protected function defaultRules()
