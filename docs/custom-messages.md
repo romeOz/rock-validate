@@ -1,7 +1,7 @@
 Custom messages, placeholders and templates 
 ==================
 
-### Custom Messages
+###Custom Messages
 
 ```php
 use rock\validate\Validate as v;
@@ -20,7 +20,7 @@ output:
 */
 ```
 
-### Custom Placeholders
+###Custom Placeholders
 
 ```php
 use rock\validate\Validate as v;
@@ -42,7 +42,7 @@ output:
 ```
 
 
-### Custom Templates
+###Custom Templates
 
 ```php
 use rock\validate\Validate as v;
