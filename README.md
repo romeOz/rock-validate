@@ -8,8 +8,6 @@ Validator for PHP
 [![Coverage Status](https://coveralls.io/repos/romeOz/rock-validate/badge.svg?branch=master)](https://coveralls.io/r/romeOz/rock-validate?branch=master)
 [![License](https://poser.pugx.org/romeOz/rock-validate/license.svg)](https://packagist.org/packages/romeOz/rock-validate)
 
-[Rock Validate on Packagist](https://packagist.org/packages/romeOz/rock-validate)
-
 Features
 -------------------
 
@@ -23,12 +21,26 @@ Features
 
 > Bolded features are different from [Respect/Validation](https://github.com/Respect/Validation).
 
+Table of Contents
+-------------------
+
+ * [Installation](#installation)
+ * [Quick Start](#quick-start)
+    - [Replacement a placeholder](#replacement-a-placeholder)
+    - [i18n](#i18n)
+    - [As array or object](#as-array-or-object)
+ * [Documentation](#documentation)
+ * [Demo](#demo)
+ * [Requirements](#requirements)
+
 Installation
 -------------------
 
 From the Command Line:
 
-```composer require romeoz/rock-validate:*```
+```
+composer require romeoz/rock-validate
+```
 
 In your composer.json:
 
@@ -64,7 +76,7 @@ $v->getFirstError();
 // output: value must have a length between 10 and 20
 ```
 
-####Replacement of placeholder
+####Replacement a placeholder
 
 ```php
 use rock\validate\Validate;
@@ -104,7 +116,7 @@ output:
 */
 ```
 
-####For Array or Object
+####As Array or Object
 
 ```php
 use rock\validate\Validate;
