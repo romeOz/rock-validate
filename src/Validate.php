@@ -4,6 +4,7 @@ namespace rock\validate;
 
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
+use rock\helpers\Instance;
 use rock\helpers\StringHelper;
 use rock\validate\locale\Locale;
 use rock\validate\rules\Alnum;
@@ -282,7 +283,7 @@ class Validate implements ObjectInterface
                     'valid' => $this->valid,
                     'remainder' =>  $this->remainder
                 ];
-                $rule->setProperties($config);
+                Instance::configure($rule, $config);
                 $rule->validate($input);
                 $this->errors = $rule->getErrors();
                 break;
