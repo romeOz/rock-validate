@@ -6,6 +6,7 @@ namespace rock\validate;
 use rock\base\ObjectInterface;
 use rock\base\ObjectTrait;
 use rock\helpers\ArrayHelper;
+use rock\helpers\Instance;
 
 
 class Attributes implements ObjectInterface
@@ -73,7 +74,7 @@ class Attributes implements ObjectInterface
             'remainder' => $this->remainder,
             'attributes' => $validate
         ];
-        $this->setProperties($config);
+        Instance::configure($this, $config);
         $this->validate($input);
     }
 }
