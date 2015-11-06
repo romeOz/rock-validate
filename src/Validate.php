@@ -165,7 +165,7 @@ class Validate implements ObjectInterface
      * Default locale.
      * @var string
      */
-    public $locale = 'en';
+    protected $locale = 'en';
     /**
      * This is a group validator that acts as an OR operator (if only one condition is valid).
      * @var bool
@@ -185,16 +185,28 @@ class Validate implements ObjectInterface
      */
     protected $errors = [];
 
-    public function __construct($config = [])
+    public function init()
     {
-        $this->parentConstruct($config);
-
-        $this->locale = strtolower($this->locale);
         $this->rules = array_merge($this->defaultRules(), $this->rules);
     }
 
     /**
-     * Set templates.
+     * Sets a locale.
+     * @param callable|string $locale
+     * @return $this
+     */
+    public function setLocale($locale)
+    {
+        if (is_callable($locale)) {
+            $locale = call_user_func($locale, $this);
+        }
+        $this->locale = strtolower($locale);
+
+        return $this;
+    }
+
+    /**
+     * Sets a templates.
      *
      * ```php
      * $validate->required()
@@ -213,7 +225,7 @@ class Validate implements ObjectInterface
     }
 
     /**
-     * Set placeholders for template.
+     * Sets a list placeholders for template.
      *
      * ```php
      * $validate->required()
@@ -231,7 +243,7 @@ class Validate implements ObjectInterface
     }
 
     /**
-     * To set custom messages.
+     * Customizing messages.
      *
      * ```php
      * $validate->required()
