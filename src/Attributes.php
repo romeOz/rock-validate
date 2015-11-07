@@ -14,7 +14,7 @@ class Attributes implements ObjectInterface
     use ObjectTrait;
 
     public $attributes = [];
-    public $valid = true;
+    public $invert = false;
     public $one = false;
     public $remainder = '*';
     protected $errors = [];
@@ -39,7 +39,7 @@ class Attributes implements ObjectInterface
                 $input[$attribute] = null;
             }
 
-            $validate->valid = $this->valid;
+            $validate->invert = $this->invert;
             if ($validate->validate($input[$attribute])) {
                 continue;
             }

@@ -254,7 +254,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
     public function testDate()
     {
-        $validate = Validate::date()->templates(['date' => Date::FORMAT]);
+        $validate = Validate::date()->setTemplates(['date' => Date::FORMAT]);
         $this->assertTrue($validate->validate('2005-11-30 01:02:03'));
         $this->assertEmpty($validate->getErrors());
 
@@ -265,20 +265,20 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             ['date' => 'value must be date'],
             $validate->getErrors()
         );
-        $validate = Validate::date('Y-d')->templates(['date' => Date::FORMAT]);
+        $validate = Validate::date('Y-d')->setTemplates(['date' => Date::FORMAT]);
         $this->assertFalse($validate->validate('2005-11-30 01:02:03'));
         $this->assertSame(
             ['date' => 'value must be a valid date. Sample format: 2005-30'],
             $validate->getErrors()
         );
-        $validate->templates([])->validate('2005-11-30 01:02:03');
+        $validate->setTemplates([])->validate('2005-11-30 01:02:03');
         $this->assertSame(
             ['date' => 'value must be date'],
             $validate->getErrors()
         );
 
         // custom placeholder
-        $validate = Validate::date('Y-d')->placeholders(['format' => 'bar'])->templates(['date' => Date::FORMAT]);
+        $validate = Validate::date('Y-d')->setPlaceholders(['format' => 'bar'])->setTemplates(['date' => Date::FORMAT]);
         $this->assertFalse($validate->validate('2005-11-30 01:02:03'));
         $this->assertSame(
             ['date' => 'value must be a valid date. Sample format: bar'],
@@ -297,7 +297,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($validate->validate(7));
 
         //placeholder
-        $validate = Validate::between(6, 7)->placeholders(['name' => 'num']);
+        $validate = Validate::between(6, 7)->setPlaceholders(['name' => 'num']);
         $this->assertFalse($validate->validate(5));
         $this->assertSame(
             ['between' => 'num must be between 6 and 7']
@@ -316,7 +316,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertEmpty($validate->getErrors());
 
         // notOf
-        $validate = Validate::notOf(Validate::between(null, 7)->placeholders(['name' => 'num']));
+        $validate = Validate::notOf(Validate::between(null, 7)->setPlaceholders(['name' => 'num']));
         $this->assertFalse($validate->validate(5));
         $this->assertSame(
             ['between' => 'num must not be lower than 7'],
@@ -375,8 +375,8 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         $validate = Validate::required()
             ->numeric()
-            ->templates(['numeric' => Numeric::STANDARD])
-            ->placeholders(['name' => 'email']);
+            ->setTemplates(['numeric' => Numeric::STANDARD])
+            ->setPlaceholders(['name' => 'email']);
         $this->assertFalse($validate->validate('foo'));
         $this->assertSame(
             ['numeric' => 'email must be numeric'],
@@ -387,9 +387,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         $validate = Validate::required()
             ->numeric()
-            ->templates(['numeric' => Numeric::STANDARD])
-            ->placeholders(['name' => 'email'])
-            ->messages(['numeric' => 'custom message']);
+            ->setTemplates(['numeric' => Numeric::STANDARD])
+            ->setPlaceholders(['name' => 'email'])
+            ->setMessages(['numeric' => 'custom message']);
         $this->assertFalse($validate->validate('foo'));
         $this->assertSame(
             ['numeric' => 'custom message'],
@@ -399,15 +399,15 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     public function testNotOf()
     {
         $validate = Validate::notOf(
-            Validate::required()->numeric()->placeholders(
+            Validate::required()->numeric()->setPlaceholders(
                 ['name' => 'email'])
         );
         $this->assertTrue($validate->validate(''));
         $validate = Validate::notOf(
-            Validate::required()->string()->placeholders(['name' => 'email']));
+            Validate::required()->string()->setPlaceholders(['name' => 'email']));
         $this->assertFalse($validate->validate(''));
         $validate = Validate::notOf(
-            Validate::required()->string()->placeholders(['name' => 'email']));
+            Validate::required()->string()->setPlaceholders(['name' => 'email']));
         $this->assertFalse($validate->validate('foo'));
         $this->assertSame(
             [
@@ -417,7 +417,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             $validate->getErrors()
         );
         $validate = Validate::required()->notOf(
-            Validate::numeric()->placeholders(['name' => 'email']));
+            Validate::numeric()->setPlaceholders(['name' => 'email']));
         $this->assertFalse($validate->validate(5));
         $this->assertSame(['numeric' => 'email must not be numeric'], $validate->getErrors());
     }
@@ -432,7 +432,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             [
                 'email' => Validate::required()
                     ->string()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->string()
             ]
         );
@@ -449,7 +449,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                     'username' => Validate::required(),
                     'email' => Validate::required()
                         ->numeric()
-                        ->placeholders(['name' => 'email']),
+                        ->setPlaceholders(['name' => 'email']),
                     'name' => Validate::required()->string()
                 ]
             ));
@@ -467,9 +467,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
                     ->numeric()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->notOf(
-                    Validate::string()->placeholders(['name' => 'email']))
+                    Validate::string()->setPlaceholders(['name' => 'email']))
             ]
         );
         $this->assertFalse($validate->validate($input));
@@ -501,7 +501,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                     'username' => Validate::required(),
                     'email' => Validate::required()
                         ->numeric()
-                        ->placeholders(['name' => 'email']),
+                        ->setPlaceholders(['name' => 'email']),
                     'name' => Validate::required()->string()
                 ]
             ));
@@ -602,7 +602,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             [
                 'email' => Validate::required()
                     ->string()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->string()->validate('foo')
             ]
         );
@@ -619,7 +619,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             [
                 'email' => Validate::required()
                     ->string()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->string()
             ]
         ));
@@ -632,9 +632,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
                     ->numeric()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->notOf(
-                    Validate::string()->placeholders(['name' => 'email']))
+                    Validate::string()->setPlaceholders(['name' => 'email']))
             ]
         ));
         $this->assertFalse($validate->validate($input));
@@ -678,7 +678,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
             [
                 'email' => Validate::required()
                     ->string()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->string()->validate('foo')
             ]
         ));
@@ -706,7 +706,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         $validate = Validate::required()
             ->numeric()
-            ->placeholders(['name' => 'email']);
+            ->setPlaceholders(['name' => 'email']);
         $this->assertFalse($validate->validate(''));
         $this->assertSame('email must not be empty', $validate->getFirstError());
         // not error
@@ -724,9 +724,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
                     ->numeric()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->notOf(
-                    Validate::string()->placeholders(['name' => 'email']))
+                    Validate::string()->setPlaceholders(['name' => 'email']))
             ]
         );
         $this->assertFalse($validate->validate($array));
@@ -738,11 +738,11 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
     {
         $validate = Validate::required()
             ->numeric()
-            ->placeholders(['name' => 'email']);
+            ->setPlaceholders(['name' => 'email']);
         $this->assertFalse($validate->validate(''));
         $validate = Validate::required()
             ->numeric()
-            ->placeholders(['name' => 'email']);
+            ->setPlaceholders(['name' => 'email']);
         $this->assertFalse($validate->validate('foo'));
         $this->assertSame('email must be numeric', $validate->getLastError());
         // not error
@@ -760,9 +760,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
                 'username' => Validate::required(),
                 'email' => Validate::notOf(Validate::required())
                     ->numeric()
-                    ->placeholders(['name' => 'email']),
+                    ->setPlaceholders(['name' => 'email']),
                 'name' => Validate::required()->notOf(
-                    Validate::string()->placeholders(['name' => 'name']))
+                    Validate::string()->setPlaceholders(['name' => 'name']))
             ]
         );
         $this->assertFalse($validate->validate($array));
@@ -823,7 +823,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
     public function testI18N()
     {
-        $validate = Validate::locale('ru')->required();
+        $validate = Validate::required()->setLocale('ru');
         $this->assertFalse($validate->validate(''));
         $this->assertSame(['required' => 'значение не должно быть пустым'], $validate->getErrors());
     }
@@ -839,7 +839,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $v = Validate::email();
         $this->assertTrue($v->validate(''));
 
-        $this->assertFalse($v->skipEmpty(false)->validate(''));
+        $this->assertFalse($v->setSkipEmpty(false)->validate(''));
         $this->assertEquals(array (
             'email' => 'email must be valid',
         ), $v->getErrors());
@@ -883,7 +883,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
             ]
         );
-        $this->assertFalse($validate->labelRemainder('_rem')->validate($input));
+        $this->assertFalse($validate->setRemainder('_rem')->validate($input));
         $expected = [
             'email' =>
                 [
@@ -911,7 +911,7 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
 
             ]
         );
-        $this->assertTrue($validate->labelRemainder('_rem')->validate($input));
+        $this->assertTrue($validate->setRemainder('_rem')->validate($input));
     }
 
     public function testGetRawRules()

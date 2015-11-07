@@ -68,9 +68,6 @@ use rock\validate\rules\Writable;
  * @method static Validate notOf(Validate $validate)
  * @method static Validate oneOf(Validate $validate)
  * @method static Validate when(Validate $if, Validate $then, Validate $else = null)
- * @method static Validate locale(string $locale)
- * @method static Validate skipEmpty(BoolRule $skip = true)
- * @method static Validate labelRemainder(string $label = '*')
  *
  * @method static Validate alnum(string $additionalChars = null)
  * @method static Validate alpha(string $additionalChars = null)
@@ -136,31 +133,31 @@ class Validate implements ObjectInterface
     }
 
     /**
-     * Validate rules.
+     * List rules.
      * @var array
      */
-    public $rules = [];
+    protected $rules = [];
     /**
-     * Change behavior Validate.
+     * Invert behavior Validate.
      * @var bool
      * @see notOf()
      */
-    public $valid = true;
+    public $invert = false;
     /**
      * Custom templates.
      * @var array
      */
-    public $templates = [];
+    protected $templates = [];
     /**
-     * Custom messages.
+     * List custom messages.
      * @var array
      */
-    public $messages = [];
+    protected $messages = [];
     /**
-     * Placeholders.
+     * List placeholders for message.
      * @var array
      */
-    public $placeholders = [];
+    protected $placeholders = [];
     /**
      * Default locale.
      * @var string
@@ -170,17 +167,25 @@ class Validate implements ObjectInterface
      * This is a group validator that acts as an OR operator (if only one condition is valid).
      * @var bool
      */
-    public $one = false;
+    protected $one = false;
     /**
+     * Enable skipped if the attribute value is null or an empty string.
      * @var boolean whether this validation rule should be skipped if the attribute value
      * is null or an empty string.
      */
-    public $skipEmpty = true;
-    public $remainder = '*';
-    /** @var array  */
+    protected $skipEmpty = true;
+    /**
+     * Label remainder.
+     * @var string
+     */
+    protected $remainder = '*';
+    /**
+     * List raw rules.
+     * @var array
+     */
     protected $rawRules = [];
     /**
-     * Received errors.
+     * List errors.
      * @var array
      */
     protected $errors = [];
@@ -192,77 +197,105 @@ class Validate implements ObjectInterface
 
     /**
      * Sets a locale.
-     * @param callable|string $locale
+     * @param string $locale
      * @return $this
      */
     public function setLocale($locale)
     {
-        if (is_callable($locale)) {
-            $locale = call_user_func($locale, $this);
-        }
         $this->locale = strtolower($locale);
-
         return $this;
     }
 
     /**
-     * Sets a templates.
+     * Adds a list rules.
+     * @param array $rules list rules.
+     * @return $this
+     */
+    public function setRules(array $rules)
+    {
+        $this->rules = array_merge($this->rules, $rules);
+        return $this;
+    }
+
+    /**
+     * Selects a templates.
      *
      * ```php
      * $validate->required()
      *          ->email()
-     *          ->templates(['required' => Required::NAMED])
+     *          ->setTemplates(['required' => Required::NAMED])
      *          ->validate('foo@site.com');
      * ```
      *
      * @param array $templates
      * @return $this
      */
-    public function templates(array $templates)
+    public function setTemplates(array $templates)
     {
         $this->templates = $templates;
         return $this;
     }
 
     /**
-     * Sets a list placeholders for template.
+     * Sets a list placeholders for message.
      *
      * ```php
      * $validate->required()
      *          ->email()
-     *          ->placeholders(['name' => 'email'])
+     *          ->setPlaceholders(['name' => 'email'])
      *          ->validate('foo@site.com');
      * ```
      * @param array $placeholders
      * @return $this
      */
-    public function placeholders(array $placeholders)
+    public function setPlaceholders(array $placeholders)
     {
         $this->placeholders = $placeholders;
         return $this;
     }
 
     /**
-     * Customizing messages.
+     * Sets a messages.
      *
      * ```php
      * $validate->required()
      *          ->email()
-     *          ->messages(['required' => 'the value must not be empty'])
+     *          ->setMessages(['required' => 'the value must not be empty'])
      *          ->validate('foo@site.com');
      * ```
      * @param array $messages
      * @return $this
      */
-    public function messages(array $messages)
+    public function setMessages(array $messages)
     {
         $this->messages = $messages;
         return $this;
     }
 
     /**
-     * Validate value.
-     *
+     * Enable skipped if the attribute value is null or an empty string
+     * @param bool $enable
+     * @return $this
+     */
+    public function setSkipEmpty($enable)
+    {
+        $this->skipEmpty = $enable;
+        return $this;
+    }
+
+    /**
+     * Sets a label remainder.
+     * @param string $label
+     * @return $this
+     */
+    public function setRemainder($label)
+    {
+        $this->remainder = $label;
+        return $this;
+    }
+
+    /**
+     * Checks a value.
      * @param mixed $input
      * @return bool
      * @throws ValidateException
@@ -283,7 +316,7 @@ class Validate implements ObjectInterface
             }
 
             if ($rule instanceof When) {
-                $rule->valid = $this->valid;
+                $rule->invert = $this->invert;
                 $rule->validate($input);
                 $this->errors = array_merge($this->errors, $rule->getErrors());
                 continue;
@@ -292,7 +325,7 @@ class Validate implements ObjectInterface
             if ($rule instanceof Attributes) {
                 $config = [
                     'one' => $this->one,
-                    'valid' => $this->valid,
+                    'invert' => $this->invert,
                     'remainder' =>  $this->remainder
                 ];
                 Instance::configure($rule, $config);
@@ -305,7 +338,7 @@ class Validate implements ObjectInterface
                 continue;
             }
 
-            if ($rule->validate($input) === $this->valid) {
+            if ($rule->validate($input) === !$this->invert) {
                 continue;
             }
             $this->errors[$ruleName] = $this->error($ruleName, $rule);
@@ -434,7 +467,7 @@ class Validate implements ObjectInterface
     protected function attributesInternal($attributes)
     {
         $this->rawRules = [];
-        $this->rawRules[] = ['attributes', new Attributes(['attributes' => $attributes, 'one' => $this->one, 'valid' => $this->valid, 'remainder' => $this->remainder])];
+        $this->rawRules[] = ['attributes', new Attributes(['attributes' => $attributes, 'one' => $this->one, 'invert' => $this->invert, 'remainder' => $this->remainder])];
         return $this;
     }
 
@@ -447,14 +480,14 @@ class Validate implements ObjectInterface
 
     protected function notOfInternal(Validate $validate)
     {
-        $validate->valid = false;
+        $validate->invert = true;
         $this->rawRules[] = ['notOf', $validate];
         return $this;
     }
 
     protected function whenInternal(Validate $if, Validate $then, Validate $else = null)
     {
-        $this->rawRules[] = ['when', new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'valid' => $this->valid])];
+        $this->rawRules[] = ['when', new When(['if' => $if, 'then' => $then, 'else' =>  $else, 'invert' => $this->invert])];
         return $this;
     }
 
@@ -475,14 +508,15 @@ class Validate implements ObjectInterface
             throw new ValidateException("Messages `{$locale}` is empty.");
         }
         $this->placeholders = array_merge(call_user_func_array([$locale, 'defaultPlaceholders'], $rule->params), $this->placeholders);
+        $mode = (int)!$this->invert;
         if (isset($this->templates[$ruleName])) {
-            if (!isset($messages[(int)$this->valid][$this->templates[$ruleName]])) {
+            if (!isset($messages[$mode][$this->templates[$ruleName]])) {
                 throw new ValidateException("Message `{$this->templates[$ruleName]}` is not found.");
             }
-            return $this->replace($messages[(int)$this->valid][$this->templates[$ruleName]]);
+            return $this->replace($messages[$mode][$this->templates[$ruleName]]);
         }
 
-        return $this->replace($messages[(int)$this->valid][$locale->defaultTemplate]);
+        return $this->replace($messages[$mode][$locale->defaultTemplate]);
     }
 
     protected function replace($message)
@@ -491,24 +525,6 @@ class Validate implements ObjectInterface
             return $message;
         }
         return StringHelper::replace($message, $this->placeholders);
-    }
-
-    protected function localeInternal($locale)
-    {
-        $this->locale = $locale;
-        return $this;
-    }
-
-    protected function SkipEmptyInternal($skip = true)
-    {
-        $this->skipEmpty = $skip;
-        return $this;
-    }
-
-    protected function labelRemainderInternal($label = '*')
-    {
-        $this->remainder = $label;
-        return $this;
     }
 
     /**

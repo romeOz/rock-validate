@@ -7,7 +7,7 @@ Custom messages, placeholders and templates
 use rock\validate\Validate as v;
 
 $v = v::length(10, 20, true)
-            ->messages(['length' => 'custom error']);
+            ->setMessages(['length' => 'custom error']);
 $v->validate('O’Reilly'); // output: false
 
 $v->getErrors();
@@ -27,7 +27,7 @@ use rock\validate\Validate as v;
 
 $v = v::length(10, 20, true)
             ->regex('/^[a-z]+$/i')
-            ->placeholders(['name' => 'username']);
+            ->setPlaceholders(['name' => 'username']);
 $v->validate('O’Reilly'); // output: false
 
 $v->getErrors();
@@ -48,7 +48,7 @@ output:
 use rock\validate\Validate as v;
 
 $v = v::length(10, 20, true)
-            ->templates(['length' => Length::LOWER]);
+            ->setTemplates(['length' => Length::LOWER]);
 $v->validate('O’Reilly'); // output: false
 
 $v->getErrors();

@@ -83,7 +83,7 @@ use rock\validate\Validate;
 
 $v = Validate::length(10, 20, true)
             ->regex('/^[a-z]+$/i')
-            ->placeholders(['name' => 'username']);
+            ->setPlaceholders(['name' => 'username']);
 $v->validate('O’Reilly'); // output: false
 
 $v->getErrors();
@@ -102,7 +102,7 @@ output:
 ```php
 use rock\validate\Validate;
 
-$v = Validate::locale('ru')->length(10, 20, true)->regex('/^[a-z]+$/i');
+$v = Validate::length(10, 20, true)->regex('/^[a-z]+$/i')->setLocale('ru');
 $v->validate('O’Reilly'); // output: false
 
 $v->getErrors();
@@ -129,7 +129,7 @@ $attributes = [
   'username' => Validate::required()
       ->length(10, 20, true)
       ->regex('/^[a-z]+$/i')
-      ->placeholders(['name' => 'username']),
+      ->setPlaceholders(['name' => 'username']),
   
   'email' => Validate::required()->email()
 ];
@@ -142,15 +142,13 @@ $v->getErrors();
 output:
 
 [
-  'username' => 
-  [
+  'username' => [
     'length' => 'username must have a length between 10 and 20',
     'regex' => 'username contains invalid characters',
   ],
-  'email' => 
-      [
-        'email' => 'email must be valid email',
-      ]
+  'email' => [
+    'email' => 'email must be valid email',
+  ]
 ]
 */
 

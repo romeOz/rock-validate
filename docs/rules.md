@@ -1,7 +1,7 @@
 Rules
 ==================
 
-> Documentation with some modifications taken from [Respect/Validation](https://github.com/Respect/Validation).
+> Documentation on base [Respect/Validation](https://github.com/Respect/Validation) with some modifications.
 
 ### [General](#general-1)
 
@@ -276,8 +276,7 @@ $v->getErrors();
 output:
 
 [
-  'email' => 
-  [
+  'email' => [
     'email' => 'email must be valid',
   ]
 ]
@@ -324,13 +323,11 @@ $input = [
     'age' => 15
 ];
 
-$validate = v::attributes(
-    [
-        '#' => Validate::int(),
-        'email' => Validate::required()->email(),
-        '*' => Validate::required()->string(),
-    ]
-);
+$validate = v::attributes([
+    '#' => Validate::int(),
+    'email' => Validate::required()->email(),
+    '*' => Validate::required()->string(),
+]);
 $validate->validate($input); // output: false
 
 /*
@@ -349,14 +346,12 @@ output:
 Change default label:
 
 ```php
-$validate = v::labelRemainder('_remainder')
-    ->attributes(
-        [
-            '#' => Validate::int(),
-            'email' => Validate::required()->email(),
-            '_remainder' => Validate::required()->string(),
-        ]
-    );
+$validate = v::attributes([
+    '#' => Validate::int(),
+    'email' => Validate::required()->email(),
+    '_remainder' => Validate::required()->string(),
+]);
+$validate->setRemainder('_remainder');
 ```
 
 ### Comparing Values

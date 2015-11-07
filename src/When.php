@@ -17,7 +17,7 @@ class When implements ObjectInterface
     public $then;
     /** @var  Validate|null */
     public $else;
-    public $valid = true;
+    public $invert = false;
     protected $errors = [];
 
     public function __construct($config = [])
@@ -27,7 +27,7 @@ class When implements ObjectInterface
 
     public function validate($value)
     {
-        $this->if->valid = $this->then->valid = $this->valid;
+        $this->if->invert = $this->then->invert = $this->invert;
         if ($this->if->validate($value)) {
             if (!$this->then->validate($value)) {
                 $this->errors = $this->then->getErrors();
@@ -37,10 +37,10 @@ class When implements ObjectInterface
         }
 
         if (!isset($this->else)) {
-            return $this->valid;
+            return $this->invert;
         }
 
-        $this->else->valid = $this->valid;
+        $this->else->invert = $this->invert;
         if (!$this->else->validate($value)) {
             $this->errors = $this->else->getErrors();
             return false;
