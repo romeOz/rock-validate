@@ -22,6 +22,9 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $v = Validate::date();
         $this->assertTrue($v->validate(new DateTime('today')));
+
+        $v = Validate::date('Y-m-d');
+        $this->assertTrue($v->validate((new \rock\date\DateTime('02.02.1950'))->setDefaultFormat('Y-m-d')->format()));
     }
 
     public function testInvalidDateShouldFail()
@@ -33,6 +36,8 @@ class DateTest extends \PHPUnit_Framework_TestCase
     {
         $v = Validate::date('Y-m-d');
         $this->assertFalse($v->validate('2009-12-00'));
+
+        $this->assertFalse($v->validate((new \rock\date\DateTime('02.02.1950'))->setDefaultFormat('Y.m.d')->format()));
     }
 
     public function testAnyObjectExceptDateTimeInstancesShouldFail()

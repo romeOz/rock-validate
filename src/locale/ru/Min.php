@@ -36,7 +36,7 @@ class Min extends Locale
         if ($minValue instanceof \DateTime) {
             $minValue = $minValue->format('Y-m-d H:i:s');
         } elseif ($minValue instanceof DateTime) {
-            $minValue = $minValue->format($minValue->format);
+            $minValue = $minValue->format();
         }
         return [
             'name' => 'значение',

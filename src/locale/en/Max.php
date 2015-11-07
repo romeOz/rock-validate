@@ -30,7 +30,7 @@ class Max extends Locale
         if ($maxValue instanceof \DateTime) {
             $maxValue = $maxValue->format('Y-m-d H:i:s');
         } elseif ($maxValue instanceof DateTime) {
-            $maxValue = $maxValue->format($maxValue->format);
+            $maxValue = $maxValue->format();
         }
         return [
             'name' => 'value',

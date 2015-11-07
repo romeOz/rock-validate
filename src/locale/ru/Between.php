@@ -44,13 +44,13 @@ class Between extends Locale
             $this->defaultTemplate = static::BOTH;
         }
         if ($minValue instanceof DateTime) {
-            $minValue = $minValue->format($minValue->format);
+            $minValue = $minValue->format();
         } elseif ($minValue instanceof \DateTime) {
             $minValue = $minValue->format('Y-m-d H:i:s');
         }
 
         if ($maxValue instanceof DateTime) {
-            $maxValue = $maxValue->format($maxValue->format);
+            $maxValue = $maxValue->format();
         } elseif ($maxValue instanceof \DateTime) {
             $maxValue = $maxValue->format('Y-m-d H:i:s');
         }

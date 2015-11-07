@@ -49,6 +49,18 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
                 false,
                 new DateTime('now')
             ],
+            [
+                (new \rock\date\DateTime('02-02-1940')),
+                (new \rock\date\DateTime('-2 year')),
+                false,
+                '07.07.2000'
+            ],
+            [
+                (new \rock\date\DateTime('02-02-1940')),
+                (new \rock\date\DateTime('-2 year')),
+                false,
+                (new \rock\date\DateTime('-3 year'))
+            ]
         ];
     }
 
@@ -69,6 +81,18 @@ class BetweenTest extends \PHPUnit_Framework_TestCase
                 false,
                 new DateTime('tomorrow')
             ],
+            [
+                (new \rock\date\DateTime('02-02-1940')),
+                (new \rock\date\DateTime('-2 year')),
+                false,
+                (new \rock\date\DateTime())->format()
+            ],
+            [
+                (new \rock\date\DateTime('02-02-1940')),
+                (new \rock\date\DateTime('-2 year')),
+                false,
+                (new \rock\date\DateTime('-1 year'))
+            ]
         ];
     }
 }
