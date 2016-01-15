@@ -13,9 +13,9 @@ class IntLocale extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} must be an integer number',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must not be an integer number',
-            )
+            ]
         ];
     }
 }

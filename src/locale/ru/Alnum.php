@@ -22,10 +22,10 @@ class Alnum extends Locale
                 self::STANDARD => '{{name}} должно содержать только буквы или цифры',
                 self::EXTRA => '{{name}} должно содержать только буквы, цифры и "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно содержать буквы и цифры',
                 self::EXTRA => '{{name}} не должно содержать буквы, цифры или "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

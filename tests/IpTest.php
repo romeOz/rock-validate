@@ -8,7 +8,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForIp
      */
-    public function testValidIpsValid($input, $options = null)
+    public function testValidIpsValid($input)
     {
         $ipValidator = Validate::ip();
         $this->assertTrue($ipValidator->validate($input));

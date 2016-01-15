@@ -3,7 +3,7 @@
 namespace rock\validate\locale\ru;
 
 
-use rock\date\DateTime;
+
 use rock\validate\locale\Locale;
 
 /**

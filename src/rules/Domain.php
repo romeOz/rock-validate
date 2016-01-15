@@ -3,10 +3,6 @@
 namespace rock\validate\rules;
 
 
-use ArrayAccess;
-use Countable;
-use Traversable;
-
 class Domain extends Rule
 {
     public function validate($input)

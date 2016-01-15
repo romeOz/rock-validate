@@ -19,9 +19,9 @@ class Directory extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должно быть директорией',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно быть директорией',
-            )
+            ]
         ];
     }
 

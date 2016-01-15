@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\StartsWith;
+
 use rock\validate\Validate;
 
 class StartsWithTest extends \PHPUnit_Framework_TestCase

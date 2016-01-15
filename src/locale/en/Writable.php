@@ -13,9 +13,9 @@ class Writable extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} must be writable',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must not be writable',
-            )
+            ]
         ];
     }
 

@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\NoWhitespace;
+
 use rock\validate\Validate;
 
 class NoWhitespaceTest extends \PHPUnit_Framework_TestCase

@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\Positive;
+
 use rock\validate\Validate;
 
 class PositiveTest extends \PHPUnit_Framework_TestCase

@@ -22,10 +22,10 @@ class Cntrl extends Locale
                 self::STANDARD => '{{name}} должно содержать только управляющие символы',
                 self::EXTRA => '{{name}} должно содержать только управляющие символы и "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно содержать управляющих символов',
                 self::EXTRA => '{{name}} не должно содержать управляющих символов или "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

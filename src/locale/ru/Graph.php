@@ -22,10 +22,10 @@ class Graph extends Locale
                 self::STANDARD => '{{name}} должно содержать все символы, кроме пробелов',
                 self::EXTRA => '{{name}} должно содержать все символы, кроме пробелов и "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} должно содержать только пробелы',
                 self::EXTRA => '{{name}} должно содержать только пробелы или "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

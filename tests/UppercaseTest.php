@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\Uppercase;
+
 use rock\validate\Validate;
 
 class UppercaseTest extends \PHPUnit_Framework_TestCase

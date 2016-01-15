@@ -16,10 +16,10 @@ class Alpha extends Locale
                 self::STANDARD => '{{name}} must contain only letters (a-z)',
                 self::EXTRA => '{{name}} must contain only letters (a-z) and "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must not contain letters (a-z)',
                 self::EXTRA => '{{name}} must not contain letters (a-z) or "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

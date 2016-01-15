@@ -840,9 +840,9 @@ class ValidateTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($v->validate(''));
 
         $this->assertFalse($v->setSkipEmpty(false)->validate(''));
-        $this->assertEquals(array (
+        $this->assertEquals([
             'email' => 'email must be valid',
-        ), $v->getErrors());
+        ], $v->getErrors());
     }
 
     public function testRemainder()

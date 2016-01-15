@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\Lowercase;
+
 use rock\validate\Validate;
 
 class LowercaseTest extends \PHPUnit_Framework_TestCase

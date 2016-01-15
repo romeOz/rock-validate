@@ -19,9 +19,9 @@ class FloatLocale extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должно быть вещественным числом',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно быть вещественным числом',
-            )
+            ]
         ];
     }
 

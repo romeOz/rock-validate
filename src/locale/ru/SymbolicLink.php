@@ -19,9 +19,9 @@ class SymbolicLink extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должен быть символической ссылкой',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должен быть символической ссылкой',
-            )
+            ]
         ];
     }
 

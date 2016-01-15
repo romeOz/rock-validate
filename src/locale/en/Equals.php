@@ -17,10 +17,10 @@ class Equals extends Locale
                 self::EQUALS => '{{name}} must be equals {{compareTo}}',
                 self::IDENTICAL => '{{name}} must be identical as {{compareTo}}',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::EQUALS => '{{name}} must not be equals {{compareTo}}',
                 self::IDENTICAL => '{{name}} must not be identical as {{compareTo}}',
-            )
+            ]
         ];
     }
 

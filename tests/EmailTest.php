@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\Email;
+
 use rock\validate\Validate;
 
 class EmailTest extends \PHPUnit_Framework_TestCase

@@ -19,9 +19,9 @@ class Readable extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должен быть доступен для чтения',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должен быть доступен для чтения',
-            )
+            ]
         ];
     }
 

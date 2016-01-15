@@ -13,9 +13,9 @@ class Exists extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} must exists',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must not exists',
-            )
+            ]
         ];
     }
 

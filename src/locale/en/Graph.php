@@ -16,10 +16,10 @@ class Graph extends Locale
                 self::STANDARD => '{{name}} must contain only graphical characters',
                 self::EXTRA => '{{name}} must contain only graphical characters and "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must not contain graphical characters',
                 self::EXTRA => '{{name}} must not contain graphical characters or "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

@@ -13,9 +13,9 @@ class NoWhitespace extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} must not contain whitespace',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must contain whitespace',
-            )
+            ]
         ];
     }
 }

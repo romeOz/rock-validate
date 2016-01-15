@@ -19,9 +19,9 @@ class NoWhitespace extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => 'в {{name}} не должно быть пробельных символов',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => 'в {{name}} должны быть пробельные символы',
-            )
+            ]
         ];
     }
 

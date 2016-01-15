@@ -23,10 +23,10 @@ class Equals extends Locale
                 self::EQUALS => '{{name}} должно быть равным {{compareTo}}',
                 self::IDENTICAL => '{{name}} должно быть идентично {{compareTo}}',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::EQUALS => '{{name}} не должно быть равным {{compareTo}}',
                 self::IDENTICAL => '{{name}} не должно быть идентично {{compareTo}}',
-            )
+            ]
         ];
     }
 

@@ -13,9 +13,9 @@ class Odd extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} must be an odd number',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} must not be an odd number',
-            )
+            ]
         ];
     }
 

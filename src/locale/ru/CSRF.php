@@ -19,9 +19,9 @@ class CSRF extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => 'CSRF-токен должен быть верным',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => 'CSRF-токен не должен быть верным',
-            )
+            ]
         ];
     }
 }

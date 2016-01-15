@@ -19,9 +19,9 @@ class IntLocale extends Locale
             self::MODE_DEFAULT => [
                 self::STANDARD => '{{name}} должно быть целым числом',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно быть целым числом',
-            )
+            ]
         ];
     }
 

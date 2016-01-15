@@ -3,10 +3,6 @@
 namespace rock\validate\rules;
 
 
-use ArrayAccess;
-use Countable;
-use Traversable;
-
 class Min extends Rule
 {
     public function __construct($min, $inclusive = false, $config = [])

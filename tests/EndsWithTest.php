@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\EndsWith;
+
 use rock\validate\Validate;
 
 class EndsWithTest extends \PHPUnit_Framework_TestCase

@@ -22,10 +22,10 @@ class Space extends Locale
                 self::STANDARD => '{{name}} должно содержать только пробельные символы',
                 self::EXTRA => '{{name}} должно содержать только пробельные символы и "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно содержать пробельные символы',
                 self::EXTRA => '{{name}} не должно содержать пробельные символы и "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

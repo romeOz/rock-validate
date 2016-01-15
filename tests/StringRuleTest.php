@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\StringRule;
+
 use rock\validate\Validate;
 
 class StringRuleTest extends \PHPUnit_Framework_TestCase

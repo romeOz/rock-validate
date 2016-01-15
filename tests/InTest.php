@@ -1,7 +1,7 @@
 <?php
 namespace rockunit;
 
-use rock\validate\rules\In;
+
 use rock\validate\Validate;
 
 class InTest extends \PHPUnit_Framework_TestCase

@@ -32,7 +32,7 @@ class Ip extends Rule
             || $input == '0.0.0.0-255.255.255.255') {
             return null;
         }
-        $range = array('min' => null, 'max' => null, 'mask' => null);
+        $range = ['min' => null, 'max' => null, 'mask' => null];
 
         if (strpos($input, '-') !== false) {
             list($range['min'], $range['max']) = explode('-', $input);
@@ -95,9 +95,9 @@ class Ip extends Rule
         return (boolean) filter_var(
             $address,
             FILTER_VALIDATE_IP,
-            array(
+            [
                 'flags' => $this->params['ipOptions']
-            )
+            ]
         );
     }
 

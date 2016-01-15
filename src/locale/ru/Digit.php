@@ -22,10 +22,10 @@ class Digit extends Locale
                 self::STANDARD => '{{name}} должно содержать только цифры',
                 self::EXTRA => '{{name}} должно содержать только цифры или "{{additionalChars}}"'
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::STANDARD => '{{name}} не должно содержать только цифры',
                 self::EXTRA => '{{name}} не должно содержать только цифры или "{{additionalChars}}"'
-            )
+            ]
         ];
     }
 

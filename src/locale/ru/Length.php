@@ -25,11 +25,11 @@ class Length extends Locale
                 self::LOWER => '{{name}} должно иметь длину больше {{minValue}}',
                 self::GREATER => '{{name}} должно иметь длину меньше {{maxValue}}',
             ],
-            self::MODE_NEGATIVE => array(
+            self::MODE_NEGATIVE => [
                 self::BOTH => '{{name}} не должно иметь длину в диапазоне от {{minValue}} до {{maxValue}}',
                 self::LOWER => '{{name}} не должно иметь длину больше {{minValue}}',
                 self::GREATER => '{{name}} не должно иметь длину меньше {{maxValue}}',
-            )
+            ]
         ];
     }
 
