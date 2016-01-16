@@ -1145,7 +1145,7 @@ See also:
 #### v::ip()
 #### v::ip($options)
 
-Validates IP Addresses. This validator uses the native `filter_var()` PHP function.
+Validates IPv4/IPv6 addresses. This validator uses the native `filter_var()` PHP function.
 
 ```php
 v::ip()->validate('192.168.0.1');
@@ -1154,7 +1154,20 @@ v::ip()->validate('192.168.0.1');
 You can pass a parameter with `filter_var` flags for IP.
 
 ```php
-v::ip(FILTER_FLAG_NO_PRIV_RANGE)->validate('127.0.0.1'); // output: false
+v::ip(null, FILTER_FLAG_NO_PRIV_RANGE)->validate('127.0.0.1'); // output: false
+```
+
+Network range.
+
+```php
+// IPv4
+
+v::ip('192.168.0.0-192.168.255.255')->validate('192.168.2.6'); // output: true
+v::ip('220.78.168.0/21')->validate('220.78.176.2'); // output: false
+
+// IPv6
+v::ip('2001:cdba:0000:0000:0000:0000:3257:7770-2001:cdba:0000:0000:0000:0000:3257:7777')->validate('2001:cdba:0000:0000:0000:0000:3257:7773'); // output: true
+v::ip('2001:cdba:0000:0000:0000:0000:3257:7777/125')->validate('2001:cdba:0000:0000:0000:0000:3257:7769'); // output: false
 ```
   
 ### Other  

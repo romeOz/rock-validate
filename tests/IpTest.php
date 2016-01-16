@@ -8,14 +8,14 @@ class IpTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider providerForIp
      */
-    public function testValidIpsValid($input)
+    public function testValidIpsValid($input, $options = null)
     {
-        $ipValidator = Validate::ip();
+        $ipValidator = Validate::ip($options);
         $this->assertTrue($ipValidator->validate($input));
     }
 
     /**
-     * @dataProvider providerForIpBetweenRange
+     * @dataProvider providerForIpsBetweenRangeValid
      */
     public function testIpsBetweenRangeValid($input, $networkRange)
     {
@@ -28,14 +28,14 @@ class IpTest extends \PHPUnit_Framework_TestCase
      */
     public function testInvalidIpsInvalid($input, $options=null)
     {
-        $ipValidator = Validate::ip($options);
+        $ipValidator = Validate::ip(null, $options);
         $this->assertFalse($ipValidator->validate($input));
     }
 
     /**
-     * @dataProvider providerForIpOutsideRange
+     * @dataProvider providerForIpsBetweenRangeInvalid
      */
-    public function testIpsOutsideRangeShouldReturnFalse($input, $networkRange)
+    public function testIpsBetweenRangeInvalid($input, $networkRange)
     {
         $ipValidator = Validate::ip($networkRange);
         $this->assertFalse($ipValidator->validate($input));
@@ -68,10 +68,11 @@ class IpTest extends \PHPUnit_Framework_TestCase
             [[]],
 
             ['127.0.0.1'],
+            ['2001:cdba:0000:0000:0000:0000:3257:9652'],
         ];
     }
 
-    public function providerForIpBetweenRange()
+    public function providerForIpsBetweenRangeValid()
     {
         return [
             ['127.0.0.1', '127.*'],
@@ -91,6 +92,13 @@ class IpTest extends \PHPUnit_Framework_TestCase
             ['220.78.173.2', '220.78.168/21'],
             ['220.78.173.2', '220.78.168.0/21'],
             ['220.78.173.2', '220.78.168.0/255.255.248.0'],
+            ['2001:cdba:0000:0000:0000:0000:3257:7777', '2001:cdba:0000:0000:0000:0000:3257:1234-2001:cdba:0000:0000:0000:0000:3257:7777'],
+            ['2001:cdba:0000:0000:0000:0000:3257:9652', '2001:cdba:0000:0000:0000:0000:3257:*'],
+            ['2001:cdba:0000:0000:0000:0000:3257:9652', '2001:cdba:0000:0000:0000:0000:*:*'],
+            ['21DA:00D3:0000:2F3B:02AC:00FF:FE28:9C5A', '21DA:00D3:0000:2F3B::/64'],
+            ['21DA:00D3:0000:2F3B:02AC:00FF:FE28:9C5A', '21DA:00D3:0000:2F3B::/FFFF:FFFF:FFFF:FFFF:0000:0000:0000:0000'],
+            ['2001:cdba:0000:0000:0000:0000:3257:7770', '2001:cdba:0000:0000:0000:0000:3257:7777/125'],
+            ['2001:cdba:0000:0000:0000:0000:3257:7770', '2001:cdba:0000:0000:0000:0000:3257:7777/FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFF8']
         ];
     }
 
@@ -101,10 +109,11 @@ class IpTest extends \PHPUnit_Framework_TestCase
             [' '],
             ['Foo'],
             ['192.168.0.1', FILTER_FLAG_NO_PRIV_RANGE],
+            ['2001:cdba:0000:0000:0000:0000:3257:965s'],
         ];
     }
 
-    public function providerForIpOutsideRange()
+    public function providerForIpsBetweenRangeInvalid()
     {
         return [
             ['127.0.0.1', '127.0.1.*'],
@@ -116,6 +125,13 @@ class IpTest extends \PHPUnit_Framework_TestCase
             ['220.78.176.1', '220.78.168/21'],
             ['220.78.176.2', '220.78.168.0/21'],
             ['220.78.176.3', '220.78.168.0/255.255.248.0'],
+            ['2001:cdba:0000:0000:0000:0000:3257:7778', '2001:cdba:0000:0000:0000:0000:3257:1234-2001:cdba:0000:0000:0000:0000:3257:7777'],
+            ['2001:cdba:0000:0000:0000:0000:3257:1233', '2001:cdba:0000:0000:0000:0000:3257:1234-2001:cdba:0000:0000:0000:0000:3257:7777'],
+            ['2001:cdba:0000:0000:0000:1234:3258:9652', '2001:cdba:0000:0000:0000:0000:*:*'],
+            ['21DA:00D3:0000:2F3C:02AC:00FF:FE28:9C5A', '21DA:00D3:0000:2F3B::/64'],
+            ['21DA:00D3:0000:2F3C:02AC:00FF:FE28:9C5A', '21DA:00D3:0000:2F3B::/FFFF:FFFF:FFFF:FFFF:0000:0000:0000:0000'],
+            ['2001:cdba:0000:0000:0000:0000:3257:7769', '2001:cdba:0000:0000:0000:0000:3257:7777/125'],
+            ['2001:cdba:0000:0000:0000:0000:3257:7769', '2001:cdba:0000:0000:0000:0000:3257:7777/FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFF8']
         ];
     }
 

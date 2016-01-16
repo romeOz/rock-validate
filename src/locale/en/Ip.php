@@ -24,12 +24,12 @@ class Ip extends Locale
         ];
     }
 
-    public function defaultPlaceholders($ipOptions = null, array $networkRange = null)
+    public function defaultPlaceholders(array $range = null)
     {
         $message = '';
-        if (is_array($networkRange)) {
-            $message = $networkRange['min'];
-            $message .= isset($networkRange['max']) ? '-' . $networkRange['max'] : '/' . long2ip($networkRange['mask']);
+        if (!empty($range)) {
+            $message = $range['min'];
+            $message .= isset($range['max']) ? '-' . $range['max'] : '/' . long2ip($range['mask']);
         }
         $this->defaultTemplate = !empty($message) ? self::NETWORK_RANGE : self::STANDARD;
         return [

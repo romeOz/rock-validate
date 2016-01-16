@@ -29,17 +29,16 @@ class Ip extends Locale
             ]
         ];
     }
-
-    public function defaultPlaceholders(array $networkRange = null)
+    public function defaultPlaceholders(array $range = null)
     {
         $message = '';
-        if ($networkRange) {
-            $range = $networkRange;
+        if (!empty($range)) {
             $message = $range['min'];
             $message .= isset($range['max']) ? '-' . $range['max'] : '/' . long2ip($range['mask']);
         }
+        $this->defaultTemplate = !empty($message) ? self::NETWORK_RANGE : self::STANDARD;
         return [
-            'name' => 'значение',
+            'name' => 'value',
             'range' =>  $message
         ];
     }
