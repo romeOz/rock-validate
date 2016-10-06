@@ -1161,7 +1161,6 @@ Network range.
 
 ```php
 // IPv4
-
 v::ip('192.168.0.0-192.168.255.255')->validate('192.168.2.6'); // output: true
 v::ip('220.78.168.0/21')->validate('220.78.176.2'); // output: false
 

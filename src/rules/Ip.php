@@ -171,7 +171,7 @@ class Ip extends Rule
     }
 
     /**
-     * Gets IP string representation from IP long
+     * Gets IP string representation from IP long.
      *
      * @param string $dec IPv4 or IPv6 long
      * @param bool $ipv6
@@ -202,6 +202,11 @@ class Ip extends Rule
         return $ipstr;
     }
 
+    /**
+     * @link http://stackoverflow.com/a/7951507
+     * @param string $ip
+     * @return string
+     */
     protected function IPv6toBit($ip)
     {
         $result = '';
