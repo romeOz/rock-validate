@@ -34,7 +34,7 @@ class Ip extends Locale
         $message = '';
         if (!empty($range)) {
             $message = $range['min'];
-            $message .= isset($range['max']) ? '-' . $range['max'] : '/' . long2ip($range['mask']);
+            $message .= isset($range['max']) ? '-' . $range['max'] : '/' . long2ip((int)$range['mask']);
         }
         $this->defaultTemplate = !empty($message) ? self::NETWORK_RANGE : self::STANDARD;
         return [
