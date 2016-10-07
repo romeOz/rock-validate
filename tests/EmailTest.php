@@ -59,6 +59,8 @@ class EmailTest extends \PHPUnit_Framework_TestCase
             ['@'],
             ['mail@test@test.com'],
             ['test@test.com-'],
+            ['foo@-foo.com'],
+            ['foo@foo-.com'],
             ['test..child@example.com'],
             ['test@sub.-example.com'],
             ['test@_smtp_.example.com'],
