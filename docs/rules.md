@@ -823,10 +823,16 @@ See also:
   
 #### v::email()
 
-Validates an email address.
+Validates an email address with support unicode symbols and IPv4/IPv6 in domain.
 
 ```php
-v::email()->validate('alexandre@gaigalas.net'); // output: true
+v::email()->validate('support@site.net'); // output: true
+
+v::email()->validate('поддержка@сайт.рф'); // output: true
+
+v::email()->validate('site@[255.255.255.255].com'); // output: true
+
+v::email()->validate('site@[IPv6:2001:db8:1ff::a0b:dbd0].com'); // output: true
 ```
   
   
